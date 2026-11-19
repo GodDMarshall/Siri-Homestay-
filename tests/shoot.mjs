@@ -5,12 +5,11 @@ import fs from 'node:fs';
 
 const [, , base = 'http://localhost:3100', out = '/tmp/shots', ...specs] = process.argv;
 fs.mkdirSync(out, { recursive: true });
-const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox', '--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist'] });
+const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
 const errors = [];
 for (const spec of specs) {
   const [name, path, w = '1440', h = '900', y = '0', waitMs = '1600', reduce = ''] = spec.split('|');
   const ctx = await browser.newContext({ viewport: { width: +w, height: +h }, deviceScaleFactor: 1, reducedMotion: reduce ? 'reduce' : 'no-preference', isMobile: +w < 600, hasTouch: +w < 600 });
-  if (!reduce) await ctx.addInitScript(() => { try { localStorage.setItem('sh-3d', 'force'); } catch (e) {} });
   const page = await ctx.newPage();
   page.on('console', (m) => { if (m.type() === 'error') errors.push(`${name}: ${m.text()}`); });
   page.on('pageerror', (e) => errors.push(`${name}: ${e.message}`));

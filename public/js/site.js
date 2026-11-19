@@ -50,34 +50,13 @@
     menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   }
 
-  // ---- Day-to-night scene ----------------------------------------------------
-  doc.querySelectorAll('[data-dusk]').forEach(function (el) {
-    if (reduce) return;
-    var stage = el.querySelector('.dusk__stage');
-    SH.scenes.push(function () {
-      var r = el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > window.innerHeight) return;
-      var p = SH.progress(el);
-      stage.style.setProperty('--p', Math.min(1, Math.max(0, (p - 0.12) / 0.6)).toFixed(3));
-    });
-  });
-
-  // ---- Explore teaser: bamboo slats part when the image comes into view -------
-  doc.querySelectorAll('.peek').forEach(function (el) {
-    if (reduce || !('IntersectionObserver' in window)) return;
-    el.classList.add('is-closed');
-    new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (en) { if (en.isIntersecting) { el.classList.remove('is-closed'); obs.disconnect(); } });
-    }, { threshold: 0.35 }).observe(el);
-  });
-
   // ---- Lightbox ----------------------------------------------------------------
   var dlg;
   function lightbox(list, index) {
     if (!dlg) {
       dlg = doc.createElement('dialog');
       dlg.className = 'lightbox';
-      dlg.setAttribute('aria-label', 'Picture');
+      dlg.setAttribute('aria-label', 'Photo');
       dlg.innerHTML = '<img class="lightbox__img" alt=""><p class="lightbox__cap"></p>' +
         '<button type="button" class="lightbox__btn lightbox__prev">Previous</button>' +
         '<button type="button" class="lightbox__btn lightbox__next">Next</button>' +

@@ -26,8 +26,6 @@ for (let i = 0; i < 50 && !log.includes('running at'); i++) await new Promise((r
 
 const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
-// The test browser renders WebGL in software; the site skips 3D there unless asked to.
-await ctx.addInitScript(() => { try { localStorage.setItem('sh-3d', 'force'); localStorage.setItem('sh-3d-quality', 'low'); } catch (e) {} });
 const page = await ctx.newPage();
 page.setDefaultTimeout(10000);
 const consoleErrors = [];
@@ -39,7 +37,7 @@ page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text(
 try {
   // ---------------------------------------------------------------- public pages
   await check('All public pages return 200 with a title and one h1', async () => {
-    const paths = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/explore', '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
+    const paths = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
     for (const p of paths) {
       const res = await page.goto(BASE + p, { waitUntil: 'domcontentloaded' });
       assert(res.status() === 200, `${p} returned ${res.status()}`);
@@ -337,73 +335,95 @@ try {
     assert(items.some((t) => t.includes('Enquiry received')) && items.some((t) => t.includes('Confirmed')), items.join(' | '));
   });
 
-  // ---------------------------------------------------------------- the 3D estate
-  await check('No real photographs or films are published', async () => {
+  // ---------------------------------------------------------------- photos, tour and room views
+  await check('Every picture is one of the owners’ photos; no 3D world is left', async () => {
     const m = await (await fetch(BASE + '/media/manifest.json')).json();
-    assert(m.renders && Object.keys(m.renders).length >= 24, 'renders missing');
-    assert(!m.photos && !m.video && !m.sequences, 'old photo/video entries still in the manifest');
-    for (const u of ['/media/photos/lawn-stepping-stones-1600.webp', '/media/video/walk-in.mp4', '/media/seq/arrival/000.webp']) {
+    const keys = Object.keys(m.photos || {});
+    assert(keys.length === 20, `${keys.length} photos in the manifest`);
+    assert(keys.filter((k) => m.photos[k].source === 'video').every((k) => k.startsWith('bath-')), 'only the bathroom comes from the video');
+    assert(!m.renders, 'renders still listed');
+    for (const u of ['/js/world.js', '/js/estate3d.js', '/js/cinema.js', '/world/studio.html', '/media/renders/villa-bedroom-1024.webp']) {
       const r = await fetch(BASE + u); assert(r.status === 404, `${u} is still served`);
     }
-    for (const p of ['/', '/stay/garden-villa', '/gallery']) {
+    for (const p of ['/', '/stay/garden-villa', '/stay/whole-estate', '/gallery', '/estate']) {
       const html = await (await fetch(BASE + p)).text();
-      assert(!/<video/i.test(html), `${p} still has a video`);
-      assert(!/media\/photos\//.test(html), `${p} still links a photo`);
+      // (placeholders are base64 in style attributes, so leave those out of the text check)
+      assert(!/\b3D\b|<canvas|type="module"/.test(html.replace(/style="[^"]*"/g, '')), `${p} still mentions or loads 3D`);
+      const imgs = [...html.matchAll(/<img [^>]*src="([^"]+)"/g)].map((x) => x[1]);
+      assert(imgs.length && imgs.every((u) => u.startsWith('/media/photos/')), `${p} has a picture that isn't a photo: ${imgs.find((u) => !u.startsWith('/media/photos/'))}`);
     }
-    return `${Object.keys(m.renders).length} renders`;
-  });
-
-  await check('Pictures say they are 3D recreations', async () => {
+    const r = await fetch(BASE + '/explore', { redirect: 'manual' });
+    assert(r.status === 301 && r.headers.get('location') === '/#tour', 'explore should redirect to the tour');
     await page.goto(BASE + '/');
-    const foot = await page.locator('.footer__legal').innerText();
-    assert(/3D recreation/.test(foot) && /illustrative/.test(foot), foot);
+    assert(/taken at Siri Homestay by its owners/.test(await page.locator('.footer__legal').innerText()), 'footer note');
+    return `${keys.length} photos`;
   });
 
-  await check('Home hero brings the code-built estate to life (WebGL)', async () => {
+  await check('Scrolling the home page takes the tour, one photo at a time', async () => {
     await page.goto(BASE + '/');
-    await page.waitForSelector('.hero__media.is-live .world-canvas', { timeout: 90000 });
-    const size = await page.evaluate(() => { const c = document.querySelector('.hero__media .world-canvas'); return [c.width, c.height]; });
-    assert(size[0] > 300 && size[1] > 200, 'canvas ' + size);
-    return `canvas ${size.join('x')}`;
+    await page.waitForSelector('.tour.is-live');
+    const n = await page.locator('.tour__stop').count();
+    const seen = [];
+    for (const i of [0, 3, n - 1]) {
+      await page.evaluate((k) => {
+        const t = document.querySelector('.tour__track'), stops = document.querySelectorAll('.tour__stop').length;
+        window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * (k + 0.5) / stops);
+      }, i);
+      await page.waitForFunction((k) => document.querySelectorAll('.tour__stop')[k].classList.contains('is-on'), i);
+      const on = await page.locator('.tour__stop.is-on').count();
+      assert(on === 1, `${on} stops showing at once`);
+      seen.push(await page.locator('.tour__stop.is-on .tour__title').innerText());
+    }
+    await page.click('.tour__rail a[data-goto="1"]');
+    await page.waitForFunction(() => document.querySelectorAll('.tour__stop')[1].classList.contains('is-on'));
+    return `${n} stops: ${seen.join(', ')}`;
   });
 
-  await check('Scrolling the walk takes the camera across the lawn and through the villa door', async () => {
-    await page.evaluate(() => { const w = document.querySelector('[data-walk3d]'); window.scrollTo(0, w.offsetTop + (w.offsetHeight - innerHeight) * 0.9); });
-    await page.waitForSelector('.walk.is-live', { timeout: 30000 });
-    await page.waitForFunction(() => window.SH.world.world.state.door > 0.5, null, { timeout: 30000 });
-    const inside = await page.evaluate(() => window.SH.world.world.state.interiorK);
-    assert(inside === 1, 'camera not inside the villa');
+  await check('A room shows its photos side by side, moving sideways as you scroll', async () => {
+    await page.goto(BASE + '/stay/garden-villa');
+    await page.waitForSelector('.strip.is-live');
+    const at = async (p) => {
+      await page.evaluate((q) => { const t = document.querySelector('.strip__track'); window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * q); }, p);
+      await page.waitForTimeout(250);
+      return page.evaluate(() => {
+        const items = [...document.querySelectorAll('.strip__item')].map((li) => li.getBoundingClientRect());
+        return { x: items[0].left, visible: items.filter((r) => r.right > 0 && r.left < innerWidth && r.bottom > 0 && r.top < innerHeight).length };
+      });
+    };
+    const a = await at(0), b = await at(0.7);
+    assert(a.visible >= 2, `only ${a.visible} photo(s) side by side`);
+    assert(b.x < a.x - 200, 'the row did not move sideways');
+    const n = await page.locator('.strip__item').count();
+    await at(0); // back to the start, where the first photos are in view
+    await page.click('.strip__item:nth-child(2) a');
+    await page.waitForSelector('dialog.lightbox[open]');
+    await page.keyboard.press('Escape');
+    return `${n} photos, ${a.visible} side by side`;
   });
 
-  await check('Explorer flies between 3D viewpoints with hotspots pinned to them', async () => {
-    await page.goto(BASE + '/explore');
-    await page.waitForSelector('[data-explorer].is-3d', { timeout: 90000 });
-    await page.click('[data-next]');
-    await page.waitForFunction(() => document.querySelector('[data-title]').textContent === 'Umbrella tables', null, { timeout: 60000 });
-    await page.waitForFunction(() => !document.querySelector('[data-spots]').classList.contains('is-moving'), null, { timeout: 60000 });
-    const spots = await page.locator('.spot:not([hidden])').count();
-    assert(spots >= 1, 'no hotspots');
-    return `${spots} hotspots`;
-  });
-
-  await check('"Step inside" flies into the villa, then opens its page', async () => {
-    await page.goto(BASE + '/stay');
-    await page.click('.stay--lead .stay__actions [data-enter]');
-    await page.waitForSelector('.cinema', { timeout: 30000 });
-    await page.waitForURL(/\/stay\/garden-villa$/, { timeout: 120000 });
-  });
-
-  await check('Without WebGL motion the site shows the rendered stills, with hotspots', async () => {
+  await check('With reduced motion the tour is a plain photo list and the room photos scroll sideways', async () => {
     const rctx = await browser.newContext({ viewport: { width: 1280, height: 860 }, reducedMotion: 'reduce' });
     const p = await rctx.newPage();
     await p.goto(BASE + '/');
-    await p.waitForTimeout(1500);
-    assert(await p.locator('.world-canvas').count() === 0, '3D started despite reduced motion');
-    assert(await p.locator('.hero__media img').isVisible(), 'hero still missing');
-    await p.goto(BASE + '/explore');
-    const n = await p.locator('.spot:not([hidden])').count();
-    assert(n >= 2, `only ${n} hotspots on the still`);
+    assert(await p.locator('.tour.is-live').count() === 0, 'tour animates despite reduced motion');
+    assert(await p.locator('.tour__stop img').first().isVisible(), 'tour photos missing');
+    await p.goto(BASE + '/stay/garden-villa');
+    assert(await p.locator('.strip.is-live').count() === 0, 'strip animates despite reduced motion');
+    const scrolls = await p.evaluate(() => { const r = document.querySelector('.strip__row'); return r.scrollWidth > r.clientWidth && getComputedStyle(r).overflowX === 'auto'; });
+    assert(scrolls, 'room photos should scroll sideways on their own');
     await rctx.close();
+  });
+
+  await check('Gallery shows the real photos and opens them larger', async () => {
+    await page.goto(BASE + '/gallery');
+    const n = await page.locator('.gallery__item').count();
+    assert(n === 20, `${n} photos in the gallery`);
+    await page.click('.gallery__item:first-child a');
+    await page.waitForSelector('dialog.lightbox[open]');
+    const src = await page.getAttribute('dialog.lightbox img', 'src');
+    assert(/\/media\/photos\/villa-patio-2400\.webp$/.test(src), src);
+    await page.keyboard.press('Escape');
+    return `${n} photos`;
   });
 
   // ---------------------------------------------------------------- accessibility
@@ -413,7 +433,7 @@ try {
     // axe is injected as a script, so this context bypasses CSP; signed-in cookies are carried over.
     const actx = await browser.newContext({ viewport: { width: 1280, height: 860 }, bypassCSP: true, storageState: await ctx.storageState() });
     const page = await actx.newPage();
-    const pages = ['/', '/stay', '/stay/garden-villa', '/explore', '/estate', '/around', '/gallery', '/contact', '/enquire', '/admin', '/admin/bookings', `/admin/bookings/${id1}`, '/admin/calendar'];
+    const pages = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/estate', '/around', '/gallery', '/contact', '/enquire', '/admin', '/admin/bookings', `/admin/bookings/${id1}`, '/admin/calendar'];
     let serious = 0;
     for (const p of pages) {
       await page.goto(BASE + p, { waitUntil: 'networkidle' });

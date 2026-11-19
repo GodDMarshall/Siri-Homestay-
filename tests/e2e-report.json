@@ -1,12 +1,12 @@
 {
-  "at": "2026-11-19T12:07:12.803Z",
-  "passed": 41,
+  "at": "2026-11-19T12:34:17.406Z",
+  "passed": 39,
   "failed": 0,
   "results": [
     {
       "name": "All public pages return 200 with a title and one h1",
       "ok": true,
-      "detail": "11 pages"
+      "detail": "10 pages"
     },
     {
       "name": "404 page for unknown address",
@@ -46,7 +46,7 @@
     {
       "name": "Guest can send an enquiry and gets a reference",
       "ok": true,
-      "detail": "SH-MG5HNE"
+      "detail": "SH-7ZFXTF"
     },
     {
       "name": "Confirmation page details are private to the sender",
@@ -159,39 +159,29 @@
       "detail": ""
     },
     {
-      "name": "No real photographs or films are published",
+      "name": "Every picture is one of the owners’ photos; no 3D world is left",
       "ok": true,
-      "detail": "28 renders"
+      "detail": "20 photos"
     },
     {
-      "name": "Pictures say they are 3D recreations",
+      "name": "Scrolling the home page takes the tour, one photo at a time",
+      "ok": true,
+      "detail": "8 stops: Arrive, The dining hall, After dark"
+    },
+    {
+      "name": "A room shows its photos side by side, moving sideways as you scroll",
+      "ok": true,
+      "detail": "8 photos, 2 side by side"
+    },
+    {
+      "name": "With reduced motion the tour is a plain photo list and the room photos scroll sideways",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "Home hero brings the code-built estate to life (WebGL)",
+      "name": "Gallery shows the real photos and opens them larger",
       "ok": true,
-      "detail": "canvas 1280x860"
-    },
-    {
-      "name": "Scrolling the walk takes the camera across the lawn and through the villa door",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "Explorer flies between 3D viewpoints with hotspots pinned to them",
-      "ok": true,
-      "detail": "2 hotspots"
-    },
-    {
-      "name": "\"Step inside\" flies into the villa, then opens its page",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "Without WebGL motion the site shows the rendered stills, with hotspots",
-      "ok": true,
-      "detail": ""
+      "detail": "20 photos"
     },
     {
       "name": "Accessibility scan (axe-core, WCAG 2.1 A/AA) on key pages",

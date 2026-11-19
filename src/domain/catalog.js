@@ -7,7 +7,6 @@ function parseRoomType(r) {
     ...r,
     features: JSON.parse(r.features_json || '[]'),
     media: JSON.parse(r.media_json || '{}'),
-    transition: JSON.parse(r.transition_json || '[]'),
   };
 }
 

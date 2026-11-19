@@ -10,9 +10,7 @@
     "test": "node --test tests/*.test.js",
     "test:e2e": "node tests/e2e.mjs",
     "admin:reset-password": "node scripts/reset-admin-password.js",
-    "build:world": "esbuild src/world/index.js --bundle --format=esm --minify --legal-comments=none --target=es2020 --outfile=public/js/world.js",
-    "build:world:dev": "esbuild src/world/index.js --bundle --format=esm --sourcemap --target=es2020 --outfile=public/js/world.js",
-    "render": "node scripts/render-views.mjs --out renders --q ultra --w 1600 && python3 scripts/build-renders.py --src renders --out public/media"
+    "photos": "python3 scripts/build-photos.py --src originals --out public/media"
   },
   "license": "UNLICENSED",
   "dependencies": {
@@ -27,9 +25,7 @@
     "@fontsource-variable/anek-kannada": "^5.3.0",
     "@fontsource-variable/newsreader": "^5.3.0",
     "axe-core": "^4.14.1",
-    "esbuild": "^0.28.2",
-    "playwright-core": "^1.65.1",
-    "three": "^0.187.0"
+    "playwright-core": "^1.65.1"
   },
   "private": true,
   "engines": {

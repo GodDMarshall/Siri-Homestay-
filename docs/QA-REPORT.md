@@ -3,9 +3,9 @@
 **Date:** 19 November 2026  
 **Build:** Phase 1, version 1.0.0  
 **Environment:** Node.js 22, SQLite 3.54, Google Chrome 153 (headless), Linux  
-**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 41/41 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
+**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 39/39 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
 
-**Update (3D estate):** the site's pictures and films were replaced by a 3D estate generated in code. Seven checks were added for it (section 2), and the motion review and performance figures below are for the 3D version.
+**Update (real photos):** the owner rejected the code-built 3D estate, so the site is back on the owners' own photographs. The 3D checks were replaced by checks for the photos, the scroll tour and the side-by-side room photos (section 2), and the review and performance notes below are for this version.
 
 **Update (Vercel):** the production build was made locally with the Vercel CLI (66.2) and the built function was run on its own, without the project's `node_modules`, as Vercel runs it: all 18 public and admin addresses answer as expected, every one of the 93 CSS, script, font and picture references on those pages exists in the static output, the enquiry form hands over to WhatsApp without saving anything, cross-site posts are refused, cookies are `Secure`, and the admin signs in with `ADMIN_PASSWORD`. Defects found and fixed: Vercel picked Node 26 from `"node": ">=22"` (now pinned to 22.x, the tested version); Vercel's request helpers would have replaced Express's `res.send` and `res.redirect` (the entry now exports the Express app, which Vercel leaves alone); the function bundle carried all 16 MB of pictures (now 8 MB, pictures come from the CDN); the admin sign-in card was squeezed into the 250 px sidebar column (fixed in `admin.css`).
 
@@ -34,7 +34,7 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 
 | Area | Check | Result |
 |---|---|---|
-| Pages | 11 public pages return 200, one `h1` each, correct titles; 404 page; old WordPress URLs redirect (301) | Pass |
+| Pages | 10 public pages return 200, one `h1` each, correct titles; 404 page; old WordPress URLs redirect (301) | Pass |
 | Content | Contacts appear Swetha, Ganesh, Dilip (last) with correct `tel:` numbers | Pass |
 | Content | No Airbnb or MakeMyTrip mention anywhere public | Pass |
 | SEO | JSON-LD `LodgingBusiness` with 5 rooms and no invented ratings | Pass |
@@ -59,34 +59,29 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 | Audit | Booking history records the enquiry and confirmation | Pass |
 | Accessibility | axe-core WCAG 2.1 A/AA on 13 public and admin pages: no violations | Pass |
 | Security | Enquiry endpoint rate-limited (429) | Pass |
-| 3D estate | No photographs or films are published (manifest holds 28 renders; old photo, film and frame URLs return 404; no `<video>` on any page) | Pass |
-| 3D estate | Footer says every picture is a 3D recreation and the layout is illustrative | Pass |
-| 3D estate | Home hero starts the code-built estate in WebGL | Pass |
-| 3D estate | Scrolling the walk moves the camera along the stones, opens the sliding door and ends inside the bedroom | Pass |
-| 3D estate | Explorer flies between viewpoints; hotspots follow their 3D anchors | Pass |
-| 3D estate | "Step inside" plays the entry and lands on the Garden Villa page | Pass |
-| 3D estate | With reduced motion: no WebGL; rendered stills, with explorer hotspots placed from the render data | Pass |
+| Photos | All 20 pictures are the owners' photos (two bathroom stills from their video); no 3D code, renders or studio are served; `/explore` redirects to the tour; every `<img>` on the main pages is a photo | Pass |
+| Tour | Scrolling the home page shows one photo at a time and moves through all 8 stops; the stop list jumps to a stop | Pass |
+| Rooms | The Garden Villa's photos sit side by side and the row moves sideways as you scroll; a photo opens larger | Pass |
+| Reduced motion | The tour is a plain list of photos; the room photos scroll sideways on their own | Pass |
+| Gallery | All 20 photos, each opening larger (2400 px) | Pass |
 | Console | No JavaScript errors and no missing files | Pass |
 
 ## 3. Visual and motion review
 
 | Item | Result |
 |---|---|
-| Each render compared side by side with the owner's photograph of the same spot (18 pairs) | Same composition and contents: lawn, stones, umbrella tables, net, brush heap, villa patio and pool, bedroom, bathroom, courtyard cottages, night lighting. Differences: the arrangement of the grounds is illustrative, the forest is stylised, and close-up foliage is less detailed than a photograph |
-| Hero: live 3D lawn with wind in the bamboo and a slow camera drift, fading in over the rendered still | Pass |
-| Walk: camera from above the pond, over the lawn, along the stepping stones; the door slides open; settles at the bed | Pass |
-| Room entry: 3D flight, then the stay page; stills fallback when 3D is unavailable or not ready within 2.5 s | Pass |
-| Explore: 3D flights between 8 viewpoints, hotspots pinned to objects, door routing in and out of the bedroom | Pass |
-| Walk-throughs on stay pages and in the gallery (pause, next, close, Escape) | Pass |
-| Reduced motion or data saver: rendered stills, all text visible, no WebGL | Pass |
-| Software-only WebGL (no graphics card): stills, no 3D | Pass |
+| Photo clean-up compared side by side with the originals (levels, colour, fill light for backlit rooms, sharpening) | Natural: brighter rooms, crisper bamboo, no redrawn or invented detail |
+| Home hero: a villa among the golden bamboo (photo), with the title and two actions | Pass |
+| Tour, desktop: full-screen photo per stop, cross-fade on scroll, caption and stop list | Pass |
+| Tour, phone: the whole photo on its own blurred colours, caption below, no stop list | Pass |
+| Room page: photos side by side in a row that moves sideways with the scroll, progress line, captions | Pass |
+| Reduced motion: no cross-fades or moving rows; all photos and text visible | Pass |
+| Bathroom still checked for reflections of people in the mirror: none | Pass |
 
 ## 4. Performance
 
-- The 3D bundle (`public/js/world.js`, 680 KB, about 175 KB compressed) is fetched only after the page has loaded, or on intent (hovering a stay, the walk-through button), never with reduced motion or data saver.
-- Building the estate takes about 1–2 s of main-thread work on a recent laptop and is split into steps that yield to the browser. Until then the rendered still is shown, so the largest paint is an ordinary image.
-- Quality is chosen per device (shadow map size, texture resolution, plant density, grass blades, floor reflections). The hero renders at most 40 frames a second, only while it is on screen and the tab is visible, and stops by itself if frames take more than about 110 ms.
-- Pictures are WebP renditions at 640/1024/1600 px (portrait 480/768/1200) with blurred placeholders, served with a 30-day immutable cache.
+- No 3D, no WebGL and no animation library. The tour and the room row are one small script (`tour.js`, under 5 KB) driven by the page scroll.
+- Photos are WebP at 640/1024/1600 px (portrait 480/768/1200) plus a 1.5x enlargement for large screens, with blurred placeholders, served from the CDN with a 30-day immutable cache. The tour loads its first two photos straight away and each next photo one stop ahead.
 
 ## 5. Defects found and fixed during QA
 
@@ -98,16 +93,14 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 | Past dates in the availability calendar and today's header in the admin calendar failed contrast | Re-coloured to pass WCAG AA |
 | Explorer counter unreadable over bright grass; edge hotspots cut off on phones | Stronger scrim and text shadow; scene links pinned inside the screen and anchored on their dot |
 | No `/favicon.ico` (browsers request it) | Added |
-| Home page downloaded all 96 film frames before any scroll | Frames load on first scroll; phones load half (since replaced by the 3D walk) |
-| 3D: the lawn vanished on some GPUs (flat ground layers fighting in the depth buffer) | Ground layers are drawn first in a fixed order and simply cover each other |
-| 3D: a bamboo leaf card passed through the camera in the hero view | Plants are kept clear of every camera position and path; foliage is kept out of buildings |
-| 3D: the bedroom ceiling looked olive (it picked up the lawn's colour from the sky light) | Interior surfaces take little outdoor light; the ceiling gets a soft bounce |
-| 3D: in headless Chrome (software WebGL) the live hero made the page unresponsive | Software renderers get the stills; a frame-time guard stops the hero on slow devices |
+| Home page downloaded all 96 film frames before any scroll | Frames load on first scroll; phones load half (that version has since been replaced) |
+| Tour stop names were hard to read over bright photos (the courtyard, the bedroom window) | A soft shade along the right edge on wide screens |
+| Admin sign-in card squeezed into the 250 px sidebar column | `admin.css` gives the sign-in page a single column |
 
 ## 6. Known limitations and open items
 
-- **Not tested on real devices** (iOS Safari, low-end Android). Headless Chrome only, with software WebGL. Test on an iPhone and an Android phone after deployment, especially the 3D hero, the walk and the explorer, and check that phones get the low quality tier.
-- **The 3D layout is illustrative.** No site plan was supplied; see `docs/CONTENT-SOURCES.md`.
+- **Not tested on real devices** (iOS Safari, low-end Android). Headless Chrome only. Test the tour and the room photo row on an iPhone and an Android phone after deployment.
+- **Photo quality is limited by the source:** WhatsApp copies at 1600 x 1200. The original camera files would be sharper; see `docs/CONTENT-SOURCES.md`.
 - **Email delivery** is untested until SMTP credentials are added.
 - **Client confirmations** are listed in `docs/CONTENT-SOURCES.md`: check-in/out times, capacity, meals, rates, PIN code, map pin, licence number, WhatsApp availability, lawn area.
 - The rate limiter is in memory (fine for one server process).

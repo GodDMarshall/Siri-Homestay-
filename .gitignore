@@ -5,6 +5,4 @@ data/
 *.db-wal
 *.db-shm
 originals/
-models/
 .DS_Store
-/renders/

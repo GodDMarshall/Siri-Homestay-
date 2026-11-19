@@ -9,7 +9,7 @@
   "functions": {
     "api/index.js": {
       "includeFiles": "{src/**,public/media/manifest.json,public/img/**,public/css/*.css,public/js/*.js,node_modules/better-sqlite3/package.json,node_modules/better-sqlite3/lib/**,node_modules/better-sqlite3/prebuilds/linux-x64.node}",
-      "excludeFiles": "{src/world/**,public/media/renders/**,public/fonts/**,public/world/**,public/js/*.map,public/favicon.*,node_modules/better-sqlite3/prebuilds/darwin-*,node_modules/better-sqlite3/prebuilds/win32-*,node_modules/better-sqlite3/prebuilds/linuxmusl-*}",
+      "excludeFiles": "{public/media/photos/**,public/fonts/**,public/js/*.map,public/favicon.*,node_modules/better-sqlite3/prebuilds/darwin-*,node_modules/better-sqlite3/prebuilds/win32-*,node_modules/better-sqlite3/prebuilds/linuxmusl-*}",
       "maxDuration": 30
     }
   },
@@ -66,19 +66,6 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
-        }
-      ]
-    },
-    {
-      "source": "/world/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
         }
       ]
     }

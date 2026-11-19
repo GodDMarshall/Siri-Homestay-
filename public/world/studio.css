@@ -1,3 +1,0 @@
-html, body { margin: 0; background: #10271f; color: #f8f6ef; font: 14px/1.4 system-ui, sans-serif; }
-#studio-canvas { display: block; width: 100vw; height: 100vh; }
-#studio-status { position: fixed; left: 12px; bottom: 8px; margin: 0; opacity: .8; }

@@ -1,437 +1,13 @@
 {
- "generated": "scripts/build-renders.py",
- "note": "3D renders of the estate, generated in code",
- "renders": {
-  "lawn-stepping-stones": {
-   "key": "lawn-stepping-stones",
-   "area": "lawn",
-   "alt": "Stepping stones crossing the lawn towards umbrella tables, with the volleyball net and a line of trees beyond",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "lawn-stepping-stones-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "lawn-stepping-stones-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "lawn-stepping-stones-1600.webp"
-    }
-   ],
-   "jpg": "lawn-stepping-stones.jpg",
-   "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAABQBACdASoYABIAPu1mqk2ppaQiMAgBMB2JQBOgA9DyVV9v8mCrBC2zGOgAAP5YflZOJiwLEdFRGc/A+H7MYO0+Ska+yEbAyROCKk5j9rL5q7QOaUbp8wS1eSpudI5KL9KsQ/R/JQ4U5+gA",
-   "camera": {
-    "pos": [
-     -28.2,
-     1.55,
-     6.4
-    ],
-    "target": [
-     0,
-     0.6,
-     0.5
-    ],
-    "fov": 55
-   },
-   "preset": "day",
-   "anchors": {
-    "lawn": [
-     0.5287,
-     0.5063
-    ],
-    "stones": [
-     0.7831,
-     0.5768
-    ],
-    "courtyard": [
-     0.3069,
-     0.4896
-    ],
-    "net": [
-     0.3988,
-     0.4573
-    ],
-    "umbrellaP2": [
-     0.1862,
-     0.4386
-    ],
-    "umbrellaP4": [
-     0.7275,
-     0.4455
-    ],
-    "umbrellaP5": [
-     0.9233,
-     0.3952
-    ],
-    "tableP5": [
-     0.9216,
-     0.5169
-    ],
-    "cottage": [
-     0.1699,
-     0.4605
-    ],
-    "cottageV5": [
-     0.3926,
-     0.4628
-    ],
-    "potRow": [
-     0.343,
-     0.4838
-    ],
-    "bigTree": [
-     0.3796,
-     0.4272
-    ]
-   }
-  },
-  "estate-lawn-dining": {
-   "key": "estate-lawn-dining",
-   "area": "lawn",
-   "alt": "A heap of branches and logs for the campfire beside an umbrella table, with the open dining hall on the left and the lawn beyond",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "estate-lawn-dining-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "estate-lawn-dining-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "estate-lawn-dining-1600.webp"
-    }
-   ],
-   "jpg": "estate-lawn-dining.jpg",
-   "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAwBACdASoYABIAPu1gqE4ppSOiMBgMATAdiUAXYAGtQ3YNW/tNLnbBf4AA4mWraNVhIZPCT4qLtOiQfQPpxjeNQNzB+a4BBWy5aGiX8d8Mr4gqrnbFBJxZPbUc/hNOa/gH8r1yqIX3FAAA",
-   "camera": {
-    "pos": [
-     -27.8,
-     1.5,
-     -1.2
-    ],
-    "target": [
-     -5,
-     1.3,
-     -16
-    ],
-    "fov": 55
-   },
-   "preset": "day",
-   "anchors": {
-    "diningHall": [
-     0.2634,
-     0.4705
-    ],
-    "kitchen": [
-     0.3824,
-     0.482
-    ],
-    "courtyard": [
-     0.6668,
-     0.5144
-    ],
-    "net": [
-     0.8213,
-     0.4788
-    ],
-    "umbrellaP1": [
-     0.3466,
-     0.3949
-    ],
-    "umbrellaP2": [
-     0.6031,
-     0.4604
-    ],
-    "firewood": [
-     0.3311,
-     0.6091
-    ],
-    "cottage": [
-     0.5318,
-     0.4844
-    ],
-    "cottageV5": [
-     0.7334,
-     0.4863
-    ],
-    "potRow": [
-     0.6927,
-     0.5085
-    ],
-    "bigTree": [
-     0.729,
-     0.4479
-    ]
-   }
-  },
-  "lawn-umbrellas": {
-   "key": "lawn-umbrellas",
-   "area": "lawn",
-   "alt": "An umbrella table with blue chairs on its concrete circle, firewood beside it and more umbrellas across the lawn",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "lawn-umbrellas-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "lawn-umbrellas-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "lawn-umbrellas-1600.webp"
-    }
-   ],
-   "jpg": "lawn-umbrellas.jpg",
-   "lqip": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAABwBACdASoYABIAPu1kqE2ppaQiMBgMATAdiWIAqPQPRHTgPPshUURbjMWIgAD5O3g5RjSJiMOQNtIQYACgC/KqqNfZPrqVqflM3w+M+/G8JYSWgTt6fk7OQ1xiLSJkS2hi47nnss73yp66z8juHnxjGMe5v3vOAAA=",
-   "camera": {
-    "pos": [
-     -0.4,
-     1.45,
-     -10.9
-    ],
-    "target": [
-     3.7,
-     0.65,
-     -16.1
-    ],
-    "fov": 60
-   },
-   "preset": "day",
-   "anchors": {
-    "kitchen": [
-     0.2184,
-     0.37
-    ],
-    "courtyard": [
-     0.8952,
-     0.4405
-    ],
-    "umbrellaP2": [
-     0.4063,
-     0.1741
-    ],
-    "cottage": [
-     0.6173,
-     0.3782
-    ],
-    "potRow": [
-     0.956,
-     0.4246
-    ]
-   }
-  },
-  "lawn-table-villa": {
-   "key": "lawn-table-villa",
-   "area": "lawn",
-   "alt": "Blue chairs round a table under a large white umbrella, in front of a villa screened by golden bamboo",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "lawn-table-villa-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "lawn-table-villa-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "lawn-table-villa-1600.webp"
-    }
-   ],
-   "jpg": "lawn-table-villa.jpg",
-   "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADwBACdASoYABIAPu1kqk2ppaQiMAgBMB2JZgDCgCPRmcA5aDxg6LIT7nW6Ph3W9ZAA/uMDTbgy6Bwxf+3CuDSmpm+GCKXI+DqYvjHmGyZVMp/S+zJmwHmG+0YqUaMDlEgFIPsmcSqt1GoKFuMRXsqjRZjNfkDF9cwAAA==",
-   "camera": {
-    "pos": [
-     -16.2,
-     1.6,
-     13.4
-    ],
-    "target": [
-     -27,
-     1.4,
-     17.8
-    ],
-    "fov": 55
-   },
-   "preset": "day",
-   "anchors": {
-    "wc": [
-     1.0038,
-     0.5333
-    ],
-    "umbrella": [
-     0.5285,
-     0.3272
-    ],
-    "tableP3": [
-     0.5284,
-     0.6002
-    ],
-    "villa": [
-     0.4884,
-     0.4729
-    ]
-   }
-  },
-  "lawn-table-closeup": {
-   "key": "lawn-table-closeup",
-   "area": "lawn",
-   "alt": "Under a white umbrella: six blue chairs round a dark table, with a villa and bamboo behind",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "lawn-table-closeup-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "lawn-table-closeup-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "lawn-table-closeup-1600.webp"
-    }
-   ],
-   "jpg": "lawn-table-closeup.jpg",
-   "lqip": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAACwBACdASoYABIAPu1gp02ppSOiMAgBMB2JQBadA83bEBzRT0dm2p2asCxKEVuAAPui2BuX9HGAbRr1RoxKJ3B1beR1h7U3GKUtm3ZE/2bFiH9q0hktzoPxPVYih45DARqVqhe9NNPXixbToAA=",
-   "camera": {
-    "pos": [
-     -18.7,
-     1.3,
-     14
-    ],
-    "target": [
-     -23.5,
-     0.5,
-     16.1
-    ],
-    "fov": 62
-   },
-   "preset": "day",
-   "anchors": {
-    "umbrella": [
-     0.4905,
-     0.0498
-    ],
-    "tableP3": [
-     0.4912,
-     0.4767
-    ],
-    "villa": [
-     0.4885,
-     0.3454
-    ]
-   }
-  },
-  "bamboo-view-lawn": {
-   "key": "bamboo-view-lawn",
-   "area": "lawn",
-   "alt": "The lawn and umbrella tables seen between golden bamboo culms from a villa patio",
-   "w": 1200,
-   "h": 1600,
-   "orientation": "portrait",
-   "files": [
-    {
-     "w": 480,
-     "h": 640,
-     "src": "bamboo-view-lawn-480.webp"
-    },
-    {
-     "w": 768,
-     "h": 1024,
-     "src": "bamboo-view-lawn-768.webp"
-    },
-    {
-     "w": 1200,
-     "h": 1600,
-     "src": "bamboo-view-lawn-1200.webp"
-    }
-   ],
-   "jpg": "bamboo-view-lawn.jpg",
-   "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAADQBACdASoSABgAPu1eqE4ppKOiMBgMATAdiUATpmHQIJbJX5D8MMJt7id8l8HVwAD+cpk6EKvxjIXvB5i590Ll+qfsWnB0eOatngbXZORr37r8Ew1fv2mW77QvXzE4u7d0KfGOlVR1R9EHWU+kAA==",
-   "camera": {
-    "pos": [
-     -31.4,
-     1.45,
-     5.9
-    ],
-    "target": [
-     -21,
-     1,
-     13.5
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "stones": [
-     0.0147,
-     0.5364
-    ],
-    "pond": [
-     0.5575,
-     0.4856
-    ],
-    "umbrella": [
-     0.662,
-     0.4112
-    ],
-    "umbrellaP5": [
-     0.1607,
-     0.4284
-    ],
-    "tableP3": [
-     0.6612,
-     0.5075
-    ],
-    "tableP5": [
-     0.1618,
-     0.4986
-    ],
-    "gardenLamp": [
-     0.4583,
-     0.5229
-    ]
-   }
-  },
+ "generated": "2026-11-19T12:26:04Z",
+ "note": "The owners' photographs of Siri Homestay, cleaned up for the web (levels, colour, light sharpening). bath-* are stills from the owners' video. Built by scripts/build-photos.py.",
+ "photos": {
   "villa-patio": {
    "key": "villa-patio",
    "area": "villa",
-   "alt": "A whitewashed villa with sliding glass doors, a pergola, a small blue-lined pool and root-wood chairs on the patio, behind golden bamboo",
+   "caption": "A villa behind golden bamboo",
+   "alt": "A whitewashed villa with sliding glass doors, rustic root-wood chairs and a glass table on its patio, and tall golden bamboo in front",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -450,103 +26,22 @@
      "w": 1600,
      "h": 1200,
      "src": "villa-patio-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "villa-patio-2400.webp"
     }
    ],
    "jpg": "villa-patio.jpg",
-   "lqip": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABwBACdASoYABIAPu1mqk2ppaQiMAgBMB2JYwCnFCB9+f2+/zI7oSb2qM/2AAD+d9opZ4etuzfHB9uZf8KUp1rGU/VaLj6B/ecQSR/1N1wzquk3grm19UNHu7o1EOiFry2VDPB9Gm96WWZIXbLmOuLBU9iayT7tsoncL+gA",
-   "camera": {
-    "pos": [
-     -26.4,
-     1.4,
-     4.2
-    ],
-    "target": [
-     -34,
-     1.65,
-     2.6
-    ],
-    "fov": 58
-   },
-   "preset": "day",
-   "anchors": {
-    "doorOutside": [
-     0.642,
-     0.4953
-    ],
-    "doorInside": [
-     0.5272,
-     0.5139
-    ],
-    "door": [
-     0.5504,
-     0.529
-    ],
-    "bed": [
-     0.6348,
-     0.5865
-    ],
-    "pillows": [
-     0.6745,
-     0.5726
-    ],
-    "throw": [
-     0.5714,
-     0.5922
-    ],
-    "singleBed": [
-     0.5854,
-     0.5787
-    ],
-    "pool": [
-     0.154,
-     0.6303
-    ],
-    "patio": [
-     0.4461,
-     0.6308
-    ],
-    "dayBed": [
-     0.2469,
-     0.6089
-    ],
-    "sideTable": [
-     0.168,
-     0.5949
-    ],
-    "tv": [
-     0.1556,
-     0.5147
-    ],
-    "dressing": [
-     0.3169,
-     0.529
-    ],
-    "wardrobe": [
-     0.4288,
-     0.5359
-    ],
-    "bathroomDoor": [
-     0.1874,
-     0.5368
-    ],
-    "wc": [
-     0.0216,
-     0.5972
-    ],
-    "glass": [
-     0.1945,
-     0.4663
-    ],
-    "patioChairs": [
-     0.4802,
-     0.6168
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQBACdASoYABIAPu1sq1EppaOiqAqpMB2JYwCo9BCHPCXAldeg5Rh8zxafloAA/mlJOGGxcTKsnWT7pXd0gXGgM1teu9i9hVxLCdFemaawQS+ef4FNzLbrEF9QBwQ+suhpJgwGCnLkx1pjsehp3yCRMYH2JCz80BBDUiUs6ZxZdjJL3SfVla5YKr9yp5+v0AAAAA=="
   },
   "patio-chairs": {
    "key": "patio-chairs",
    "area": "villa",
-   "alt": "Root-wood chairs and a glass-topped table on a villa patio, seen from the open door",
+   "caption": "Root-wood chairs on the patio",
+   "alt": "Three root-wood chairs and a glass table on a villa patio beside a bamboo grove",
+   "source": "photo",
    "w": 1200,
    "h": 1600,
    "orientation": "portrait",
@@ -565,71 +60,22 @@
      "w": 1200,
      "h": 1600,
      "src": "patio-chairs-1200.webp"
+    },
+    {
+     "w": 1800,
+     "h": 2400,
+     "src": "patio-chairs-1800.webp"
     }
    ],
    "jpg": "patio-chairs.jpg",
-   "lqip": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACQBACdASoSABgAPu1mqE2ppaQiMBgMATAdiUAW9wIHU1aCv49DfhIMkR2PQogA/VGEiWPzOKwo8pM5BMtRNAHz6Hji9vE4POAlR4uI+KS9BIJFonP6reVwYLdy5QORvO1qibWffocNWo9lDpLAegNzwTrRvzc47Y7N8RaAVggAAA==",
-   "camera": {
-    "pos": [
-     -34.3,
-     1.6,
-     2.25
-    ],
-    "target": [
-     -32.3,
-     0.25,
-     3.5
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "patio": [
-     0.5323,
-     0.4223
-    ],
-    "stones": [
-     0.2531,
-     0.1493
-    ],
-    "pond": [
-     0.6615,
-     0.0993
-    ],
-    "umbrella": [
-     0.8123,
-     0.0264
-    ],
-    "umbrellaP4": [
-     0.0314,
-     0.0636
-    ],
-    "umbrellaP5": [
-     0.3281,
-     0.0404
-    ],
-    "tableP3": [
-     0.7948,
-     0.1241
-    ],
-    "tableP5": [
-     0.3354,
-     0.1145
-    ],
-    "patioChairs": [
-     0.393,
-     0.4009
-    ],
-    "gardenLamp": [
-     0.603,
-     0.1395
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACwBACdASoSABgAPu1sqlEppaOiqAqpMB2JZQC/7Amk8lfVPPC/u4S03ZFCw10AAOEmJdvRlGm6rANLkImn3QAcAebbmvGCv/yQQcaI5HMafWk4o5l2OF3AhYrxYBb8qct03mdTeuY0hlVTvJPR52A1Shu0Z26DHc8reFgfX/zEZUiPH+Kk/8LJhcKbiUfsAAA="
   },
   "doorway-bedroom": {
    "key": "doorway-bedroom",
    "area": "villa",
-   "alt": "Looking in through the sliding door: a king-size bed with a red throw, a single bed, the wardrobe and the bathroom door",
+   "caption": "Through the sliding door",
+   "alt": "Looking through a villa's sliding door into the bedroom: a king-size bed with a red throw, a single bed, a wardrobe, a dressing mirror and the bathroom door",
+   "source": "photo",
    "w": 1200,
    "h": 1600,
    "orientation": "portrait",
@@ -648,55 +94,22 @@
      "w": 1200,
      "h": 1600,
      "src": "doorway-bedroom-1200.webp"
+    },
+    {
+     "w": 1800,
+     "h": 2400,
+     "src": "doorway-bedroom-1800.webp"
     }
    ],
    "jpg": "doorway-bedroom.jpg",
-   "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQBQCdASoSABgAPu1mqk2ppaQiMAgBMB2JYwDE2CP/2PxH8SQ7N4h0mKc/bALksLH2p+AA/udiVVb6Y5eKEfIMeoounvFZ6M9fTEYk/oSa+aK8yE+Cu7ot5a/tpn9G/ECt+X9rOX5VMM+QuZapo0b+/bgAAA==",
-   "camera": {
-    "pos": [
-     -32.9,
-     1.55,
-     2.1
-    ],
-    "target": [
-     -37.2,
-     0.85,
-     0.4
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "doorInside": [
-     0.1628,
-     0.3899
-    ],
-    "door": [
-     0.2177,
-     0.493
-    ],
-    "bed": [
-     0.6889,
-     0.5491
-    ],
-    "pillows": [
-     0.8285,
-     0.5122
-    ],
-    "throw": [
-     0.4391,
-     0.5771
-    ],
-    "singleBed": [
-     0.4802,
-     0.4926
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwBACdASoSABgAPu1sqlEppaOiqAqpMB2JZQDMHAirggKnkX5xRUcM7ZC4DYjdygAA7QUvlurF2oH5u1OolYwVcaGui3OyKt+g4ahxHBweD9/o+/EBHQ68wdOJnDGWZX6fYKH4xoImRRBq3in0N4TyK/PIlm5dXPX5m3Gp0D9BdmsDawIAAA=="
   },
   "villa-bedroom": {
    "key": "villa-bedroom",
    "area": "villa",
-   "alt": "A villa bedroom: a king-size bed and a single bed, a day bed by the glass and sliding doors open to the bamboo and lawn",
+   "caption": "The bedroom",
+   "alt": "A villa bedroom with a king-size bed, two single beds, a glass-and-root side table and sliding glass doors open to the lawn",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -715,139 +128,22 @@
      "w": 1600,
      "h": 1200,
      "src": "villa-bedroom-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "villa-bedroom-2400.webp"
     }
    ],
    "jpg": "villa-bedroom.jpg",
-   "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAACQBACdASoYABIAPu1cqE2ppKOiN/VYATAdiWcAzNAPA4EoRA9EO5M18VE+WAAA/ucubHc0snvlZ4jsKk+qHDN59f4lHxPUhUpUi/NWnkVExgGbt9mmgN2nF7eZ8SjlcmaeInZiApwm7u4VqctN6M9Mq/gPk9W4TIAAAA==",
-   "camera": {
-    "pos": [
-     -39.45,
-     1.45,
-     2
-    ],
-    "target": [
-     -34.3,
-     0.85,
-     1.4
-    ],
-    "fov": 66
-   },
-   "preset": "day",
-   "anchors": {
-    "doorOutside": [
-     0.5679,
-     0.3962
-    ],
-    "doorInside": [
-     0.5679,
-     0.3928
-    ],
-    "door": [
-     0.5677,
-     0.4181
-    ],
-    "bed": [
-     0.268,
-     0.5574
-    ],
-    "pillows": [
-     0.1724,
-     0.5243
-    ],
-    "throw": [
-     0.4205,
-     0.5727
-    ],
-    "pool": [
-     0.9272,
-     0.4971
-    ],
-    "patio": [
-     0.6886,
-     0.4979
-    ],
-    "lawn": [
-     0.5675,
-     0.4308
-    ],
-    "stones": [
-     0.7361,
-     0.4513
-    ],
-    "diningHall": [
-     0.0945,
-     0.3939
-    ],
-    "kitchen": [
-     0.1647,
-     0.4019
-    ],
-    "courtyard": [
-     0.3716,
-     0.4246
-    ],
-    "net": [
-     0.4605,
-     0.4022
-    ],
-    "umbrellaP1": [
-     0.2535,
-     0.367
-    ],
-    "umbrellaP2": [
-     0.3366,
-     0.39
-    ],
-    "umbrellaP4": [
-     0.6621,
-     0.3948
-    ],
-    "umbrellaP5": [
-     0.7901,
-     0.3751
-    ],
-    "tableP5": [
-     0.7878,
-     0.4294
-    ],
-    "firewood": [
-     0.2928,
-     0.4448
-    ],
-    "bamboo": [
-     0.9325,
-     0.1908
-    ],
-    "patioChairs": [
-     0.6609,
-     0.4849
-    ],
-    "cottage": [
-     0.2746,
-     0.4042
-    ],
-    "cottageV5": [
-     0.4137,
-     0.406
-    ],
-    "potRow": [
-     0.3878,
-     0.4208
-    ],
-    "bigTree": [
-     0.4105,
-     0.3804
-    ],
-    "gardenLamp": [
-     0.9459,
-     0.4539
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACQBACdASoYABIAPu1qr1CppaSiqAqpMB2JYwCw7An9kPh6EVxL3vrvdAYs84AA+bSa6ZQUFBsfW+CKz9gBnArJoA4qbYtKq0DzXGjFNfdoCxoxJbhUrdkjgbLkDqjkYjWjp36xXbcS5y45nURCyElrt35koT9mfuJ0e39lzdsPuseGeJAlDIflR02dZrA0ZmjCDe29SWREYAAA"
   },
   "villa-window-pool": {
    "key": "villa-window-pool",
    "area": "villa",
-   "alt": "From inside the bedroom, the small blue-lined pool just beyond the glass, with bamboo outside",
+   "caption": "The pool, seen from the bed",
+   "alt": "View from a villa bedroom through floor-to-ceiling glass to a blue-lined pool and a grove of bamboo",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -866,123 +162,22 @@
      "w": 1600,
      "h": 1200,
      "src": "villa-window-pool-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "villa-window-pool-2400.webp"
     }
    ],
    "jpg": "villa-window-pool.jpg",
-   "lqip": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAADQBACdASoYABIAPu1urlKppiQiqAgBMB2JZQDE2A6/AqK/okbw/aSgKwQTWFqegADhlY3w3l4sHiaHsaFAISENFQ/gy0uA6LRBw2yjAt4Z7id1Pods0Ui29W/+uj6bMXfPC8LBRJWLUHmHy6APTrR0atU0tf83gsrnk1C4E6g7HseHUjKr6jMhAAA=",
-   "camera": {
-    "pos": [
-     -36.65,
-     1.5,
-     6.55
-    ],
-    "target": [
-     -32.8,
-     0.4,
-     6
-    ],
-    "fov": 62
-   },
-   "preset": "day",
-   "anchors": {
-    "doorOutside": [
-     0.0802,
-     0.2492
-    ],
-    "pool": [
-     0.4869,
-     0.4246
-    ],
-    "patio": [
-     0.1473,
-     0.4182
-    ],
-    "dayBed": [
-     0.1818,
-     0.7279
-    ],
-    "sideTable": [
-     0.5385,
-     0.6709
-    ],
-    "glass": [
-     0.4267,
-     0.121
-    ],
-    "lawn": [
-     0.5073,
-     0.2901
-    ],
-    "stones": [
-     0.6516,
-     0.3185
-    ],
-    "kitchen": [
-     0.0627,
-     0.255
-    ],
-    "courtyard": [
-     0.3209,
-     0.2815
-    ],
-    "net": [
-     0.4039,
-     0.2551
-    ],
-    "umbrellaP1": [
-     0.0396,
-     0.2108
-    ],
-    "umbrellaP2": [
-     0.249,
-     0.2405
-    ],
-    "umbrellaP4": [
-     0.648,
-     0.246
-    ],
-    "umbrellaP5": [
-     0.7387,
-     0.2205
-    ],
-    "tableP5": [
-     0.7336,
-     0.2901
-    ],
-    "firewood": [
-     0.0541,
-     0.3112
-    ],
-    "patioChairs": [
-     0.1174,
-     0.3959
-    ],
-    "cottage": [
-     0.2082,
-     0.2574
-    ],
-    "cottageV5": [
-     0.3816,
-     0.2594
-    ],
-    "potRow": [
-     0.3457,
-     0.277
-    ],
-    "bigTree": [
-     0.3725,
-     0.229
-    ],
-    "gardenLamp": [
-     0.9075,
-     0.3228
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADQBACdASoYABIAPu1urlIppiQiqAgBMB2JYwC06Ai4JEaW/86o2QNcgNm/iYfXQADOPVqxaSPbAeKqhvEYqVYDdBjj2Dgl2T1wceCScuq7TquL0faLEO84/JM9x+9pq+r+MgkNyRsRSqW07PwO/eBNDKDyL+ODWNA8ZoiYhrg239yNscQfjOOHTxNmOqMjCQ2oOezCCdlCMsRYRlBS5v3wCgSAAA=="
   },
   "villa-pool": {
    "key": "villa-pool",
    "area": "villa",
-   "alt": "The small blue-lined pool against the villa under the pergola, with bamboo beside it",
+   "caption": "The pool under the glass pergola",
+   "alt": "A villa's blue-lined pool under a glass-roofed pergola, with bamboo in front of the bedroom window",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1001,87 +196,192 @@
      "w": 1600,
      "h": 1200,
      "src": "villa-pool-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "villa-pool-2400.webp"
     }
    ],
    "jpg": "villa-pool.jpg",
-   "lqip": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADQBACdASoYABIAPu1sqk8ppiOiMBgIATAdiUAXYAYyEnPRvKKFAQyJd7oWQYbSAADN1+ji9Sq/+nPi+IXEImca8znlVxK8gW2ORC0nYbqQQT2Q3PKZ/5AWVJ03x+8qTpDaQqfRj48jl9uj95a/OEVavqBIjQI0AAA=",
-   "camera": {
-    "pos": [
-     -28.8,
-     1.55,
-     5
-    ],
-    "target": [
-     -34.2,
-     1.05,
-     5.9
-    ],
-    "fov": 58
-   },
-   "preset": "day",
-   "anchors": {
-    "doorInside": [
-     0.9744,
-     0.4176
-    ],
-    "singleBed": [
-     1.0003,
-     0.5047
-    ],
-    "pool": [
-     0.4588,
-     0.5965
-    ],
-    "patio": [
-     0.92,
-     0.6346
-    ],
-    "dayBed": [
-     0.5549,
-     0.5407
-    ],
-    "sideTable": [
-     0.4634,
-     0.5192
-    ],
-    "tv": [
-     0.4457,
-     0.4176
-    ],
-    "dressing": [
-     0.6163,
-     0.4304
-    ],
-    "wardrobe": [
-     0.7578,
-     0.4399
-    ],
-    "bathroomDoor": [
-     0.4755,
-     0.4397
-    ],
-    "basin": [
-     0.2648,
-     0.4855
-    ],
-    "wc": [
-     0.3168,
-     0.5072
-    ],
-    "glass": [
-     0.4979,
-     0.358
-    ],
-    "patioChairs": [
-     0.9952,
-     0.6179
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABwBQCdASoYABIAPu1oqU+ppaOiKA1RMB2JZAC1A1HAJ+6JCpIyxYw4MvFmUctM4z8zaD0AAP61S++fudsiM/+YE0hDCpQ6I/MCbkVYNSppz6d95A81yZUr5zOLNg2xG84Y1+K80ehJyU/+8uc5Qdqbc7WENQ4F4ILz0UZM8FYLawV4DsNyiV7Tpq0/E/FHVwQ4P+lEiBJ4ur1wSwfEyVUzSsPvm54ivQAAAA=="
   },
-  "room-beds": {
-   "key": "room-beds",
-   "area": "villa",
-   "alt": "The king-size bed with white linen and a red throw, and a single bed beyond",
+  "lawn-stepping-stones": {
+   "key": "lawn-stepping-stones",
+   "area": "lawn",
+   "caption": "Stepping stones across the lawn",
+   "alt": "Stepping stones curving across the lawn towards umbrella seating and the volleyball net, framed by bamboo leaves",
+   "source": "photo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-stepping-stones-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-stepping-stones-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-stepping-stones-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "lawn-stepping-stones-2400.webp"
+    }
+   ],
+   "jpg": "lawn-stepping-stones.jpg",
+   "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwBACdASoYABIAPu1gqE4ppSOiMBgMATAdiWMAvkgONjnBUsfs8e2Yd5u0AAD+xd9pOot0D19vDuYKllb40//zsnEhfIjmo52/S8YjUICAkEqPtKijmslNaxTUABSJN5qcIs0AH65oEdMqguhP7TtnhyTTZmrRKg9RRYHW6zxn9BgOgFAAAA=="
+  },
+  "estate-lawn-dining": {
+   "key": "estate-lawn-dining",
+   "area": "lawn",
+   "caption": "The lawn and the dining hall",
+   "alt": "The estate lawn with umbrella seating in front, the open dining hall with yellow chairs on the left, a cottage behind and the volleyball net on the right",
+   "source": "photo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "estate-lawn-dining-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "estate-lawn-dining-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "estate-lawn-dining-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "estate-lawn-dining-2400.webp"
+    }
+   ],
+   "jpg": "estate-lawn-dining.jpg",
+   "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADwBACdASoYABIAPu1qrVCppiQiqAqpMB2JYwCxHxs/2Cd8d1z7tZ1TRq66yeAtPlgA/gh0xiXJGevh6raGWrEymooSK+DsQQUI+nKArdXWsL38wvSw+10k7kAAsR8kvGz4FDB3hyv/vC1TbCINBF4UnhuABDD+eudRtMk7FSEPNKG+5ofyBEBKVCAAAA=="
+  },
+  "lawn-umbrellas": {
+   "key": "lawn-umbrellas",
+   "area": "lawn",
+   "caption": "Umbrella seating and firewood for a campfire",
+   "alt": "Umbrella seating on the lawn, two more umbrellas and the volleyball net in the distance, and firewood stacked for a campfire",
+   "source": "photo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-umbrellas-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-umbrellas-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-umbrellas-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "lawn-umbrellas-2400.webp"
+    }
+   ],
+   "jpg": "lawn-umbrellas.jpg",
+   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwBACdASoYABIAPu1qrlCppaQiqAqpMB2JYwC3uBGSZD8TPDPbr8URxGpkFE8afwAA/sX7oSsGRnD7AKbvQnDJdF1pHtrfKbinsLqKsOBjRjNhhewGfAFe4+qTAjbwmtEmoH9fhkglO0eIbMEVWElCS6SxI5A1DeJt/XCflbqYmt5OSsmoAAAA"
+  },
+  "lawn-table-villa": {
+   "key": "lawn-table-villa",
+   "area": "lawn",
+   "caption": "A table under the umbrella",
+   "alt": "Six blue chairs around a round table under a large white umbrella, in front of a villa screened by golden bamboo",
+   "source": "photo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-table-villa-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-table-villa-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-table-villa-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "lawn-table-villa-2400.webp"
+    }
+   ],
+   "jpg": "lawn-table-villa.jpg",
+   "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBQCdASoYABIAPu1mrE+ppSQiMBgIATAdiWYAvZG/gG3TjUdp7aig3hq+QBvY/834APsTVr9/QY00bwARo7gjmwbn3gfrhjmTW2T6b0pT5pJJPAD65mpKkmMrSQWaAoT/Qpebpys19UNYcM/Odwsb5YB8bihAB6g/IZqLtS0LqJZTc86QaJqMIZHjd0m0V3bA2biQvU3+mb3S0eqAsxSz+1OABNWAAAA="
+  },
+  "lawn-table-closeup": {
+   "key": "lawn-table-closeup",
+   "area": "lawn",
+   "caption": "Blue chairs under a white umbrella",
+   "alt": "Blue chairs around a dark round table beneath a white umbrella, with a villa and bamboo behind",
+   "source": "photo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-table-closeup-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-table-closeup-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-table-closeup-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "lawn-table-closeup-2400.webp"
+    }
+   ],
+   "jpg": "lawn-table-closeup.jpg",
+   "lqip": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAABQBQCdASoYABIAPu1orlCppaQiqAqpMB2JbACdMxx/YGgAKbDnXQuVGSSuPGZlWARCCAAA4gXSRwFDkSaeckoIzXHaMbbTA5grpJMsBuiGGeb47afIKv7sTbsKSelRzkoaIz4uLuSDwWtne20h0f5t5RC2RjHxnvktbKK5aLeQsxjP724CEFAMvlhe0DQTsuCgpTrPhcEOhugOiQiuoT4vfhxbswmo6U+eJLgA"
+  },
+  "bamboo-view-lawn": {
+   "key": "bamboo-view-lawn",
+   "area": "lawn",
+   "caption": "The lawn through the bamboo",
+   "alt": "The lawn and umbrella seating seen between bamboo culms from a villa patio",
+   "source": "photo",
    "w": 1200,
    "h": 1600,
    "orientation": "portrait",
@@ -1089,417 +389,33 @@
     {
      "w": 480,
      "h": 640,
-     "src": "room-beds-480.webp"
+     "src": "bamboo-view-lawn-480.webp"
     },
     {
      "w": 768,
      "h": 1024,
-     "src": "room-beds-768.webp"
+     "src": "bamboo-view-lawn-768.webp"
     },
     {
      "w": 1200,
      "h": 1600,
-     "src": "room-beds-1200.webp"
+     "src": "bamboo-view-lawn-1200.webp"
+    },
+    {
+     "w": 1800,
+     "h": 2400,
+     "src": "bamboo-view-lawn-1800.webp"
     }
    ],
-   "jpg": "room-beds.jpg",
-   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAADwBACdASoSABgAPu1iqE2ppaOiMAgBMB2JZgDG9CHMHsiHYdhUa7Bq0K9pTUf99GAA/ucTwUkxPHZimWYsecoRn/fiHtCbnZ1Le5rj74tW3Za6Yr14VkHYqWLmORhj6jb1Mi5M/6ryVOTm29LWeWrNGO/qHTgduHiRNmn9tF3T5crug/G3xO+S6eVhk6kEgdJ5ILOi5sQdp4AA",
-   "camera": {
-    "pos": [
-     -35,
-     1.55,
-     1.85
-    ],
-    "target": [
-     -36.15,
-     0.7,
-     -0.5
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "bed": [
-     0.4421,
-     0.5469
-    ],
-    "pillows": [
-     0.557,
-     0.4499
-    ],
-    "throw": [
-     0.0826,
-     0.7557
-    ]
-   }
-  },
-  "room-pool-view": {
-   "key": "room-pool-view",
-   "area": "villa",
-   "alt": "The bedroom glass looking out over the pool to the bamboo and the lawn",
-   "w": 1200,
-   "h": 1600,
-   "orientation": "portrait",
-   "files": [
-    {
-     "w": 480,
-     "h": 640,
-     "src": "room-pool-view-480.webp"
-    },
-    {
-     "w": 768,
-     "h": 1024,
-     "src": "room-pool-view-768.webp"
-    },
-    {
-     "w": 1200,
-     "h": 1600,
-     "src": "room-pool-view-1200.webp"
-    }
-   ],
-   "jpg": "room-pool-view.jpg",
-   "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADwBACdASoSABgAPu1kq06ppaQiKA1RMB2JZQDImAh7q6rPkfQFOrlSIgge6b8LcsAA/lL8g6ev903Z8HXJjJWTX7A1s17pERmcYv4ziOc8ujDLVA+v3jG918cihRDcPcudpFs0heGnZOjaVEWH8LTn08dxq5y6CygAAA==",
-   "camera": {
-    "pos": [
-     -36.6,
-     1.5,
-     4.6
-    ],
-    "target": [
-     -32.8,
-     0.75,
-     5.8
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "pool": [
-     0.5151,
-     0.496
-    ],
-    "dayBed": [
-     0.8265,
-     0.7586
-    ],
-    "glass": [
-     0.678,
-     0.2515
-    ],
-    "lawn": [
-     0.1071,
-     0.3863
-    ],
-    "stones": [
-     0.3833,
-     0.4071
-    ],
-    "pond": [
-     0.8629,
-     0.375
-    ],
-    "umbrella": [
-     0.8483,
-     0.3143
-    ],
-    "umbrellaP4": [
-     0.3103,
-     0.3477
-    ],
-    "umbrellaP5": [
-     0.4787,
-     0.3291
-    ],
-    "tableP3": [
-     0.8417,
-     0.3913
-    ],
-    "tableP5": [
-     0.4789,
-     0.3829
-    ],
-    "bamboo": [
-     0.5937,
-     0.1051
-    ],
-    "gardenLamp": [
-     0.6997,
-     0.4038
-    ]
-   }
-  },
-  "bath-basin": {
-   "key": "bath-basin",
-   "area": "villa",
-   "alt": "The attached bathroom: a white vessel basin on a dark stone counter, with a mirror and green-grey wall tiles",
-   "w": 1200,
-   "h": 1600,
-   "orientation": "portrait",
-   "files": [
-    {
-     "w": 480,
-     "h": 640,
-     "src": "bath-basin-480.webp"
-    },
-    {
-     "w": 768,
-     "h": 1024,
-     "src": "bath-basin-768.webp"
-    },
-    {
-     "w": 1200,
-     "h": 1600,
-     "src": "bath-basin-1200.webp"
-    }
-   ],
-   "jpg": "bath-basin.jpg",
-   "lqip": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwBACdASoSABgAPu1krVAppSQisBgIATAdiWMAuwAPRsU9e4+ztzWJ+oI0lugAAP5wiqVftC2qmH5oHiMUhyXW0h7cF1qZ2UBbPF9Hn7g4Rr3Kzrzb3gXVRASJ0NI08zySTYAA",
-   "camera": {
-    "pos": [
-     -37.75,
-     1.5,
-     7.45
-    ],
-    "target": [
-     -35.55,
-     1.05,
-     8.9
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "basin": [
-     0.4532,
-     0.5209
-    ],
-    "wc": [
-     0.8424,
-     0.7558
-    ],
-    "pond": [
-     0.5354,
-     0.387
-    ],
-    "umbrella": [
-     0.3899,
-     0.3284
-    ],
-    "umbrellaP5": [
-     0.0563,
-     0.3395
-    ],
-    "tableP3": [
-     0.3918,
-     0.4033
-    ],
-    "tableP5": [
-     0.062,
-     0.3969
-    ],
-    "floodlight": [
-     0.605,
-     0.0843
-    ],
-    "gardenLamp": [
-     0.2895,
-     0.4167
-    ]
-   }
-  },
-  "bath-wc": {
-   "key": "bath-wc",
-   "area": "villa",
-   "alt": "The attached bathroom: a wall-hung WC and textured wall tiles",
-   "w": 1200,
-   "h": 1600,
-   "orientation": "portrait",
-   "files": [
-    {
-     "w": 480,
-     "h": 640,
-     "src": "bath-wc-480.webp"
-    },
-    {
-     "w": 768,
-     "h": 1024,
-     "src": "bath-wc-768.webp"
-    },
-    {
-     "w": 1200,
-     "h": 1600,
-     "src": "bath-wc-1200.webp"
-    }
-   ],
-   "jpg": "bath-wc.jpg",
-   "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAACQBACdASoSABgAPuVepk2pJSOiN/VYASAciWMAtOgPSVAzKe7yCm2HHawoZMAA+6f/xqZDP+B0t3FqLMCX9Ow1bMeK1si6Lmdl7ACWQbuq8kbDmbX26iI1o3s3RW93qAAAAA==",
-   "camera": {
-    "pos": [
-     -34.75,
-     1.45,
-     7.4
-    ],
-    "target": [
-     -36.9,
-     0.65,
-     8.8
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "basin": [
-     0.0851,
-     0.5015
-    ],
-    "wc": [
-     0.5212,
-     0.4946
-    ]
-   }
-  },
-  "walk-door": {
-   "key": "walk-door",
-   "area": "villa",
-   "alt": "The villa’s sliding door standing open, with a red welcome mat and root-wood chairs on the patio",
-   "w": 1200,
-   "h": 1600,
-   "orientation": "portrait",
-   "files": [
-    {
-     "w": 480,
-     "h": 640,
-     "src": "walk-door-480.webp"
-    },
-    {
-     "w": 768,
-     "h": 1024,
-     "src": "walk-door-768.webp"
-    },
-    {
-     "w": 1200,
-     "h": 1600,
-     "src": "walk-door-1200.webp"
-    }
-   ],
-   "jpg": "walk-door.jpg",
-   "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwBACdASoSABgAPuVipk2pJaOiMAwBIByJZQDKACHhTMIxC3Eo+AKgm0r3wy54AP7f5VCZACJ6FautfGaASE3O2IWU4oSNJolSssPg8oDaqNnB3SLqvl59sTIi/HDG9QKoMnAuG80reTQMx7yVoIcvzufIFr3+j64bSjOQAAA=",
-   "camera": {
-    "pos": [
-     -30.6,
-     1.5,
-     2.6
-    ],
-    "target": [
-     -34,
-     0.7,
-     2
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "doorInside": [
-     0.4579,
-     0.323
-    ],
-    "door": [
-     0.5,
-     0.3535
-    ],
-    "bed": [
-     0.756,
-     0.4284
-    ],
-    "pillows": [
-     0.8588,
-     0.408
-    ],
-    "throw": [
-     0.5931,
-     0.4378
-    ],
-    "singleBed": [
-     0.6386,
-     0.4039
-    ],
-    "dressing": [
-     0.0445,
-     0.3405
-    ],
-    "wardrobe": [
-     0.2964,
-     0.3489
-    ],
-    "patioChairs": [
-     0.0792,
-     0.6071
-    ]
-   }
-  },
-  "walk-bed": {
-   "key": "walk-bed",
-   "area": "villa",
-   "alt": "The king-size bed with a red throw, seen on walking into the villa",
-   "w": 1200,
-   "h": 1600,
-   "orientation": "portrait",
-   "files": [
-    {
-     "w": 480,
-     "h": 640,
-     "src": "walk-bed-480.webp"
-    },
-    {
-     "w": 768,
-     "h": 1024,
-     "src": "walk-bed-768.webp"
-    },
-    {
-     "w": 1200,
-     "h": 1600,
-     "src": "walk-bed-1200.webp"
-    }
-   ],
-   "jpg": "walk-bed.jpg",
-   "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAACwBACdASoSABgAPu1kqk2ppaQiMAgBMB2JZgDBzCHfm12f6XQqAXaKPwGuYAMAAP7nETSLmnDucGXHu2PnMskoTewyvfnxtC/2LZfagVS16ViXbFueOrn8zzD39SQlkj/EQEgoT620b0XVrvQHcMRJ/5H8n4H/VKjRkhXeE629tJTkIr80o/8MUgCAAA==",
-   "camera": {
-    "pos": [
-     -34.45,
-     1.55,
-     2
-    ],
-    "target": [
-     -36.1,
-     0.65,
-     0.1
-    ],
-    "fov": 69
-   },
-   "preset": "day",
-   "anchors": {
-    "bed": [
-     0.5284,
-     0.4797
-    ],
-    "pillows": [
-     0.6628,
-     0.4078
-    ],
-    "throw": [
-     0.2011,
-     0.5886
-    ],
-    "singleBed": [
-     0.0917,
-     0.3947
-    ]
-   }
+   "jpg": "bamboo-view-lawn.jpg",
+   "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAAAQBQCdASoSABgAPu1sq1EppiOiqAqpMB2JQBdmargeGtf9SqEkgnQCrOltRfDVUCHAAP7o7+r7Wf3hjQ/JtC5CCBLL1zUN+qfwV13YwDTAZIV99Bp3pJfq+7O2H5nb+9pzAL7NaHeJtsqdag+2CdHBbeIvmL/qOa6BM9wNIOjGYEwyE2Tyh3IQWDWCa3eTURdosnnIePaCMQBRXHmE8AAA"
   },
   "courtyard-villas": {
    "key": "courtyard-villas",
    "area": "courtyard",
-   "alt": "Two tiled-roof cottages around the paved courtyard, with a row of potted plants and a spreading tree",
+   "caption": "Villas around the courtyard",
+   "alt": "Two tiled-roof villas around the paved courtyard, lined with potted plants",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1518,43 +434,22 @@
      "w": 1600,
      "h": 1200,
      "src": "courtyard-villas-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "courtyard-villas-2400.webp"
     }
    ],
    "jpg": "courtyard-villas.jpg",
-   "lqip": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADQBACdASoYABIAPu1qq08ppiOiMBgIATAdiWcAzFgLM+8byBNC5TtXEqum6npogADypQYOztKTckWyoYmA2KA1ODvAoU7sej3hk74/awVsSmVe45QvLZsLlSgYBii5CGRltrkhZqAAAA==",
-   "camera": {
-    "pos": [
-     16,
-     1.6,
-     -12.5
-    ],
-    "target": [
-     27,
-     1.6,
-     -28
-    ],
-    "fov": 55
-   },
-   "preset": "overcast",
-   "anchors": {
-    "courtyard": [
-     0.6464,
-     0.6162
-    ],
-    "cottage": [
-     0.2473,
-     0.4775
-    ],
-    "potRow": [
-     0.8842,
-     0.5637
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAADQBACdASoYABIAPu1epk6ppKMiMBgMATAdiWUAuzLyAUyRSMprrap85vpyoT0FIAD7nFyWP46Je5LmUaa/qndirtb7XE7sxO2PgfgIPnTO/kiXG1CFGUn6f0m24RZw8cxmVgcaoEBiupoXmGeZpVEzo3j6xKAeTOsg5xROjkCkUbv1Y3pu5FS73qWJJNvzkb8e3xTH9YVApoAA"
   },
   "courtyard-villa": {
    "key": "courtyard-villa",
    "area": "courtyard",
-   "alt": "A tiled-roof cottage beside the paved courtyard, with trees behind",
+   "caption": "The courtyard and the hills",
+   "alt": "The paved courtyard beside a villa with a tiled roof, backed by forested hills",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1573,35 +468,22 @@
      "w": 1600,
      "h": 1200,
      "src": "courtyard-villa-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "courtyard-villa-2400.webp"
     }
    ],
    "jpg": "courtyard-villa.jpg",
-   "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADQBACdASoYABIAPu1orE8ppiQiMBgIATAdiWcAwoARcD95XJeI6KbAh+QW5oL0AAD8Llx91Vqh7eCUnlwKGUO8TjCfPGCeuYeNaH01KmsbBh5UZXjLBYtQjfSwmHebnfixHJjLv1Kyi7Gr54XQqsr9WYagAAAA",
-   "camera": {
-    "pos": [
-     14.5,
-     1.6,
-     -15.5
-    ],
-    "target": [
-     22,
-     1.6,
-     -31
-    ],
-    "fov": 55
-   },
-   "preset": "overcast",
-   "anchors": {
-    "cottage": [
-     0.4808,
-     0.4757
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADQBQCdASoYABIAPu1eqE6ppKOiMBgMATAdiWcAxnwPuOk836vVAM1lW3Ns8g1R8LADA8fRfHoAAP7u5smZtFa4PARW8Z4MgAwBAqPsMrNKdJEa4xjw302+umljNm9QMGaSOIWpK6epBnvbM8XY9Fq/wjGclDifuDPcm7gGREnRg0kkBKwRIAAA"
   },
   "courtyard-garden": {
    "key": "courtyard-garden",
    "area": "courtyard",
-   "alt": "An umbrella and a table under a broad-leaved tree on the grass beside the courtyard’s potted plants",
+   "caption": "A table under the tree",
+   "alt": "An umbrella table under a tree beside a row of potted plants and the paved courtyard",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1620,51 +502,22 @@
      "w": 1600,
      "h": 1200,
      "src": "courtyard-garden-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "courtyard-garden-2400.webp"
     }
    ],
    "jpg": "courtyard-garden.jpg",
-   "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABQBACdASoYABIAPuVepk2pJSOiN/VYASAciUAYOYIqrIGl9J5N5/BSEggAAP6yCT5+JPLVZza62kSf3yUe+MZ4afIz+YWWV7ogNSPNtYGK1bVHm1rVaNyrisg/ASAvijqqWKST0Tz1VeEHWcqJLWpEZKG7AAAA",
-   "camera": {
-    "pos": [
-     41,
-     1.6,
-     -4.5
-    ],
-    "target": [
-     33,
-     1.6,
-     -22
-    ],
-    "fov": 55
-   },
-   "preset": "overcast",
-   "anchors": {
-    "kitchen": [
-     0.0994,
-     0.4902
-    ],
-    "courtyard": [
-     0.1931,
-     0.559
-    ],
-    "cottage": [
-     0.3251,
-     0.4878
-    ],
-    "potRow": [
-     0.4749,
-     0.5577
-    ],
-    "bigTree": [
-     0.616,
-     0.3124
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBQCdASoYABIAPu1eqE4ppKOiMBgMATAdiWMAt+OVAEKztzqoa+fUKSdMraaL/qPAAAD98CH2sCb0k1ev/T7pPoDSeW3VMHazC7H8ugUjAms8ruym5NMPDeTdAAj4DgxazTMFcZZJH+4wDe3OP3XUVWTl7EMg5tGQoiTSYstYSdGt1RT+lMciL++6+4QJPAAAAA=="
   },
   "night-garden": {
    "key": "night-garden",
    "area": "night",
-   "alt": "The lawn at night under floodlights, with umbrella tables, the volleyball net and low garden lamps",
+   "caption": "The garden after dark",
+   "alt": "The garden at night: floodlit trees, glowing ground lights, umbrella tables and the volleyball net",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1683,91 +536,22 @@
      "w": 1600,
      "h": 1200,
      "src": "night-garden-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "night-garden-2400.webp"
     }
    ],
    "jpg": "night-garden.jpg",
-   "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQBACdASoYABIAPuVepk2pJSOiN/VYASAciWUAyywQ7/G9IBTzwcCcZwMAAP70G/Y8eSqc0R6SYi9xVOTsegUnGBLWFffVeu+9W1N8eYccANqdEto3s3EZhI38O8QA",
-   "camera": {
-    "pos": [
-     -20,
-     1.5,
-     21
-    ],
-    "target": [
-     -6,
-     1.6,
-     6
-    ],
-    "fov": 55
-   },
-   "preset": "night",
-   "anchors": {
-    "lawn": [
-     0.5054,
-     0.5414
-    ],
-    "stones": [
-     0.1248,
-     0.6041
-    ],
-    "diningHall": [
-     0.1066,
-     0.4888
-    ],
-    "kitchen": [
-     0.275,
-     0.496
-    ],
-    "courtyard": [
-     0.5503,
-     0.5239
-    ],
-    "net": [
-     0.5375,
-     0.4928
-    ],
-    "umbrellaP2": [
-     0.3522,
-     0.4791
-    ],
-    "umbrellaP4": [
-     0.9541,
-     0.4729
-    ],
-    "umbrellaP5": [
-     0.4162,
-     0.4146
-    ],
-    "tableP5": [
-     0.4161,
-     0.558
-    ],
-    "cottage": [
-     0.4474,
-     0.4973
-    ],
-    "cottageV5": [
-     0.6858,
-     0.4983
-    ],
-    "potRow": [
-     0.6082,
-     0.5191
-    ],
-    "bigTree": [
-     0.652,
-     0.4624
-    ],
-    "gardenLamp": [
-     0.3147,
-     0.6948
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABwBACdASoYABIAPu1mq0+ppSOmsBgIATAdiWUAv+wQKZhLsS3OARcXVFPWAAD+7LF1+BN8Grzejj4/Rk9kJ40r45U2VhD4X3Lz362+zTR0kbIhYWB1qck7C1oXle0YOc8/2KxJ7bmq5tj/NoDRpHxPk5fW6gAA"
   },
   "night-lawn": {
    "key": "night-lawn",
    "area": "night",
-   "alt": "The lawn under a floodlight at night, with the volleyball net and an umbrella table",
+   "caption": "The lawn under the floodlight",
+   "alt": "The lawn under a floodlight at night, with the volleyball net and a lit umbrella table near the villas",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1786,63 +570,22 @@
      "w": 1600,
      "h": 1200,
      "src": "night-lawn-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "night-lawn-2400.webp"
     }
    ],
    "jpg": "night-lawn.jpg",
-   "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQBACdASoYABIAPuFWpU2opKOiN/qoARAcCWUAxnwh34OpYVW4L6HgxUNUoKicAAD+9WbVTJpR8ly3a7v96ot70M1ujsWwQaQvqQBYn3J/VQfd8vIZY5c6eRh716/tIAA=",
-   "camera": {
-    "pos": [
-     -9,
-     1.5,
-     16
-    ],
-    "target": [
-     14,
-     1.2,
-     3
-    ],
-    "fov": 55
-   },
-   "preset": "night",
-   "anchors": {
-    "lawn": [
-     0.0152,
-     0.563
-    ],
-    "courtyard": [
-     0.2658,
-     0.5139
-    ],
-    "net": [
-     0.2019,
-     0.4713
-    ],
-    "umbrellaP4": [
-     0.748,
-     0.4484
-    ],
-    "cottage": [
-     0.1272,
-     0.4792
-    ],
-    "cottageV5": [
-     0.4433,
-     0.4818
-    ],
-    "potRow": [
-     0.3474,
-     0.5067
-    ],
-    "bigTree": [
-     0.4014,
-     0.4387
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAACQBACdASoYABIAPu1kqk2ppaQjMAgBMB2JZwDKMoADTo4BXz5JxtxdcMgsRoAA/vDWz6gKbxQTUN9O7ZQjJWBilGehuF6SdfyjFgk7RXSHuXd4g2byZ8PDtNPokttQAAA="
   },
   "night-path": {
    "key": "night-path",
    "area": "night",
-   "alt": "A floodlight by the bamboo at night, low lamps glowing along the edge of the lawn",
+   "caption": "A lit path between the beds",
+   "alt": "A floodlit path at night between bamboo and garden plants",
+   "source": "photo",
    "w": 1600,
    "h": 1200,
    "orientation": "landscape",
@@ -1861,542 +604,73 @@
      "w": 1600,
      "h": 1200,
      "src": "night-path-1600.webp"
+    },
+    {
+     "w": 2400,
+     "h": 1800,
+     "src": "night-path-2400.webp"
     }
    ],
    "jpg": "night-path.jpg",
-   "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAwCdASoYABIAPu1kq1AppSOisBgIATAdiWcAxkAQ8Oiet0TcxggA/vKuxdh6O7ELFBPRuS0T4C1egH5DyjeOrQ0VHPSF9Z5z0JAJ2JfYMOd2mcj5LIAAAAA=",
-   "camera": {
-    "pos": [
-     13,
-     1.5,
-     25
-    ],
-    "target": [
-     24,
-     3.6,
-     17
-    ],
-    "fov": 55
-   },
-   "preset": "night",
-   "anchors": {
-    "umbrellaP4": [
-     0.0092,
-     0.5614
-    ],
-    "cottageV5": [
-     0.2579,
-     0.6391
-    ],
-    "potRow": [
-     0.0667,
-     0.6712
-    ],
-    "bigTree": [
-     0.158,
-     0.5838
-    ]
-   }
+   "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAwCdASoYABIAPu1qr1AppaSiqAqpMB2JZwC90A9YrKIGc3vcSqWAAP7ZQyvRh8bNUXvRxuVdMVSBg4TVhuRpxYtWBlPR/SCdaeIU8EHjfFE6KpqfRrahoaUY2OAA"
   },
-  "aerial": {
-   "key": "aerial",
-   "area": "estate",
-   "alt": "The estate from above: the lawn with its umbrella tables, the garden villas along the bamboo, the dining hall, the courtyard and the pond, in forest",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "aerial-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "aerial-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "aerial-1600.webp"
-    }
-   ],
-   "jpg": "aerial.jpg",
-   "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQBACdASoYABIAPu1qrFEppaQiqAqpMB2JYwC7ABF4EbzFIqn/QoCLLOzwAPqa1mQa1QXa6ISf+C11etIhHGF+yp1OgHAxOkGwS4/+xajv8VG8eYIjl4sVbgEiEpZBAAA=",
-   "camera": {
-    "pos": [
-     -62,
-     46,
-     58
-    ],
-    "target": [
-     2,
-     0,
-     -2
-    ],
-    "fov": 40
-   },
-   "preset": "golden",
-   "anchors": {
-    "doorOutside": [
-     0.2237,
-     0.7065
-    ],
-    "doorInside": [
-     0.1784,
-     0.7381
-    ],
-    "door": [
-     0.1925,
-     0.731
-    ],
-    "bed": [
-     0.1543,
-     0.7427
-    ],
-    "pillows": [
-     0.1491,
-     0.7353
-    ],
-    "throw": [
-     0.1619,
-     0.7515
-    ],
-    "singleBed": [
-     0.1204,
-     0.7649
-    ],
-    "pool": [
-     0.2411,
-     0.7613
-    ],
-    "patio": [
-     0.222,
-     0.7409
-    ],
-    "dayBed": [
-     0.205,
-     0.7841
-    ],
-    "sideTable": [
-     0.2131,
-     0.789
-    ],
-    "tv": [
-     0.1988,
-     0.794
-    ],
-    "dressing": [
-     0.1421,
-     0.8073
-    ],
-    "wardrobe": [
-     0.1274,
-     0.7889
-    ],
-    "bathroomDoor": [
-     0.1698,
-     0.8211
-    ],
-    "basin": [
-     0.2281,
-     0.8091
-    ],
-    "wc": [
-     0.2121,
-     0.8261
-    ],
-    "glass": [
-     0.2217,
-     0.756
-    ],
-    "lawn": [
-     0.502,
-     0.532
-    ],
-    "stones": [
-     0.4353,
-     0.6585
-    ],
-    "diningHall": [
-     0.2647,
-     0.4207
-    ],
-    "kitchen": [
-     0.3327,
-     0.3599
-    ],
-    "courtyard": [
-     0.5159,
-     0.3512
-    ],
-    "net": [
-     0.5111,
-     0.4255
-    ],
-    "umbrella": [
-     0.4476,
-     0.718
-    ],
-    "umbrellaP1": [
-     0.2637,
-     0.5458
-    ],
-    "umbrellaP2": [
-     0.4076,
-     0.4164
-    ],
-    "umbrellaP4": [
-     0.7098,
-     0.4508
-    ],
-    "umbrellaP5": [
-     0.4947,
-     0.6214
-    ],
-    "tableP3": [
-     0.4482,
-     0.7449
-    ],
-    "tableP5": [
-     0.4948,
-     0.6465
-    ],
-    "firewood": [
-     0.2557,
-     0.6064
-    ],
-    "bamboo": [
-     0.2903,
-     0.696
-    ],
-    "villa": [
-     0.377,
-     0.8838
-    ],
-    "patioChairs": [
-     0.2206,
-     0.7361
-    ],
-    "cottage": [
-     0.4404,
-     0.3158
-    ],
-    "cottageV5": [
-     0.6207,
-     0.2742
-    ],
-    "potRow": [
-     0.5576,
-     0.3219
-    ],
-    "bigTree": [
-     0.5915,
-     0.2753
-    ],
-    "floodlight": [
-     0.4177,
-     0.6934
-    ],
-    "gardenLamp": [
-     0.4969,
-     0.7119
-    ]
-   }
-  },
-  "arrival-start": {
-   "key": "arrival-start",
-   "area": "estate",
-   "alt": "Looking across the pond and the meadow towards the lawn and the villas in early light",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "arrival-start-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "arrival-start-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "arrival-start-1600.webp"
-    }
-   ],
-   "jpg": "arrival-start.jpg",
-   "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAABwBACdASoYABIAPuVipE2pJaOiMAwBIByJQBlABDuMgCMfdgKeOVLigS2XmAD+rn7Qzbw2o5ZmYUyHQr/Kgdhon/MVW0Dw65QtVpL57j+VXrLsgiQkHkIc6wKdraBVaWAvjpniQk8qaoAA",
-   "camera": {
-    "pos": [
-     24,
-     7,
-     46
-    ],
-    "target": [
-     -10,
-     2,
-     4
-    ],
-    "fov": 50
-   },
-   "preset": "golden",
-   "anchors": {
-    "doorOutside": [
-     0.3215,
-     0.4847
-    ],
-    "doorInside": [
-     0.295,
-     0.4828
-    ],
-    "door": [
-     0.3027,
-     0.4858
-    ],
-    "bed": [
-     0.3062,
-     0.4921
-    ],
-    "pillows": [
-     0.312,
-     0.4893
-    ],
-    "throw": [
-     0.2973,
-     0.4938
-    ],
-    "singleBed": [
-     0.2901,
-     0.4908
-    ],
-    "pool": [
-     0.2743,
-     0.501
-    ],
-    "patio": [
-     0.2997,
-     0.4991
-    ],
-    "dayBed": [
-     0.2591,
-     0.4998
-    ],
-    "sideTable": [
-     0.2504,
-     0.4985
-    ],
-    "tv": [
-     0.2362,
-     0.4862
-    ],
-    "dressing": [
-     0.2368,
-     0.4844
-    ],
-    "wardrobe": [
-     0.2577,
-     0.4841
-    ],
-    "bathroomDoor": [
-     0.2205,
-     0.4884
-    ],
-    "basin": [
-     0.2245,
-     0.4976
-    ],
-    "wc": [
-     0.2164,
-     0.5012
-    ],
-    "glass": [
-     0.264,
-     0.4817
-    ],
-    "lawn": [
-     0.618,
-     0.5382
-    ],
-    "stones": [
-     0.3858,
-     0.5317
-    ],
-    "diningHall": [
-     0.7147,
-     0.4687
-    ],
-    "kitchen": [
-     0.8764,
-     0.4756
-    ],
-    "net": [
-     0.8428,
-     0.5066
-    ],
-    "umbrella": [
-     0.2479,
-     0.4905
-    ],
-    "umbrellaP1": [
-     0.5046,
-     0.468
-    ],
-    "umbrellaP2": [
-     0.7787,
-     0.478
-    ],
-    "umbrellaP4": [
-     0.9467,
-     0.5524
-    ],
-    "umbrellaP5": [
-     0.3872,
-     0.495
-    ],
-    "tableP3": [
-     0.2486,
-     0.5258
-    ],
-    "tableP5": [
-     0.3876,
-     0.5321
-    ],
-    "firewood": [
-     0.4563,
-     0.4971
-    ],
-    "bamboo": [
-     0.2802,
-     0.4517
-    ],
-    "villa": [
-     0.0949,
-     0.5011
-    ],
-    "patioChairs": [
-     0.3033,
-     0.4973
-    ],
-    "floodlight": [
-     0.1917,
-     0.4008
-    ],
-    "gardenLamp": [
-     0.2957,
-     0.5453
-    ]
-   }
-  },
-  "pond": {
-   "key": "pond",
-   "area": "estate",
-   "alt": "The pond, edged with reeds, in early light",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
-   "files": [
-    {
-     "w": 640,
-     "h": 480,
-     "src": "pond-640.webp"
-    },
-    {
-     "w": 1024,
-     "h": 768,
-     "src": "pond-1024.webp"
-    },
-    {
-     "w": 1600,
-     "h": 1200,
-     "src": "pond-1600.webp"
-    }
-   ],
-   "jpg": "pond.jpg",
-   "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAwBACdASoYABIAPu1sq08ppqOiMBgIATAdiWUAxNgPDup2Rlqn/YU2UNwA/sdp4C+03KQVvw5aaxFzvk8RR64RR2959aA4XMKyjtrARRBAi4Lb4o2m7/8q1L0JsgvlvWsW1glVHS09Q846yvgy4AAAAAA=",
-   "camera": {
-    "pos": [
-     -2,
-     2.2,
-     31
-    ],
-    "target": [
-     26,
-     0.6,
-     52
-    ],
-    "fov": 55
-   },
-   "preset": "golden",
-   "anchors": {
-    "pond": [
-     0.5188,
-     0.5126
-    ]
-   }
-  },
-  "bed": {
-   "key": "bed",
+  "bath-basin": {
+   "key": "bath-basin",
    "area": "villa",
-   "alt": "Close to the king-size bed: pillows, white linen and the red throw",
-   "w": 1600,
-   "h": 1200,
-   "orientation": "landscape",
+   "caption": "The attached bathroom",
+   "alt": "Attached bathroom with a white vessel basin on a dark stone counter, a mirror, tiled walls and a window",
+   "source": "video",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
    "files": [
     {
-     "w": 640,
-     "h": 480,
-     "src": "bed-640.webp"
+     "w": 432,
+     "h": 960,
+     "src": "bath-basin-432.webp"
     },
     {
-     "w": 1024,
-     "h": 768,
-     "src": "bed-1024.webp"
+     "w": 576,
+     "h": 1280,
+     "src": "bath-basin-576.webp"
     },
     {
-     "w": 1600,
-     "h": 1200,
-     "src": "bed-1600.webp"
+     "w": 864,
+     "h": 1920,
+     "src": "bath-basin-864.webp"
     }
    ],
-   "jpg": "bed.jpg",
-   "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBQCdASoYABIAPu1qrE8ppiQiMBgIATAdiUAX5wId6hm5RniNJDG+Dwyh0+Pl+66AAP7nFDbhM2qqraqAcq2ELlWeQiSIxBi1gMpjRaCACfY66qDPGvkRd3CTtdblv9hHCA/ByMnzzbtou1PhSP5ROF5cfrlDgax/PtWqWOwBaGhY9KqZp2lYsAC+YZaAduBb2AAA",
-   "camera": {
-    "pos": [
-     -34.95,
-     1.45,
-     2.4
-    ],
-    "target": [
-     -36,
-     0.72,
-     0.05
-    ],
-    "fov": 55
-   },
-   "preset": "day",
-   "anchors": {
-    "bed": [
-     0.4944,
-     0.494
-    ],
-    "pillows": [
-     0.5559,
-     0.4017
-    ],
-    "throw": [
-     0.3245,
-     0.6534
-    ],
-    "singleBed": [
-     0.0538,
-     0.4286
-    ]
-   }
+   "jpg": "bath-basin.jpg",
+   "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAACQAwCdASoLABgAPu1kq04ppaQiMAgBMB2JYwAASie7iHlyP32AAP6O82Su1v0sISg76Lw/mJPgqnxILTtExWLtFVoJBwTTXwDKt9I2SvHk+CBfejzNaa91W9WQKAAA"
+  },
+  "bath-wc": {
+   "key": "bath-wc",
+   "area": "villa",
+   "caption": "Wall-hung WC and tiled walls",
+   "alt": "Attached bathroom with a wall-hung WC and textured wall tiles",
+   "source": "video",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 432,
+     "h": 960,
+     "src": "bath-wc-432.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "bath-wc-576.webp"
+    },
+    {
+     "w": 864,
+     "h": 1920,
+     "src": "bath-wc-864.webp"
+    }
+   ],
+   "jpg": "bath-wc.jpg",
+   "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAwCdASoLABgAPu1Ct1apoqakGAEwHYlnAMTYaFMESw0L2iPfIAD8bR8t7OARy2Yg0bVOz1GwpFmQpBDL4ncEv01IDy9VEqAZ4z1Vh75tQeWxK+KoqZJgAAA="
   }
  }
 }
