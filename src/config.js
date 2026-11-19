@@ -16,6 +16,9 @@ if (fs.existsSync(envFile)) {
 
 const env = process.env;
 const isProd = env.NODE_ENV === 'production';
+// On Vercel the code is read-only and only /tmp can be written; the platform sits behind a proxy.
+const onVercel = Boolean(env.VERCEL);
+const vercelUrl = env.VERCEL_ENV === 'production' && env.VERCEL_PROJECT_PRODUCTION_URL ? env.VERCEL_PROJECT_PRODUCTION_URL : env.VERCEL_URL;
 
 function required(name, fallback) {
   const v = env[name] ?? fallback;
@@ -27,12 +30,13 @@ const config = {
   isProd,
   port: Number(env.PORT || 3000),
   host: env.HOST || '0.0.0.0',
-  siteUrl: (env.SITE_URL || 'http://localhost:3000').replace(/\/$/, ''),
-  dataDir: path.resolve(env.DATA_DIR || path.join(__dirname, '..', 'data')),
+  onVercel,
+  siteUrl: (env.SITE_URL || (onVercel && vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000')).replace(/\/$/, ''),
+  dataDir: path.resolve(env.DATA_DIR || (onVercel ? '/tmp/siri-homestay' : path.join(__dirname, '..', 'data'))),
   dbFile: null,
   // Used to sign form timestamps and hash IPs for rate limiting. Must be set in production.
   appSecret: isProd ? required('APP_SECRET') : (env.APP_SECRET || 'dev-only-secret-change-me'),
-  trustProxy: env.TRUST_PROXY === '1' || env.TRUST_PROXY === 'true',
+  trustProxy: env.TRUST_PROXY === '1' || env.TRUST_PROXY === 'true' || onVercel,
   sessionDays: Number(env.SESSION_DAYS || 7),
   smtp: {
     host: env.SMTP_HOST || '',

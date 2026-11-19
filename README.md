@@ -34,6 +34,10 @@ npm run test:e2e       # 41 browser checks on a fresh server: guest and owner fl
 
 Any host that runs a long-lived Node process with a writable disk works: a small VPS (Hostinger, DigitalOcean, Lightsail), Render or Railway with a persistent disk, or similar. Serverless platforms without a persistent disk are not suitable for SQLite.
 
+### Vercel
+
+`vercel.json` and `api/index.js` run the site on Vercel: files in `public/` are served by Vercel's CDN and everything else by one function. Set `APP_SECRET`, `ADMIN_EMAIL` and `ADMIN_PASSWORD` in the project's environment variables. **Vercel functions have no persistent disk**, so on Vercel the SQLite database lives in `/tmp` and is reset whenever Vercel starts a new instance: enquiries and admin changes are not kept. Use Vercel for previews of the site; for live bookings, move the database to a hosted one first or run the app on a server with a disk.
+
 1. Copy `.env.example` to `.env` and fill in `SITE_URL`, `APP_SECRET`, `ADMIN_EMAIL` and, for email, the `SMTP_*` settings.
 2. `npm ci --omit=dev`
 3. `npm start` (or run `server.js` under systemd or pm2), behind Nginx or Caddy with HTTPS, and set `TRUST_PROXY=1`.
