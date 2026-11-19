@@ -12,19 +12,19 @@ Docs: [Architecture and Phase 2 plan](docs/ARCHITECTURE.md) · [Admin guide](doc
 
 ## Run it locally
 
-Requirements: Node.js 22 or newer. No compiler is needed: SQLite comes as a prebuilt binary, and `.npmrc` turns off install scripts.
+Requirements: Node.js 22 (pinned in `package.json`; Vercel uses the same). No compiler is needed: SQLite comes as a prebuilt binary, and `.npmrc` turns off install scripts.
 
 ```bash
 npm install
 npm run dev            # http://localhost:3000
 ```
 
-On first start the app creates `data/siri-homestay.db`, seeds the property, five villas and the three enquiry contacts, and creates the owner account. The temporary password is printed in the console and saved to `data/INITIAL-ADMIN-LOGIN.txt`. Sign in at `/admin`; you'll be asked to choose a new password. Delete that file afterwards.
+On first start the app creates `data/siri-homestay.db`, seeds the property, five villas and the three enquiry contacts, and creates the owner account. The temporary password is printed in the console and saved to `data/INITIAL-ADMIN-LOGIN.txt` (if you set `ADMIN_PASSWORD` instead, it is used and never printed). Sign in at `/admin`; you'll be asked to choose a new password. Delete that file afterwards.
 
 ## Tests
 
 ```bash
-npm test               # 14 booking-engine tests (Node test runner, in-memory database)
+npm test               # 18 tests: booking engine, temporary-storage mode, the Vercel entry point
 npm run test:e2e       # 41 browser checks on a fresh server: guest and owner flows, security, accessibility, the 3D estate
 ```
 
@@ -32,11 +32,9 @@ npm run test:e2e       # 41 browser checks on a fresh server: guest and owner fl
 
 ## Deploy
 
-Any host that runs a long-lived Node process with a writable disk works: a small VPS (Hostinger, DigitalOcean, Lightsail), Render or Railway with a persistent disk, or similar. Serverless platforms without a persistent disk are not suitable for SQLite.
+### On a server (for live bookings)
 
-### Vercel
-
-`vercel.json` and `api/index.js` run the site on Vercel: files in `public/` are served by Vercel's CDN and everything else by one function. Set `APP_SECRET`, `ADMIN_EMAIL` and `ADMIN_PASSWORD` in the project's environment variables. **Vercel functions have no persistent disk**, so on Vercel the SQLite database lives in `/tmp` and is reset whenever Vercel starts a new instance: enquiries and admin changes are not kept. Use Vercel for previews of the site; for live bookings, move the database to a hosted one first or run the app on a server with a disk.
+Any host that runs a long-lived Node process with a writable disk works: a small VPS (Hostinger, DigitalOcean, Lightsail), Render or Railway with a persistent disk, or similar.
 
 1. Copy `.env.example` to `.env` and fill in `SITE_URL`, `APP_SECRET`, `ADMIN_EMAIL` and, for email, the `SMTP_*` settings.
 2. `npm ci --omit=dev`
@@ -54,6 +52,20 @@ ExecStart=/usr/bin/node server.js
 Restart=always
 User=siri
 ```
+
+### Vercel
+
+The Vercel project `sirihomestay` deploys from `main`: every push goes live at https://sirihomestay.vercel.app. `vercel.json` serves everything in `public/` from Vercel's CDN and sends the rest to one function, `api/index.js` (the Express app), running in Mumbai (`bom1`) on Node 22.
+
+Environment variables (Settings > Environment Variables, then redeploy): `APP_SECRET` (any long random value), `ADMIN_EMAIL` and `ADMIN_PASSWORD`. Without `APP_SECRET` the function doesn't start and the page says which setting is missing.
+
+**Vercel has no lasting disk.** The SQLite database sits in `/tmp` and starts empty whenever Vercel starts a fresh copy of the function, so on Vercel the site runs in temporary-storage mode (`TEMPORARY_STORAGE`, on by default there):
+
+- The enquiry form checks the guest's details, then gives them a ready-written WhatsApp message to send Swetha (or Ganesh) instead of saving the enquiry. Nothing says an enquiry was received.
+- The availability calendar is never shown as live, whatever the admin setting.
+- Every admin page warns that changes there can disappear. The admin password comes from `ADMIN_PASSWORD` and isn't asked to be changed, because a new one couldn't be kept.
+
+To take enquiries and bookings through the site itself, connect a hosted database or run the site on a server with a disk; the normal enquiry flow then returns. Node 22 reaches end of life in April 2027: before then, run the tests on Node 24 and change `engines.node` in `package.json` to `24.x`.
 
 ### Email
 

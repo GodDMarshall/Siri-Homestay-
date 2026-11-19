@@ -108,11 +108,17 @@ function uniqueRef(db) {
 }
 
 // Public enquiry. Never occupies inventory: the hosts confirm and allocate.
-function createEnquiry(db, input) {
+// Checks a public enquiry without saving anything. Throws ValidationError like createEnquiry.
+function checkEnquiry(db, input) {
   const stay = validateStay(db, input);
   const guest = validateGuest(input, { requireConsent: true });
   const errors = { ...stay.errors, ...guest.errors };
   if (Object.keys(errors).length) throw new ValidationError(errors);
+  return { stay, guest, nights: diffDays(stay.checkIn, stay.checkOut) };
+}
+
+function createEnquiry(db, input) {
+  const { stay, guest } = checkEnquiry(db, input);
 
   // If the owner publishes the calendar, refuse dates the ledger shows as full.
   if (getSetting(db, 'publish_availability') === '1') {
@@ -303,5 +309,5 @@ function list(db, { status = null, q = null, from = null, to = null, limit = 200
 
 module.exports = {
   STATUSES, STATUS_LABEL, TRANSITIONS, SOURCES, SOURCE_LABEL, OCCUPYING,
-  createEnquiry, createManual, transition, changeDates, updateNotes, expireHolds, get, list, normalisePhone, validateStay,
+  checkEnquiry, createEnquiry, createManual, transition, changeDates, updateNotes, expireHolds, get, list, normalisePhone, validateStay,
 };

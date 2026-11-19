@@ -106,7 +106,7 @@ const CONTACTS = [
   { name: 'Dilip', phone: '+917795378068', email: null, whatsapp: 1, notify: 0 },
 ];
 
-function seed(db, { log = console.log, createAdmin = true, dataDir = null } = {}) {
+function seed(db, { log = console.log, createAdmin = true, dataDir = null, temporaryStorage = false } = {}) {
   const exists = db.prepare('SELECT COUNT(*) AS n FROM property').get().n > 0;
   if (!exists) {
     db.transaction(() => {
@@ -142,16 +142,27 @@ function seed(db, { log = console.log, createAdmin = true, dataDir = null } = {}
 
   if (createAdmin && db.prepare('SELECT COUNT(*) AS n FROM admin_users').get().n === 0) {
     const email = process.env.ADMIN_EMAIL || 'owner@sirihomestay.in';
-    const password = process.env.ADMIN_PASSWORD || token(12);
-    db.prepare('INSERT INTO admin_users (email, name, password_hash, must_change_password) VALUES (?,?,?,1)')
-      .run(email, 'Owner', hashPassword(password));
-    if (dataDir) {
-      fs.mkdirSync(dataDir, { recursive: true });
-      fs.writeFileSync(path.join(dataDir, 'INITIAL-ADMIN-LOGIN.txt'),
-        `Admin login for Siri Homestay\nURL: /admin\nEmail: ${email}\nPassword: ${password}\n\nYou will be asked to change it on first sign-in. Delete this file afterwards.\n`,
-        { mode: 0o600 });
+    const given = process.env.ADMIN_PASSWORD || '';
+    if (temporaryStorage && !given) {
+      // A generated password would differ on every fresh copy of the site and vanish with it.
+      log('No admin account yet: set ADMIN_PASSWORD (and ADMIN_EMAIL) in the hosting settings to use /admin.');
+    } else {
+      const password = given || token(12);
+      // Without lasting storage a new password would soon be forgotten, so don't ask for one.
+      db.prepare('INSERT INTO admin_users (email, name, password_hash, must_change_password) VALUES (?,?,?,?)')
+        .run(email, 'Owner', hashPassword(password), temporaryStorage ? 0 : 1);
+      if (given) {
+        log(`Created admin ${email} with the password from ADMIN_PASSWORD.`); // never echo a supplied secret
+      } else {
+        if (dataDir) {
+          fs.mkdirSync(dataDir, { recursive: true });
+          fs.writeFileSync(path.join(dataDir, 'INITIAL-ADMIN-LOGIN.txt'),
+            `Admin login for Siri Homestay\nURL: /admin\nEmail: ${email}\nPassword: ${password}\n\nYou will be asked to change it on first sign-in. Delete this file afterwards.\n`,
+            { mode: 0o600 });
+        }
+        log(`Created admin ${email}. Temporary password: ${password}`);
+      }
     }
-    log(`Created admin ${email}. Temporary password: ${password}`);
   }
 }
 
@@ -160,5 +171,5 @@ module.exports = { seed, GARDEN_VILLA, WHOLE_ESTATE, CONTACTS };
 if (require.main === module) {
   const config = require('../config');
   const { get } = require('./index');
-  seed(get(), { dataDir: config.dataDir });
+  seed(get(), { dataDir: config.dataDir, temporaryStorage: config.temporaryStorage });
 }

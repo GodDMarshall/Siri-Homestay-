@@ -6,6 +6,14 @@ const { fmtDate, fmtDateTime, addDays, today } = require('../lib/dates');
 const { formatPhone } = require('../domain/catalog');
 const { STATUS_LABEL, SOURCE_LABEL } = require('../domain/reservations');
 const { PROVIDERS } = require('../channels/registry');
+const config = require('../config');
+
+// Shown on every admin page while nothing the site stores can last (see config.temporaryStorage).
+function storageNote() {
+  return config.temporaryStorage
+    ? html`<p class="storage-note" role="note">This copy of the site has no lasting storage yet. Enquiries, bookings and changes made here can disappear at any time, so keep taking real bookings by phone and WhatsApp.</p>`
+    : '';
+}
 
 const NAV = [
   ['/admin', 'Overview'],
@@ -57,6 +65,7 @@ function shell(req, { title, body, active, flash }) {
   </nav>
 </aside>
 <main id="main" class="main" tabindex="-1">
+  ${storageNote()}
   ${msg ? html`<p class="flash" role="status">${msg}</p>` : ''}
   ${body}
 </main>
@@ -69,7 +78,7 @@ function bare(title, body) {
 <title>${title} | Siri Homestay admin</title><meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${asset('/css/admin.css')}"></head>
-<body class="admin admin--bare"><main class="auth">${MARK}${body}</main></body></html>`;
+<body class="admin admin--bare"><main class="auth">${MARK}${storageNote()}${body}</main></body></html>`;
 }
 
 function login({ error, pre, email = '', next = '' }) {

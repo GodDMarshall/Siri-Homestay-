@@ -11,6 +11,14 @@ const config = require('../config');
 
 const LAST_REF = 'sh_ref';
 
+// Settings as the public site sees them. Without lasting storage the owner's calendar can't
+// be trusted (it resets with every fresh copy of the site), so it is never shown as live.
+function publicSettings(db) {
+  const s = allSettings(db);
+  if (config.temporaryStorage) s.publish_availability = '0';
+  return s;
+}
+
 function context(db, req) {
   const stays = catalog.roomTypes(db);
   return {
@@ -18,7 +26,9 @@ function context(db, req) {
     contacts: catalog.contacts(db),
     stays,
     unitCount: catalog.units(db).length,
-    settings: allSettings(db),
+    settings: publicSettings(db),
+    // Enquiries go to the hosts on WhatsApp instead of being saved (see config.temporaryStorage).
+    handoff: config.temporaryStorage,
     path: req.path.replace(/\/$/, '') || '/',
   };
 }
@@ -87,6 +97,17 @@ module.exports = function publicRoutes(db) {
     if (body.website || stamp === 'too_fast' || stamp === 'invalid') return res.redirect(303, '/enquire/sent/received');
     if (stamp === 'expired') return rerender(422, { errors: {}, message: 'This form was open for a long time. Check the details and send it again.' });
 
+    // Nothing stored here would last, so check the details and give the guest a ready
+    // WhatsApp message to send the hosts rather than saying the enquiry was received.
+    if (ctx.handoff) {
+      try {
+        return res.set('Cache-Control', 'no-store').send(V.enquiryHandoff(ctx, reservations.checkEnquiry(db, body)));
+      } catch (e) {
+        if (e instanceof ValidationError) return rerender(422, { errors: e.errors });
+        return next(e);
+      }
+    }
+
     try {
       const resv = reservations.createEnquiry(db, body);
       res.cookie(LAST_REF, `${resv.ref}.${hmac('ref:' + resv.ref)}`, { httpOnly: true, sameSite: 'lax', secure: config.isProd, maxAge: 24 * 3600e3, path: '/enquire' });
@@ -113,7 +134,7 @@ module.exports = function publicRoutes(db) {
   // when the calendar isn't published it says so and returns no day data.
   r.get('/api/availability', (req, res) => {
     res.set('Cache-Control', 'no-store');
-    const settings = allSettings(db);
+    const settings = publicSettings(db);
     const rt = catalog.roomTypeBySlug(db, String(req.query.stay || ''));
     const from = String(req.query.from || ''), to = String(req.query.to || '');
     if (!rt) return res.status(400).json({ error: 'Unknown stay.' });

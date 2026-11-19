@@ -3,9 +3,13 @@
   "framework": null,
   "installCommand": "npm ci --omit=dev",
   "outputDirectory": "public",
+  "regions": [
+    "bom1"
+  ],
   "functions": {
     "api/index.js": {
-      "includeFiles": "{src/**,public/media/manifest.json,public/img/**,public/css/**,public/js/**,node_modules/better-sqlite3/package.json,node_modules/better-sqlite3/lib/**,node_modules/better-sqlite3/prebuilds/linux-x64.node}",
+      "includeFiles": "{src/**,public/media/manifest.json,public/img/**,public/css/*.css,public/js/*.js,node_modules/better-sqlite3/package.json,node_modules/better-sqlite3/lib/**,node_modules/better-sqlite3/prebuilds/linux-x64.node}",
+      "excludeFiles": "{src/world/**,public/media/renders/**,public/fonts/**,public/world/**,public/js/*.map,public/favicon.*,node_modules/better-sqlite3/prebuilds/darwin-*,node_modules/better-sqlite3/prebuilds/win32-*,node_modules/better-sqlite3/prebuilds/linuxmusl-*}",
       "maxDuration": 30
     }
   },

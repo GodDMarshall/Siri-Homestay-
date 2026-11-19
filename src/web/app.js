@@ -11,10 +11,11 @@ const { loadSession } = require('./auth');
 const V = require('../views/public');
 const { DomainError } = require('../domain/core');
 
-function createApp(db) {
+function createApp(db, { before = [] } = {}) {
   const app = express();
   app.disable('x-powered-by');
   if (config.trustProxy) app.set('trust proxy', 1);
+  for (const mw of before) app.use(mw);
 
   app.use(helmet({
     contentSecurityPolicy: {

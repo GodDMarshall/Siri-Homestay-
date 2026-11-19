@@ -7,12 +7,13 @@ const reservations = require('./src/domain/reservations');
 const notifications = require('./src/domain/notifications');
 
 const db = get(); // opens and migrates
-seed(db, { dataDir: config.dataDir }); // no-op once seeded
+seed(db, { dataDir: config.dataDir, temporaryStorage: config.temporaryStorage }); // no-op once seeded
 
 const app = createApp(db);
 const server = app.listen(config.port, config.host, () => {
   console.log(`Siri Homestay running at ${config.siteUrl} (port ${config.port})`);
-  if (!config.smtp.enabled) console.log('Email is not configured: enquiries are saved in the admin but not emailed.');
+  if (config.temporaryStorage) console.log('Temporary storage: enquiries are handed to WhatsApp, not saved.');
+  else if (!config.smtp.enabled) console.log('Email is not configured: enquiries are saved in the admin but not emailed.');
 });
 
 // Housekeeping: expire holds and retry email every 5 minutes.

@@ -451,6 +451,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .sent__lede { font-size: clamp(1.15rem, 1.6vw, 1.35rem); max-width: 34em; }
 .sent__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 56px; }
 .facts--receipt { max-width: 640px; }
+.handoff__text { white-space: pre-line; max-width: 34em; margin: 0 0 20px; padding: 16px 20px; background: var(--paper); border-left: 3px solid var(--culm); font-size: 1.05rem; }
+.handoff__alt { max-width: 34em; }
 .ref { font-family: var(--sans); font-weight: 650; letter-spacing: .06em; }
 .prose { max-width: 760px; margin: 0; padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad))); }
 .prose h2 { font: 620 1.5rem/1.15 var(--sans); margin: 1.6em 0 .4em; }

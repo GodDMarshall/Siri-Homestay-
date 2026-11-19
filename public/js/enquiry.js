@@ -60,6 +60,6 @@
 
   form.addEventListener('submit', function () {
     var b = form.querySelector('button[type="submit"]');
-    if (b) { setTimeout(function () { b.disabled = true; b.textContent = 'Sending…'; }, 0); }
+    if (b) { setTimeout(function () { b.disabled = true; b.textContent = b.getAttribute('data-busy') || 'Sending…'; }, 0); }
   });
 })();

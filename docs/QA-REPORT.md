@@ -3,9 +3,11 @@
 **Date:** 19 November 2026  
 **Build:** Phase 1, version 1.0.0  
 **Environment:** Node.js 22, SQLite 3.54, Google Chrome 153 (headless), Linux  
-**Result:** 14/14 booking-engine tests and 41/41 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
+**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 41/41 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
 
 **Update (3D estate):** the site's pictures and films were replaced by a 3D estate generated in code. Seven checks were added for it (section 2), and the motion review and performance figures below are for the 3D version.
+
+**Update (Vercel):** the production build was made locally with the Vercel CLI (66.2) and the built function was run on its own, without the project's `node_modules`, as Vercel runs it: all 18 public and admin addresses answer as expected, every one of the 93 CSS, script, font and picture references on those pages exists in the static output, the enquiry form hands over to WhatsApp without saving anything, cross-site posts are refused, cookies are `Secure`, and the admin signs in with `ADMIN_PASSWORD`. Defects found and fixed: Vercel picked Node 26 from `"node": ">=22"` (now pinned to 22.x, the tested version); Vercel's request helpers would have replaced Express's `res.send` and `res.redirect` (the entry now exports the Express app, which Vercel leaves alone); the function bundle carried all 16 MB of pictures (now 8 MB, pictures come from the CDN); the admin sign-in card was squeezed into the 250 px sidebar column (fixed in `admin.css`).
 
 Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run writes `tests/e2e-report.json`.
 

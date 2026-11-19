@@ -15,9 +15,15 @@ if (fs.existsSync(envFile)) {
 }
 
 const env = process.env;
-const isProd = env.NODE_ENV === 'production';
 // On Vercel the code is read-only and only /tmp can be written; the platform sits behind a proxy.
 const onVercel = Boolean(env.VERCEL);
+// Vercel deployments are always served over HTTPS, so they run as production.
+const isProd = env.NODE_ENV === 'production' || onVercel;
+// Whether what the site stores lasts. On Vercel the database sits in /tmp, which is wiped
+// whenever the platform starts a fresh copy of the site, so nothing stored there can be
+// relied on until a hosted database is connected. TEMPORARY_STORAGE=1 or 0 overrides this.
+const flag = (v) => (v === undefined || v === '' ? null : v === '1' || v === 'true');
+const temporaryStorage = flag(env.TEMPORARY_STORAGE) ?? onVercel;
 const vercelUrl = env.VERCEL_ENV === 'production' && env.VERCEL_PROJECT_PRODUCTION_URL ? env.VERCEL_PROJECT_PRODUCTION_URL : env.VERCEL_URL;
 
 function required(name, fallback) {
@@ -31,6 +37,7 @@ const config = {
   port: Number(env.PORT || 3000),
   host: env.HOST || '0.0.0.0',
   onVercel,
+  temporaryStorage,
   siteUrl: (env.SITE_URL || (onVercel && vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000')).replace(/\/$/, ''),
   dataDir: path.resolve(env.DATA_DIR || (onVercel ? '/tmp/siri-homestay' : path.join(__dirname, '..', 'data'))),
   dbFile: null,

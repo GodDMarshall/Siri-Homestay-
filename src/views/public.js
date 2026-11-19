@@ -656,7 +656,9 @@ function enquirePage(ctx, form) {
   const body = html`
 <section class="page-head page-head--slim">
   <h1 class="display page-head__title">Send an enquiry</h1>
-  <p class="page-head__lede">Tell the hosts your dates and who’s coming. They’ll reply by phone or email. Nothing is booked or charged until they confirm.</p>
+  <p class="page-head__lede">${ctx.handoff
+    ? 'Tell the hosts your dates and who’s coming, then send it to them on WhatsApp. Nothing is booked or charged until they confirm.'
+    : 'Tell the hosts your dates and who’s coming. They’ll reply by phone or email. Nothing is booked or charged until they confirm.'}</p>
 </section>
 <section class="enquire-page">
   ${enquiryForm(ctx, form)}
@@ -746,8 +748,11 @@ function enquiryForm(ctx, form) {
     <label for="f-consent-box">Siri Homestay may use these details to reply to my enquiry. <a href="/privacy">How your details are used</a></label>
     ${fieldErr(e, 'consent')}
   </div>
-  <button class="btn btn--wide" type="submit">Send enquiry</button>
-  <p class="form-note">This sends a request to the hosts. Nothing is booked or charged until they confirm with you.</p>
+  ${ctx.handoff
+    ? html`<button class="btn btn--wide" type="submit" data-busy="Preparing…">Continue to WhatsApp</button>
+  <p class="form-note">The next page writes this up as a WhatsApp message for you to send the hosts. Nothing is booked or charged until they confirm with you.</p>`
+    : html`<button class="btn btn--wide" type="submit" data-busy="Sending…">Send enquiry</button>
+  <p class="form-note">This sends a request to the hosts. Nothing is booked or charged until they confirm with you.</p>`}
 </form>`;
 }
 
@@ -780,6 +785,60 @@ function enquirySent(ctx, r) {
   return layout(ctx, { title: 'Enquiry sent', noindex: true, body });
 }
 
+// Who a handed-off enquiry goes to: the hosts who take enquiries, in the client's order.
+function handoffContacts(contacts) {
+  const wa = contacts.filter((c) => c.whatsapp && c.phone_e164);
+  const hosts = wa.filter((c) => c.notify_on_enquiry);
+  return hosts.length ? hosts : wa.slice(0, 1);
+}
+
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const guestsText = (adults, children) => plural(adults, 'adult', 'adults') + (children ? `, ${plural(children, 'child', 'children')}` : '');
+const villasText = (rt, units) => (rt.kind === 'unit' ? `, ${plural(units, 'villa', 'villas')}` : '');
+
+// The WhatsApp message a guest sends when the site can't keep enquiries (config.temporaryStorage).
+function handoffText(ctx, { stay, guest, nights }) {
+  return [
+    `Hello ${ctx.property.name}, I’d like to ask about a stay.`,
+    `Stay: ${stay.rt.name}${villasText(stay.rt, stay.unitsRequested)}`,
+    `Dates: ${fmtDate(stay.checkIn, { weekday: 'short', day: 'numeric', month: 'short' })} to ${fmtDate(stay.checkOut, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} (${plural(nights, 'night', 'nights')})`,
+    `Guests: ${guestsText(stay.adults, stay.children)}`,
+    `Name: ${guest.name}`,
+    `Phone: ${formatPhone(guest.phone)}`,
+    guest.email && `Email: ${guest.email}`,
+    guest.city && `Travelling from: ${guest.city}`,
+    guest.message && `\n${guest.message}`,
+  ].filter(Boolean).join('\n');
+}
+
+function enquiryHandoff(ctx, enquiry) {
+  const { stay, nights } = enquiry;
+  const text = handoffText(ctx, enquiry);
+  const [first, ...others] = handoffContacts(ctx.contacts);
+  const mail = ctx.contacts.find((c) => c.email);
+  const firstName = (c) => c.name.split(' ')[0];
+  const mailto = mail && `mailto:${mail.email}?subject=${encodeURIComponent(`Enquiry: ${stay.rt.name}, ${fmtDate(stay.checkIn)}`)}&body=${encodeURIComponent(text)}`;
+  const body = html`
+<section class="sent">
+  <h1 class="display sent__title">Send your enquiry</h1>
+  <p class="sent__lede">Your message to the hosts is ready. Send it on WhatsApp and they’ll reply there or by phone. Your dates aren’t booked until they confirm.</p>
+  <dl class="facts facts--receipt">
+    <div><dt>Stay</dt><dd>${stay.rt.name}${villasText(stay.rt, stay.unitsRequested)}</dd></div>
+    <div><dt>Dates</dt><dd>${fmtDate(stay.checkIn, { weekday: 'short', day: 'numeric', month: 'short' })} to ${fmtDate(stay.checkOut, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}, ${plural(nights, 'night', 'nights')}</dd></div>
+    <div><dt>Guests</dt><dd>${guestsText(stay.adults, stay.children)}</dd></div>
+  </dl>
+  <div class="sent__actions">
+    ${first ? html`<a class="btn" href="${waLink(first.phone_e164, text)}" rel="noopener" target="_blank" data-handoff>Send to ${firstName(first)} on WhatsApp</a>` : ''}
+    ${others.map((c) => html`<a class="btn btn--ghost" href="${waLink(c.phone_e164, text)}" rel="noopener" target="_blank">Send to ${firstName(c)} instead</a>`)}
+  </div>
+  <h2 class="aside-title">Your message</h2>
+  <p class="handoff__text">${text}</p>
+  <p class="handoff__alt">No WhatsApp? Send the same message by text${mail ? html`, <a href="${mailto}">email it to ${mail.email}</a>` : ''}, or call the hosts.</p>
+  ${contactList(ctx.contacts, { compact: true })}
+</section>`;
+  return layout(ctx, { title: 'Send your enquiry', noindex: true, body });
+}
+
 function privacy(ctx) {
   const p = ctx.property;
   const first = ctx.contacts.find((c) => c.email);
@@ -788,11 +847,15 @@ function privacy(ctx) {
 <p class="page-head__lede">What happens to the details you send through this website.</p></section>
 <section class="prose">
   <h2>What we collect</h2>
-  <p>When you send an enquiry we store your name, phone number, the email address and town if you give them, your dates, the number of guests and your message. We also record when you agreed to us using these details.</p>
+  ${ctx.handoff
+    ? html`<p>At the moment this website doesn’t store enquiries. The enquiry form turns your name, phone number, dates, number of guests and message into a WhatsApp message that you send to the hosts yourself, so WhatsApp’s own privacy policy also applies to it.</p>`
+    : html`<p>When you send an enquiry we store your name, phone number, the email address and town if you give them, your dates, the number of guests and your message. We also record when you agreed to us using these details.</p>`}
   <h2>Why</h2>
   <p>Only to reply to your enquiry, arrange your stay and keep a record of bookings. We don’t sell or share your details with anyone for marketing.</p>
   <h2>Who sees them</h2>
-  <p>The hosts of ${p.name}, through a password-protected admin area. If email is set up, a copy of your enquiry is emailed to the hosts and an acknowledgement to you.</p>
+  ${ctx.handoff
+    ? html`<p>The hosts of ${p.name}, who receive the message you send them.</p>`
+    : html`<p>The hosts of ${p.name}, through a password-protected admin area. If email is set up, a copy of your enquiry is emailed to the hosts and an acknowledgement to you.</p>`}
   <h2>How long we keep them</h2>
   <p>For as long as needed to handle your stay and keep business and tax records, after which they are deleted.</p>
   <h2>Your choices</h2>
@@ -818,6 +881,6 @@ function serverError(ctx) {
 }
 
 module.exports = {
-  home, stayIndex, stayPage, explore, estate, around, gallery, contact, enquirePage, enquirySent, privacy, notFound, serverError,
+  home, stayIndex, stayPage, explore, estate, around, gallery, contact, enquirePage, enquirySent, enquiryHandoff, handoffText, privacy, notFound, serverError,
   SCENES, PLACES, ACTIVITIES, time12,
 };
