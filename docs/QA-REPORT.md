@@ -3,11 +3,13 @@
 **Date:** 19 November 2026  
 **Build:** Phase 1, version 1.0.0  
 **Environment:** Node.js 22, SQLite 3.54, Google Chrome 153 (headless), Linux  
-**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 40/40 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
+**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 41/41 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
 
 **Update (real photos):** the owner rejected the code-built 3D estate, so the site is back on the owners' own photographs. The 3D checks were replaced by checks for the photos, the scroll tour and the side-by-side room photos (section 2), and the review and performance notes below are for this version.
 
 **Update (3D motion):** the owner asked for a 3D motion-graphics site, still on the real photos. Each photo now has a depth map estimated from the photo itself, and the hero, the tour and the page headers move a camera through the photo in WebGL; the room photos sit on a 3D carousel turned by scrolling; headings rise in word by word. Checks for the depth maps, the WebGL layer and the carousel were added (section 2), and sections 3 to 6 describe this version.
+
+**Update (explorer):** the owner asked for a 3D world to explore the estate, built from the real photos. `/explore` has 18 spots; each is a photo in 3D you drag to look around, with marks on visible things leading to the spots that show them. The end-to-end run gained an explorer check (data, reachability of every spot, no-JS pages, drag, flying through a mark, Next, the index) and the reduced-motion and accessibility checks now include `/explore`.
 
 **Update (Vercel):** the production build was made locally with the Vercel CLI (66.2) and the built function was run on its own, without the project's `node_modules`, as Vercel runs it: all 18 public and admin addresses answer as expected, every one of the 93 CSS, script, font and picture references on those pages exists in the static output, the enquiry form hands over to WhatsApp without saving anything, cross-site posts are refused, cookies are `Secure`, and the admin signs in with `ADMIN_PASSWORD`. Defects found and fixed: Vercel picked Node 26 from `"node": ">=22"` (now pinned to 22.x, the tested version); Vercel's request helpers would have replaced Express's `res.send` and `res.redirect` (the entry now exports the Express app, which Vercel leaves alone); the function bundle carried all 16 MB of pictures (now 8 MB, pictures come from the CDN); the admin sign-in card was squeezed into the 250 px sidebar column (fixed in `admin.css`).
 
@@ -65,7 +67,8 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 | Tour | Scrolling the home page shows one photo at a time and moves through all 8 stops; the stop list jumps to a stop | Pass |
 | 3D motion | 18 depth maps are served; the hero and the tour draw the photos with WebGL; the hero title rises in | Pass |
 | Rooms | The Garden Villa's photos sit on a 3D carousel turned by scrolling; choosing a side photo brings it to the front, choosing the front photo opens it larger | Pass |
-| Reduced motion | No WebGL layer and no carousel: the tour is a plain list of photos and the room photos scroll sideways on their own | Pass |
+| Explore | 18 spots, each a photo with a depth map; every mark leads to a real spot and every spot can be reached; without JavaScript each spot is a page with its marks as links; with WebGL the marks follow a drag, a mark flies to its spot (caption and address follow), Next and the index work | Pass |
+| Reduced motion | No WebGL layer and no carousel: the tour is a plain list of photos and the room photos scroll sideways on their own; the explorer shows plain photos and its marks still lead on | Pass |
 | Gallery | All 20 photos, each opening larger (2400 px) | Pass |
 | Console | No JavaScript errors and no missing files | Pass |
 
@@ -80,6 +83,9 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 | Tour, phone: full-screen photo cropped to fill, caption over a shade, no stop list | Pass |
 | Recorded previews reviewed frame by frame (home tour, room carousel): the parallax reads as depth, with no torn or smeared edges at the motion range used | Pass |
 | Room page: 3D carousel turned by the scroll, the front photo lit and captioned, progress line | Pass |
+| Explore, desktop and phone: marks sit on what they name (villa doors, umbrella, pool, bed through the window); on a phone, marks off the side of the screen wait at the edge with an arrow; a mark that would land on the caption or the buttons is lifted above them | Pass |
+| Explore, recorded on a virtual clock (one frame per 1/30 s): drag, then a mark: the camera moves in towards it and the next photo arrives near-first, then settles | Pass |
+| Explore without JavaScript: the whole photo with its marks as links, caption and Previous/Next below | Pass |
 | Reduced motion: no WebGL, carousel, dissolves or word reveals; all photos and text visible | Pass |
 | Bathroom still checked for reflections of people in the mirror: none | Pass |
 
@@ -106,6 +112,9 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 | Carousel: photos of different shapes overlapped or left gaps | Spacing follows each photo's width |
 | Carousel: two captions overlapped while turning | Only the front photo shows its caption |
 | Word-by-word reveal started text invisible and failed the contrast scan | Reveals move text into place but never fade it |
+| Explore: after a drag on a touch screen, the next tap on a mark did nothing (it was taken for the end of the drag) | Only the click that directly follows a drag is ignored |
+| Explore: on phones a mark pinned to the screen edge could sit on top of the caption | A mark over the caption or the buttons is lifted above them, at the edge too |
+| Explore: on wide screens there was no room to look sideways | The 3D view is magnified a little on screens wider than the photo |
 
 ## 6. Known limitations and open items
 

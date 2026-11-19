@@ -71,10 +71,149 @@ function tour() {
     </div>
   </div>
   <div class="tour__end">
-    <a class="btn" href="/stay/garden-villa">See inside a villa</a>
+    <a class="btn" href="/explore">Explore the estate in 3D</a>
+    <a class="link" href="/stay/garden-villa">See inside a villa</a>
     <a class="link" href="/gallery">All the photos</a>
   </div>
 </section>`;
+}
+
+// ---------------------------------------------------------------------------
+// Explore the estate in 3D (/explore). Every spot is one of the owners' photos, which
+// public/js/explore.js shows in 3D from its depth map: drag to look around. Marks sit on things
+// you can see in the photo and lead to the spot that shows that thing (x/y: fractions of the
+// photo from its top-left corner); `info` marks only name what they sit on. Without JavaScript
+// each spot is its own page, /explore?spot=<key>, with the marks as links.
+// ---------------------------------------------------------------------------
+const EXPLORE = [
+  { area: 'The courtyard', spots: [
+    { key: 'courtyard-villas', title: 'Arrive', pos: '50% 55%',
+      text: 'Tiled-roof villas and a row of potted plants around the paved courtyard.',
+      marks: [{ to: 'courtyard-garden', x: 0.70, y: 0.34 }, { to: 'courtyard-villa', x: 0.24, y: 0.37 }] },
+    { key: 'courtyard-garden', title: 'The table under the tree', pos: '45% 55%',
+      text: 'An umbrella table under a tree, beside potted plants and the paved courtyard.',
+      marks: [{ to: 'courtyard-villas', x: 0.76, y: 0.56, label: 'The courtyard' }] },
+    { key: 'courtyard-villa', title: 'The courtyard and the hills', pos: '50% 50%',
+      text: 'The paved courtyard beside a tiled-roof villa, backed by forested hills.', marks: [] },
+  ] },
+  { area: 'The lawn', spots: [
+    { key: 'lawn-stepping-stones', title: 'The lawn', pos: '60% 55%',
+      text: 'Stepping stones curve across the grass towards umbrella seating and the volleyball net.',
+      marks: [{ to: 'lawn-umbrellas', x: 0.84, y: 0.40 }] },
+    { key: 'estate-lawn-dining', title: 'The lawn and the dining hall', pos: '35% 45%',
+      text: 'Umbrella seating in front, the open dining hall with its yellow chairs on the left, and the volleyball net on the right.',
+      marks: [{ to: 'lawn-table-villa', x: 0.48, y: 0.36 }], info: [{ label: 'The dining hall', x: 0.12, y: 0.31 }] },
+    { key: 'lawn-umbrellas', title: 'Umbrella seating', pos: '50% 50%',
+      text: 'Blue chairs under a white umbrella, with firewood stacked for a campfire.',
+      marks: [{ to: 'lawn-stepping-stones', x: 0.33, y: 0.42 }], info: [{ label: 'Firewood for the campfire', x: 0.86, y: 0.62 }] },
+    { key: 'lawn-table-villa', title: 'Under the umbrella', pos: '50% 38%',
+      text: 'Six blue chairs round a table, in front of a villa screened by golden bamboo.',
+      marks: [{ to: 'lawn-table-closeup', x: 0.53, y: 0.52 }, { to: 'villa-patio', x: 0.31, y: 0.30 }] },
+    { key: 'lawn-table-closeup', title: 'Take a seat', pos: '50% 50%',
+      text: 'Blue chairs round a dark table beneath the white umbrella, with a villa and bamboo behind.',
+      marks: [{ to: 'villa-patio', x: 0.60, y: 0.22 }] },
+    { key: 'bamboo-view-lawn', title: 'Through the bamboo', pos: '50% 40%',
+      text: 'The lawn and umbrella seating, seen between bamboo culms from a villa patio.',
+      marks: [{ to: 'lawn-table-villa', x: 0.47, y: 0.38 }] },
+  ] },
+  { area: 'A villa', spots: [
+    { key: 'villa-patio', title: 'A villa', pos: '40% 55%',
+      text: 'A whitewashed villa with sliding glass doors and root-wood chairs on its patio, behind golden bamboo.',
+      marks: [{ to: 'villa-bedroom', x: 0.40, y: 0.47 }, { to: 'patio-chairs', x: 0.30, y: 0.71 }, { to: 'villa-pool', x: 0.17, y: 0.63 }] },
+    { key: 'patio-chairs', title: 'On the patio', pos: '40% 50%',
+      text: 'Root-wood chairs and a glass table on the patio, beside a bamboo grove.',
+      marks: [{ to: 'doorway-bedroom', x: 0.88, y: 0.42 }, { to: 'bamboo-view-lawn', x: 0.20, y: 0.27 }] },
+    { key: 'doorway-bedroom', title: 'The sliding door', pos: '45% 50%',
+      text: 'Through the sliding door: a king-size bed with a red throw, a single bed, the wardrobe and the bathroom door.',
+      marks: [{ to: 'villa-bedroom', x: 0.43, y: 0.52 }] },
+    { key: 'villa-bedroom', title: 'Inside', pos: '50% 55%',
+      text: 'A king-size bed and two singles, with sliding glass doors open to the lawn.',
+      marks: [{ to: 'lawn-table-villa', x: 0.57, y: 0.40 }] },
+    { key: 'villa-window-pool', title: 'From the bed', pos: '45% 50%',
+      text: 'Floor-to-ceiling glass, the pool and a grove of bamboo.',
+      marks: [{ to: 'villa-pool', x: 0.45, y: 0.50 }] },
+    { key: 'villa-pool', title: 'The pool', pos: '50% 60%',
+      text: 'A blue-lined pool under a glass-roofed pergola, with bamboo in front of the bedroom window.',
+      marks: [{ to: 'villa-window-pool', x: 0.56, y: 0.55 }] },
+  ] },
+  { area: 'After dark', spots: [
+    { key: 'night-garden', title: 'After dark', pos: '50% 50%',
+      text: 'Floodlights and low lamps come on across the garden.',
+      marks: [{ to: 'night-lawn', x: 0.88, y: 0.43 }] },
+    { key: 'night-lawn', title: 'The floodlit lawn', pos: '40% 50%',
+      text: 'The lawn under a floodlight, with the volleyball net and a lit umbrella table near the villas.', marks: [] },
+    { key: 'night-path', title: 'A lit path', pos: '35% 50%',
+      text: 'A floodlit path between bamboo and garden plants.', marks: [] },
+  ] },
+];
+const SPOTS = EXPLORE.flatMap((a) => a.spots.map((s) => ({ ...s, area: a.area })));
+const SPOT = new Map(SPOTS.map((s, i) => [s.key, { ...s, index: i }]));
+const markLabel = (mk) => mk.label || SPOT.get(mk.to).title;
+const pct = (f) => `${Math.round(f * 1000) / 10}%`;
+
+// What public/js/explore.js needs for every spot.
+function exploreData() {
+  return {
+    spots: SPOTS.map((s) => {
+      const m = A.media(s.key);
+      const [px, py] = s.pos.split(' ').map((v) => parseFloat(v) / 100);
+      return {
+        id: s.key, area: s.area, title: s.title, text: s.text, alt: m.alt, pos: [px, py], w: m.w, h: m.h,
+        src: A.src(s.key, 1024), srcset: A.srcset(m), lqip: m.lqip, depth: m.depth ? `/media/depth/${m.depth}` : null,
+        photo: `/media/photos/${(m.files.find((f) => f.w === m.w) || m.files[m.files.length - 1]).src}`, photoLg: A.largest(m),
+        marks: s.marks.map((mk) => ({ to: mk.to, x: mk.x, y: mk.y, label: markLabel(mk) })),
+        info: (s.info || []).map((inf) => ({ x: inf.x, y: inf.y, label: inf.label })),
+      };
+    }),
+  };
+}
+
+function explore(ctx, key) {
+  const spot = SPOT.get(key) || SPOT.get(SPOTS[0].key);
+  const n = SPOTS.length, i = spot.index;
+  const prev = SPOTS[(i - 1 + n) % n], next = SPOTS[(i + 1) % n];
+  const m = A.media(spot.key);
+  const body = html`
+<section class="explorer" data-explorer aria-labelledby="explore-title">
+  <h1 id="explore-title" class="visually-hidden">Explore the estate in 3D</h1>
+  <div class="explorer__stage" data-stage>
+    <div class="explorer__frame" data-frame style="--ar: ${(m.w / m.h).toFixed(4)}">
+      ${A.img(spot.key, { sizes: '100vw', cls: 'explorer__img', loading: 'eager', fetchpriority: 'high', pos: spot.pos })}
+      <div class="explorer__marks" data-marks>
+        ${spot.marks.map((mk) => html`<a class="mark" href="/explore?spot=${mk.to}" style="left:${pct(mk.x)};top:${pct(mk.y)}"><span class="mark__dot" aria-hidden="true"></span><span class="mark__label">${markLabel(mk)}</span></a>`)}
+        ${(spot.info || []).map((inf) => html`<span class="mark mark--info" style="left:${pct(inf.x)};top:${pct(inf.y)}"><span class="mark__dot" aria-hidden="true"></span><span class="mark__label">${inf.label}</span></span>`)}
+      </div>
+    </div>
+  </div>
+  <div class="explorer__panel">
+    <div class="explorer__caption">
+      <p class="explorer__count"><span data-area>${spot.area}</span>, <span data-count>${i + 1} of ${n}</span></p>
+      <h2 class="explorer__title" data-title aria-live="polite">${spot.title}</h2>
+      <p class="explorer__text" data-text>${spot.text}</p>
+    </div>
+    <nav class="explorer__steps" aria-label="Spots in order">
+      <a class="explorer__step" href="/explore?spot=${prev.key}" rel="prev" data-prev>Previous<span class="visually-hidden">: <span data-prev-title>${prev.title}</span></span></a>
+      <a class="explorer__step" href="/explore?spot=${next.key}" rel="next" data-next>Next<span class="visually-hidden">: <span data-next-title>${next.title}</span></span></a>
+    </nav>
+  </div>
+  <p class="explorer__hint" data-hint hidden>Drag to look around</p>
+</section>
+<section class="spots" aria-labelledby="spots-title">
+  <div class="spots__head">
+    <h2 id="spots-title" class="section-title">Every spot</h2>
+    <p>Eighteen of the owners’ photos, each one in 3D. Markers on a photo lead to the places you can see in it.</p>
+  </div>
+  ${EXPLORE.map((a) => html`<div class="spots__area">
+    <h3 class="spots__area-title">${a.area}</h3>
+    <ul class="spots__list">${a.spots.map((s) => html`<li><a class="spots__card" href="/explore?spot=${s.key}" data-goto="${s.key}"${s.key === spot.key ? raw(' aria-current="true"') : ''}>${A.img(s.key, { sizes: '(min-width: 1100px) 16vw, (min-width: 700px) 30vw, 45vw', cls: 'spots__img', alt: '' })}<span class="spots__title">${s.title}</span></a></li>`)}</ul>
+  </div>`)}
+</section>
+<script type="application/json" id="explore-data">${jsonForScript(exploreData())}</script>`;
+  return layout(ctx, {
+    title: i === 0 ? 'Explore the estate in 3D' : `${spot.title}: explore the estate in 3D`,
+    description: 'Look around Siri Homestay in 3D, made from the owners’ own photos: the courtyard, the lawn, a villa and its pool, and the garden after dark.',
+    theme: 'over-image', image: spot.key, canonical: '/explore', bodyClass: 'page-explore', scripts: ['/js/explore.js'], body,
+  });
 }
 
 // A room's photos side by side. public/js/motion.js turns them into a 3D carousel driven by the
@@ -747,6 +886,6 @@ function serverError(ctx) {
 }
 
 module.exports = {
-  home, stayIndex, stayPage, estate, around, gallery, contact, enquirePage, enquirySent, enquiryHandoff, handoffText, privacy, notFound, serverError,
-  TOUR, PLACES, ACTIVITIES, time12,
+  home, stayIndex, stayPage, explore, estate, around, gallery, contact, enquirePage, enquirySent, enquiryHandoff, handoffText, privacy, notFound, serverError,
+  TOUR, EXPLORE, PLACES, ACTIVITIES, time12,
 };

@@ -62,8 +62,10 @@ module.exports = function publicRoutes(db) {
     const av = ctx.settings.publish_availability === '1' ? calendarMonths(db, rt) : null;
     res.send(V.stayPage(ctx, rt, av));
   });
-  // The 3D explorer was replaced by the photo tour on the home page.
-  r.get(['/explore', '/explore/'], (req, res) => res.redirect(301, '/#tour'));
+  // Explore the estate in 3D. Each spot is also its own page (?spot=<photo key>) for links and
+  // for browsers without JavaScript; an unknown spot shows the first one.
+  r.get('/explore', (req, res) => res.send(V.explore(context(db, req), typeof req.query.spot === 'string' ? req.query.spot : '')));
+  r.get('/explore/', (req, res) => res.redirect(301, '/explore'));
   r.get('/estate', (req, res) => res.send(V.estate(context(db, req))));
   r.get('/around', (req, res) => res.send(V.around(context(db, req))));
   r.get('/gallery', (req, res) => res.send(V.gallery(context(db, req))));
@@ -157,7 +159,7 @@ module.exports = function publicRoutes(db) {
 
   r.get('/robots.txt', (req, res) => res.type('text/plain').send(`User-agent: *\nDisallow: /admin\nDisallow: /enquire/sent/\nSitemap: ${config.siteUrl}/sitemap.xml\n`));
   r.get('/sitemap.xml', (req, res) => {
-    const paths = ['/', '/stay', ...catalog.roomTypes(db).map((t) => `/stay/${t.slug}`), '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
+    const paths = ['/', '/stay', ...catalog.roomTypes(db).map((t) => `/stay/${t.slug}`), '/explore', '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
     res.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map((p) => `  <url><loc>${config.siteUrl}${p}</loc></url>`).join('\n')}\n</urlset>\n`);
   });
   r.get('/site.webmanifest', (req, res) => res.type('application/manifest+json').send(JSON.stringify({

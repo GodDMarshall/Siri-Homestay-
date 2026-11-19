@@ -23,7 +23,7 @@
   var VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
   // For each pixel, march from near to far through the depth map to find which point of the
   // photo the moved camera would see there (parallax occlusion), so near things cover far ones.
-  var FS = [
+  function fragmentShader(steps) { return [
     'precision highp float;',
     'varying vec2 v;',
     'uniform sampler2D i0,d0,i1,d1;',
@@ -34,8 +34,8 @@
     '  vec2 ctr = vec2(.5) * f.xy + f.zw;',
     '  vec2 q0 = p * f.xy + f.zw;',
     '  vec2 prevQ = q0; float prevDiff = -1.; vec2 hq = q0; float hd = 0.;',
-    '  for (int i = 0; i <= 22; i++) {',
-    '    float L = 1. - float(i) / 22.;',
+    '  for (int i = 0; i <= ' + steps + '; i++) {',
+    '    float L = 1. - float(i) / ' + steps + '.;',
     '    vec2 q = ctr + (q0 - ctr - c.xy * (L - c.w)) / (1. + c.z * L);',
     '    float d = texture2D(dep, q).r;',
     '    float diff = d - L;',
@@ -59,7 +59,7 @@
     '  }',
     '  gl_FragColor = vec4(col, 1.);',
     '}',
-  ].join('\n');
+  ].join('\n'); }
 
   var AMP = 0.026; // sideways camera move at full strength, as a share of the photo
   var FOCUS = 0.35; // depth that stays still; nearer moves with the camera, farther against it
@@ -73,7 +73,8 @@
     } catch (e) { return true; }
   }
 
-  function Stage(canvas) {
+  // opts.steps: depth layers marched per pixel (more for bigger camera moves).
+  function Stage(canvas, opts) {
     var gl = canvas.getContext('webgl', { antialias: false, alpha: false, depth: false, stencil: false, powerPreference: 'high-performance' });
     if (!gl) throw new Error('no webgl');
     function sh(type, src) {
@@ -82,7 +83,7 @@
       return s;
     }
     var prog = gl.createProgram();
-    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fragmentShader((opts && opts.steps) || 22)));
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
     gl.useProgram(prog);
@@ -120,18 +121,29 @@
     img.onerror = function () { cb(null); };
     img.src = url;
   };
-  // A photo and its depth map, from an element's data attributes.
-  Stage.prototype.scene = function (el, cb) {
-    var self = this, sc = { ready: false, el: el };
-    var pos = (el.getAttribute('data-pos') || '50% 50%').split(' ').map(function (s) { return parseFloat(s) / 100; });
-    sc.pos = [isNaN(pos[0]) ? 0.5 : pos[0], isNaN(pos[1]) ? 0.5 : pos[1]];
+  // A photo and its depth map: { photo, photoLg, depth, pos: [x, y] like object-position }.
+  // sc.pos and sc.zoom may be changed between frames to pan and magnify.
+  Stage.prototype.load = function (src, cb) {
+    var sc = { ready: false, pos: src.pos || [0.5, 0.5], zoom: 1 };
     var big = (this.canvas.clientWidth || window.innerWidth) * Math.min(window.devicePixelRatio || 1, 2) > 1700;
-    var url = el.getAttribute(big && el.getAttribute('data-photo-lg') ? 'data-photo-lg' : 'data-photo');
     var left = 2;
     function done() { if (--left === 0) { sc.ready = !!(sc.img && sc.dep); cb && cb(sc); } }
-    this.texture(url, function (t, w, h) { sc.img = t; sc.w = w; sc.h = h; done(); });
-    this.texture(el.getAttribute('data-depth'), function (t) { sc.dep = t; done(); });
+    this.texture(big && src.photoLg ? src.photoLg : src.photo, function (t, w, h) { sc.img = t; sc.w = w; sc.h = h; done(); });
+    this.texture(src.depth, function (t) { sc.dep = t; done(); });
     return sc;
+  };
+  // The same, from an element's data attributes.
+  Stage.prototype.scene = function (el, cb) {
+    var pos = (el.getAttribute('data-pos') || '50% 50%').split(' ').map(function (s) { return parseFloat(s) / 100; });
+    var sc = this.load({ photo: el.getAttribute('data-photo'), photoLg: el.getAttribute('data-photo-lg'), depth: el.getAttribute('data-depth'),
+      pos: [isNaN(pos[0]) ? 0.5 : pos[0], isNaN(pos[1]) ? 0.5 : pos[1]] }, cb);
+    sc.el = el;
+    return sc;
+  };
+  Stage.prototype.release = function (sc) {
+    if (sc.img) this.gl.deleteTexture(sc.img);
+    if (sc.dep) this.gl.deleteTexture(sc.dep);
+    sc.img = sc.dep = null; sc.ready = false;
   };
   Stage.prototype.resize = function () {
     var c = this.canvas, dpr = Math.min(window.devicePixelRatio || 1, 1.75) * this.scale;
@@ -142,7 +154,8 @@
   Stage.prototype.fit = function (sc) {
     var ra = this.canvas.width / this.canvas.height, ri = sc.w / sc.h, sx = 1, sy = 1;
     if (ra > ri) sy = ri / ra; else sx = ra / ri;
-    sx /= OVER; sy /= OVER;
+    var z = OVER * (sc.zoom || 1);
+    sx /= z; sy /= z;
     return [sx, sy, sc.pos[0] * (1 - sx), (1 - sc.pos[1]) * (1 - sy)];
   };
   // cam: [x, y, z] with x/y in -1..1 (sideways/up), z the push-in.
@@ -175,6 +188,9 @@
     if (med > 45 && this.scale > 0.45) this.scale = Math.max(0.45, this.scale * 0.75);
     else if (med > 110) this.failed = true;
   };
+
+  Stage.AMP = AMP; Stage.FOCUS = FOCUS; Stage.OVER = OVER;
+  SH.Stage = Stage; // used by explore.js
 
   function makeCanvas(parent, cls) {
     var c = doc.createElement('canvas');

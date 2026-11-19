@@ -117,10 +117,18 @@ devices; software renderers draw at 45% size and only while the page scrolls.
 | Home tour | `motion.js` | One full-screen photo per stop; the camera moves through it as you scroll and the next photo dissolves in from the nearest objects back; stop list on wide screens | Plain list of photos with captions |
 | Room photos | `motion.js` | 3D carousel (CSS perspective) turned by scrolling; the photo in front is lit, the rest turn away and dim | The row scrolls sideways on its own (swipe, trackpad or keyboard) |
 | Headings | `motion.js` | Words rise into place once, when the heading first scrolls into view | Plain heading |
+| Explore (`/explore`) | `explore.js` | 18 spots, each a photo in 3D: drag to look around (pan plus parallax that eases back), marks held on their objects by the depth under them, a mark moves into the photo and the next spot arrives near-first | The plain photo with its marks as links; each spot is also its own page (`?spot=`) |
 | Gallery | `site.js` | Lightbox with previous and next | Links open the full-size photo |
 
-Without WebGL (or if the governor gives up), the tour falls back to the same photos without
-depth, and the carousel still turns.
+Without WebGL (or if the governor gives up), the tour and the explorer fall back to the same
+photos without depth, and the carousel still turns.
+
+The explorer's spots are a list in `src/views/public.js` (`EXPLORE`): each names a photo, a
+caption and marks. A mark points at something visible in that photo (`x`/`y` from its top-left)
+and leads to the spot that shows it, so the way between spots follows what you can actually see
+rather than an invented plan of the estate. Previous and Next walk the spots in order, and the
+index below the viewer jumps to any of them. The explorer keeps at most five photos on the
+graphics card at a time.
 
 Which photos a stay shows lives in the database (`room_types.media_json`: `hero`, `card` and
 the `strip` shown side by side), so a new room type gets its pictures by adding a row, not code.

@@ -11,7 +11,7 @@ const MARK = raw(fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'img
 
 const NAV = [
   ['/stay', 'Stay'],
-  ['/#tour', 'Tour'],
+  ['/explore', 'Explore'],
   ['/estate', 'The estate'],
   ['/around', 'Around Joldal'],
   ['/gallery', 'Gallery'],

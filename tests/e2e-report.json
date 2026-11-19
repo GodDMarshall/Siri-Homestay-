@@ -1,12 +1,12 @@
 {
-  "at": "2026-11-19T13:11:28.980Z",
-  "passed": 40,
+  "at": "2026-11-19T13:43:44.052Z",
+  "passed": 41,
   "failed": 0,
   "results": [
     {
       "name": "All public pages return 200 with a title and one h1",
       "ok": true,
-      "detail": "10 pages"
+      "detail": "12 pages"
     },
     {
       "name": "404 page for unknown address",
@@ -46,7 +46,7 @@
     {
       "name": "Guest can send an enquiry and gets a reference",
       "ok": true,
-      "detail": "SH-GZW78F"
+      "detail": "SH-J3B8NT"
     },
     {
       "name": "Confirmation page details are private to the sender",
@@ -177,6 +177,11 @@
       "name": "A room shows its photos side by side on a 3D carousel turned by scrolling",
       "ok": true,
       "detail": "8 photos, 3 side by side"
+    },
+    {
+      "name": "Explore the estate: each spot is a photo in 3D, and its marks fly to the next spot",
+      "ok": true,
+      "detail": "18 spots, 20 marks; flew to The table under the tree"
     },
     {
       "name": "With reduced motion: no 3D, the tour is a plain photo list and the room photos scroll sideways",

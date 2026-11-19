@@ -221,6 +221,99 @@ html:not(.js) .slats { display: none; }
   .tour.is-live .tour__frame::after { background: linear-gradient(to top, rgba(10, 24, 19, .9) 0%, rgba(10, 24, 19, .5) 26%, rgba(10, 24, 19, 0) 46%); }
 }
 
+/* ---------- Explore (/explore): every spot is a photo in 3D -------------------------
+   Without JS the whole photo shows, with its marks as links and the caption below.
+   explore.js fills the screen with it, draws it in 3D and keeps the marks in place. */
+.explorer { position: relative; background: var(--leaf-deep); color: var(--lime); }
+.explorer__stage { position: relative; padding: calc(var(--head) + 16px) var(--pad) 0; }
+.explorer__frame { position: relative; width: min(100%, calc(76svh * var(--ar))); aspect-ratio: var(--ar); margin: 0 auto; }
+.explorer__img { display: block; width: 100%; height: 100%; object-fit: cover; background-size: cover; background-position: center; }
+.explorer__marks { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.mark { position: absolute; left: 0; top: 0; width: 24px; height: 24px; margin: -12px 0 0 -12px; pointer-events: auto;
+  color: #fff; text-decoration: none; font: 600 1rem/1.15 var(--sans); transition: opacity .35s var(--ease); }
+.mark__dot { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #fff;
+  background: radial-gradient(circle, var(--culm) 0 4px, rgba(15, 34, 28, .35) 5px);
+  box-shadow: 0 0 0 5px rgba(217, 180, 74, .28), 0 2px 12px rgba(0, 0, 0, .5); }
+.mark__dot::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, .7); opacity: 0; animation: mark-ping 2.6s var(--ease) infinite; }
+@keyframes mark-ping { 0% { transform: scale(.6); opacity: .9; } 70%, 100% { transform: scale(1.35); opacity: 0; } }
+.mark__label { position: absolute; left: 34px; top: 50%; transform: translateY(-50%); padding: 6px 12px 7px; border-radius: 999px; white-space: nowrap;
+  background: rgba(15, 34, 28, .74); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 2px 14px rgba(0, 0, 0, .28); }
+.mark.is-flip .mark__label { left: auto; right: 34px; }
+a.mark:hover .mark__label, a.mark:focus-visible .mark__label { background: var(--culm); color: var(--ink); }
+a.mark:focus-visible { outline: none; }
+a.mark:focus-visible .mark__dot { outline: 3px solid var(--culm); outline-offset: 4px; }
+.mark--info { pointer-events: none; width: 12px; height: 12px; margin: -6px 0 0 -6px; font-weight: 500; font-size: .95rem; }
+.mark--info .mark__dot { border: 0; background: #fff; box-shadow: 0 0 0 3px rgba(15, 34, 28, .35), 0 1px 8px rgba(0, 0, 0, .4); }
+.mark--info .mark__dot::after { content: none; }
+.mark--info .mark__label { left: 22px; background: rgba(248, 249, 245, .9); color: var(--ink); box-shadow: none; }
+.mark--info.is-flip .mark__label { right: 22px; }
+/* a mark whose place is off the side of the screen: an arrow at the edge */
+.mark.is-edge .mark__dot { background: rgba(15, 34, 28, .6); }
+.mark.is-edge .mark__dot::after { content: none; }
+.mark.is-left .mark__dot::before, .mark.is-right .mark__dot::before { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px;
+  border: solid var(--culm); border-width: 0 0 2px 2px; transform: translate(-30%, -50%) rotate(45deg); }
+.mark.is-right .mark__dot::before { transform: translate(-70%, -50%) rotate(-135deg); }
+.explorer__marks.is-moving .mark { opacity: 0; pointer-events: none; transition-duration: .2s; }
+.explorer__panel { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 32px; padding: 22px var(--pad) clamp(48px, 7vw, 80px); max-width: var(--max); margin: 0 auto; }
+.explorer__caption { max-width: 36em; }
+.explorer__count { font: 500 .95rem/1 var(--sans); color: var(--culm); margin-bottom: 10px; }
+.explorer__title { font: 650 clamp(2.2rem, 4.6vw, 4.4rem)/.95 var(--sans); font-stretch: 76%; letter-spacing: -.01em; margin-bottom: 10px; }
+.explorer__text { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: rgba(238, 240, 234, .9); margin: 0; }
+.explorer__steps { display: flex; gap: 10px; }
+.explorer__step { display: inline-flex; align-items: center; min-height: 44px; padding: .5em 1.15em; border: 1.5px solid rgba(255, 255, 255, .72); border-radius: 999px;
+  font: 600 1rem/1 var(--sans); color: #fff; text-decoration: none; background: rgba(15, 34, 28, .38); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.explorer__step:hover { background: var(--culm); border-color: var(--culm); color: var(--ink); }
+.explorer :focus-visible { outline-color: var(--culm); }
+.explorer__hint { display: none; }
+
+.js .explorer__stage { height: 100svh; min-height: 540px; padding: 0; overflow: hidden; }
+.js .explorer__frame { width: 100%; height: 100%; aspect-ratio: auto; cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.js .explorer__frame:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--culm); }
+.js .explorer.is-dragging .explorer__frame { cursor: grabbing; }
+.js .explorer__img { position: absolute; inset: 0; }
+.js .explorer__img.is-entering { opacity: 0; transform: scale(1.04); transition: opacity .6s var(--ease), transform .9s var(--ease); }
+.js .explorer__img.is-entering.is-in { opacity: 1; transform: none; }
+.explorer__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .9s ease; }
+.explorer.is-3d .explorer__canvas { opacity: 1; }
+.explorer.is-3d .explorer__img { opacity: 0; } /* still there for screen readers */
+.js .explorer__frame::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(10, 24, 19, .84) 0%, rgba(10, 24, 19, .34) 28%, rgba(10, 24, 19, 0) 50%),
+              linear-gradient(to bottom, rgba(10, 24, 19, .5), rgba(10, 24, 19, 0) 20%); }
+.js .explorer:not(.is-live) .explorer__marks { visibility: hidden; }
+.js .explorer__panel { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; max-width: none; padding: 0 var(--pad) clamp(28px, 6vh, 60px); pointer-events: none; }
+.js .explorer__panel > * { pointer-events: auto; }
+.js .explorer__caption { color: #fff; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
+.js .explorer__hint { display: flex; align-items: center; gap: 10px; position: absolute; z-index: 3; inset: 0; margin: auto; width: max-content; height: max-content;
+  padding: 11px 20px 12px; border-radius: 999px; background: rgba(15, 34, 28, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  color: #fff; font: 600 1.05rem/1 var(--sans); pointer-events: none; animation: rise .7s var(--ease) .8s both; transition: opacity .4s; }
+.js .explorer__hint[hidden] { display: none; }
+.js .explorer__hint::before { content: ''; width: 34px; height: 12px; flex: none;
+  background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); mask: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+  animation: hint-sway 1.8s var(--ease) infinite alternate; }
+@keyframes hint-sway { from { transform: translateX(-6px); } to { transform: translateX(6px); } }
+.js .explorer__hint.is-gone { animation: none; opacity: 0; }
+@media (max-width: 700px) {
+  .js .explorer__panel { gap: 14px; }
+  .js .explorer__title { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .js .explorer__text { font-size: 1rem; }
+  .explorer__steps { width: 100%; }
+  .explorer__step { flex: 1; justify-content: center; }
+  .mark { font-size: .95rem; }
+}
+
+.spots { background: var(--lime); color: var(--ink); padding: clamp(64px, 9vw, 112px) var(--pad) clamp(72px, 9vw, 120px); }
+.spots__head, .spots__area { max-width: var(--max); margin: 0 auto; }
+.spots__head p { max-width: 34em; color: var(--ink-2); }
+.spots__area + .spots__area { margin-top: clamp(28px, 4vw, 44px); }
+.spots__area-title { font: 620 1.3rem/1.2 var(--sans); margin: 22px 0 12px; }
+.spots__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(46%, 180px), 1fr)); gap: 18px 14px; }
+.spots__card { display: grid; gap: 8px; color: inherit; text-decoration: none; }
+.spots__img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 3px; background-size: cover; }
+.spots__card[aria-current] .spots__img { outline: 3px solid var(--culm-ink); outline-offset: 3px; }
+.spots__title { font: 600 1.02rem/1.25 var(--sans); }
+.spots__card:hover .spots__title { text-decoration: underline; text-decoration-color: var(--culm); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
 /* ---------- Strip (stay pages): photos side by side, moved sideways by scrolling ------
    Without JS or with reduced motion the row scrolls sideways on its own. */
 .strip { --h: min(66svh, 720px); background: var(--lime); }

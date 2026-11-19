@@ -38,7 +38,7 @@ page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text(
 try {
   // ---------------------------------------------------------------- public pages
   await check('All public pages return 200 with a title and one h1', async () => {
-    const paths = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
+    const paths = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/explore', '/explore?spot=villa-pool', '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
     for (const p of paths) {
       const res = await page.goto(BASE + p, { waitUntil: 'domcontentloaded' });
       assert(res.status() === 200, `${p} returned ${res.status()}`);
@@ -346,15 +346,13 @@ try {
     for (const u of ['/js/world.js', '/js/estate3d.js', '/js/cinema.js', '/world/studio.html', '/media/renders/villa-bedroom-1024.webp']) {
       const r = await fetch(BASE + u); assert(r.status === 404, `${u} is still served`);
     }
-    for (const p of ['/', '/stay/garden-villa', '/stay/whole-estate', '/gallery', '/estate']) {
+    for (const p of ['/', '/stay/garden-villa', '/stay/whole-estate', '/explore', '/gallery', '/estate']) {
       const html = await (await fetch(BASE + p)).text();
-      // (placeholders are base64 in style attributes, so leave those out of the text check)
-      assert(!/\b3D\b|<canvas|type="module"/.test(html.replace(/style="[^"]*"/g, '')), `${p} still mentions or loads 3D`);
+      // 3D now comes only from the photos' depth maps, drawn by motion.js/explore.js: no models or modules
+      assert(!/<canvas|type="module"|three(\.module)?(\.min)?\.js/.test(html), `${p} still loads the old 3D world`);
       const imgs = [...html.matchAll(/<img [^>]*src="([^"]+)"/g)].map((x) => x[1]);
       assert(imgs.length && imgs.every((u) => u.startsWith('/media/photos/')), `${p} has a picture that isn't a photo: ${imgs.find((u) => !u.startsWith('/media/photos/'))}`);
     }
-    const r = await fetch(BASE + '/explore', { redirect: 'manual' });
-    assert(r.status === 301 && r.headers.get('location') === '/#tour', 'explore should redirect to the tour');
     await page.goto(BASE + '/');
     assert(/taken at Siri Homestay by its owners/.test(await page.locator('.footer__legal').innerText()), 'footer note');
     return `${keys.length} photos`;
@@ -420,6 +418,55 @@ try {
     return `${n} photos, ${a.visible} side by side`;
   });
 
+  await check('Explore the estate: each spot is a photo in 3D, and its marks fly to the next spot', async () => {
+    const html = await (await fetch(BASE + '/explore')).text();
+    const data = JSON.parse(html.match(/<script type="application\/json" id="explore-data">([^<]*)<\/script>/)[1]);
+    const ids = new Set(data.spots.map((s) => s.id));
+    assert(data.spots.length === 18, `${data.spots.length} spots`);
+    for (const s of data.spots) {
+      assert(s.photo.startsWith('/media/photos/') && s.depth && s.depth.startsWith('/media/depth/'), `${s.id} is not a photo with a depth map`);
+      for (const mk of s.marks) assert(ids.has(mk.to) && mk.to !== s.id && mk.x > 0 && mk.x < 1 && mk.y > 0 && mk.y < 1, `${s.id}: bad mark to ${mk.to}`);
+    }
+    // every spot can be reached from the first by marks or the Next link
+    const seen = new Set([data.spots[0].id]), queue = [data.spots[0]];
+    while (queue.length) { const s = queue.shift(); const next = data.spots[(s.index ?? data.spots.indexOf(s)) + 1]; for (const t of [...s.marks.map((m) => m.to), next && next.id]) if (t && !seen.has(t)) { seen.add(t); queue.push(data.spots.find((x) => x.id === t)); } }
+    assert(seen.size === 18, `only ${seen.size} spots reachable`);
+    // without JavaScript every spot is a page, its marks plain links over the whole photo
+    const villa = await (await fetch(BASE + '/explore?spot=villa-patio')).text();
+    const links = [...villa.matchAll(/<a class="mark" href="\/explore\?spot=([a-z-]+)"/g)].map((x) => x[1]);
+    assert(links.join() === 'villa-bedroom,patio-chairs,villa-pool', `villa marks: ${links}`);
+    assert(/<h2 class="explorer__title"[^>]*>A villa</.test(villa), 'spot page shows its own spot');
+    assert(/<h2 class="explorer__title"[^>]*>Arrive</.test(await (await fetch(BASE + '/explore?spot=nonsense')).text()), 'unknown spot should show the first');
+
+    await page.goto(BASE + '/explore');
+    await page.waitForSelector('.explorer.is-3d canvas.explorer__canvas', { timeout: 30000 });
+    await page.waitForFunction(() => [...document.querySelectorAll('a.mark')].some((a) => /translate3d/.test(a.style.transform)));
+    const before = await page.$eval('a.mark', (a) => a.style.transform);
+    // drag to look around: the marks stay on their places, so they move with the photo
+    const box = await page.locator('[data-frame]').boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    for (let i = 1; i <= 8; i++) await page.mouse.move(box.x + box.width / 2 + i * 30, box.y + box.height / 2 + i * 12);
+    await page.waitForTimeout(200);
+    const during = await page.$eval('a.mark', (a) => a.style.transform);
+    await page.mouse.up();
+    assert(during !== before, 'marks did not follow the drag');
+    // a mark flies to its spot; the page address and the caption follow
+    const to = await page.$eval('a.mark', (a) => a.getAttribute('data-to'));
+    const title = data.spots.find((s) => s.id === to).title;
+    await page.evaluate(() => document.querySelector('a.mark').click());
+    await page.waitForFunction((t) => document.querySelector('[data-title]').textContent === t, title, { timeout: 15000 });
+    await page.waitForFunction((id) => location.search === '?spot=' + id && !document.querySelector('[data-marks]').classList.contains('is-moving'), to, { timeout: 15000 });
+    const idx = data.spots.findIndex((s) => s.id === to);
+    await page.click('[data-next]');
+    await page.waitForFunction((t) => document.querySelector('[data-title]').textContent === t, data.spots[idx + 1].title, { timeout: 15000 });
+    await page.waitForFunction(() => !document.querySelector('[data-marks]').classList.contains('is-moving'), null, { timeout: 15000 });
+    // the index below jumps to any spot
+    await page.evaluate(() => document.querySelector('[data-goto="night-garden"]').click());
+    await page.waitForFunction(() => document.querySelector('[data-title]').textContent === 'After dark', null, { timeout: 15000 });
+    return `18 spots, ${data.spots.reduce((n, s) => n + s.marks.length, 0)} marks; flew to ${title}`;
+  });
+
   await check('With reduced motion: no 3D, the tour is a plain photo list and the room photos scroll sideways', async () => {
     const rctx = await browser.newContext({ viewport: { width: 1280, height: 860 }, reducedMotion: 'reduce' });
     const p = await rctx.newPage();
@@ -431,6 +478,13 @@ try {
     assert(await p.locator('canvas').count() === 0, 'WebGL started despite reduced motion');
     const scrolls = await p.evaluate(() => { const r = document.querySelector('.strip__row'); return r.scrollWidth > r.clientWidth && getComputedStyle(r).overflowX === 'auto'; });
     assert(scrolls, 'room photos should scroll sideways on their own');
+    // the explorer shows the plain photos, with the marks still leading on
+    await p.goto(BASE + '/explore?spot=villa-patio');
+    await p.waitForSelector('.explorer.is-live');
+    assert(await p.locator('canvas').count() === 0, 'explorer started WebGL despite reduced motion');
+    assert(await p.locator('.explorer__img').isVisible(), 'explorer photo missing');
+    await p.evaluate(() => document.querySelector('a.mark[data-to="villa-bedroom"]').click());
+    await p.waitForFunction(() => document.querySelector('[data-title]').textContent === 'Inside' && /villa-bedroom/.test(document.querySelector('.explorer__img').currentSrc || document.querySelector('.explorer__img').src));
     await rctx.close();
   });
 
@@ -453,7 +507,7 @@ try {
     // axe is injected as a script, so this context bypasses CSP; signed-in cookies are carried over.
     const actx = await browser.newContext({ viewport: { width: 1280, height: 860 }, bypassCSP: true, storageState: await ctx.storageState() });
     const page = await actx.newPage();
-    const pages = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/estate', '/around', '/gallery', '/contact', '/enquire', '/admin', '/admin/bookings', `/admin/bookings/${id1}`, '/admin/calendar'];
+    const pages = ['/', '/stay', '/stay/garden-villa', '/stay/whole-estate', '/explore', '/estate', '/around', '/gallery', '/contact', '/enquire', '/admin', '/admin/bookings', `/admin/bookings/${id1}`, '/admin/calendar'];
     let serious = 0;
     for (const p of pages) {
       await page.goto(BASE + p, { waitUntil: 'networkidle' });

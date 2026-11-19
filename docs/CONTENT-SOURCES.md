@@ -47,7 +47,8 @@ Every fact on the website comes from one of four sources. Nothing was invented.
 13. **Old phone number +91 94830 29603** appears on the old site's booking section but not in the brief, so it isn't used.
 14. **Old photographs** on sirihomestay.in (2014) show an earlier layout ("main bungalow and cottage") and were not reused.
 15. **Sharper photos.** The photos arrived through WhatsApp at 1600 x 1200. The original camera files (sent as a WhatsApp "Document" or through Google Drive) would make every picture on the site sharper; see "Photos" in the README.
-16. **Photos still missing:** the bathroom (only video stills so far), the dining hall inside, the kitchen, the pond and the cottages inside. Good daylight photos of these would complete the tour and the gallery.
+16. **Explore links:** in the 3D explorer, markers on a photo lead to the spot that shows that thing (for example the umbrella table on the lawn, the pool beside the villa, the bed seen through the pool window). They follow what is visible in the photos; the owners should check that the places connect the way the markers suggest, and say if any should change. They are listed in `EXPLORE` in `src/views/public.js`.
+17. **Photos still missing:** the bathroom (only video stills so far), the dining hall inside, the kitchen, the pond and the cottages inside. Good daylight photos of these would complete the tour and the gallery.
 
 ## Pictures
 
