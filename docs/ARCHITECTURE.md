@@ -19,7 +19,7 @@ Browser ──► Express (server.js)
 
 | Part | Choice | Why |
 |---|---|---|
-| Runtime | Node.js 20+ | Runs on any VPS or Node host |
+| Runtime | Node.js 22+ | Runs on any VPS or Node host; no compiler needed |
 | Web | Express 5, Helmet, compression | Familiar, few moving parts |
 | Database | SQLite via better-sqlite3, WAL mode | One file, transactional, fast for a 5-villa property |
 | Templates | Tagged template literals with escaping by default (`src/lib/html.js`) | No template engine; XSS-safe by default |

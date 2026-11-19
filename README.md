@@ -12,7 +12,7 @@ Docs: [Architecture and Phase 2 plan](docs/ARCHITECTURE.md) · [Admin guide](doc
 
 ## Run it locally
 
-Requirements: Node.js 20 or newer.
+Requirements: Node.js 22 or newer. No compiler is needed: SQLite comes as a prebuilt binary, and `.npmrc` turns off install scripts.
 
 ```bash
 npm install
