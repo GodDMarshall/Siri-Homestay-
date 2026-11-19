@@ -77,7 +77,7 @@
     if (!dlg) {
       dlg = doc.createElement('dialog');
       dlg.className = 'lightbox';
-      dlg.setAttribute('aria-label', 'Photograph');
+      dlg.setAttribute('aria-label', 'Picture');
       dlg.innerHTML = '<img class="lightbox__img" alt=""><p class="lightbox__cap"></p>' +
         '<button type="button" class="lightbox__btn lightbox__prev">Previous</button>' +
         '<button type="button" class="lightbox__btn lightbox__next">Next</button>' +

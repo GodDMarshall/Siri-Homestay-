@@ -3,7 +3,9 @@
 **Date:** 19 November 2026  
 **Build:** Phase 1, version 1.0.0  
 **Environment:** Node.js 22, SQLite 3.54, Google Chrome 153 (headless), Linux  
-**Result:** 14/14 booking-engine tests and 34/34 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
+**Result:** 14/14 booking-engine tests and 41/41 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 13 pages and no browser errors.
+
+**Update (3D estate):** the site's pictures and films were replaced by a 3D estate generated in code. Seven checks were added for it (section 2), and the motion review and performance figures below are for the 3D version.
 
 Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run writes `tests/e2e-report.json`.
 
@@ -55,31 +57,34 @@ Re-run any time with `npm test` and `npm run test:e2e`. The end-to-end run write
 | Audit | Booking history records the enquiry and confirmation | Pass |
 | Accessibility | axe-core WCAG 2.1 A/AA on 13 public and admin pages: no violations | Pass |
 | Security | Enquiry endpoint rate-limited (429) | Pass |
+| 3D estate | No photographs or films are published (manifest holds 28 renders; old photo, film and frame URLs return 404; no `<video>` on any page) | Pass |
+| 3D estate | Footer says every picture is a 3D recreation and the layout is illustrative | Pass |
+| 3D estate | Home hero starts the code-built estate in WebGL | Pass |
+| 3D estate | Scrolling the walk moves the camera along the stones, opens the sliding door and ends inside the bedroom | Pass |
+| 3D estate | Explorer flies between viewpoints; hotspots follow their 3D anchors | Pass |
+| 3D estate | "Step inside" plays the entry and lands on the Garden Villa page | Pass |
+| 3D estate | With reduced motion: no WebGL; rendered stills, with explorer hotspots placed from the render data | Pass |
 | Console | No JavaScript errors and no missing files | Pass |
 
-## 3. Visual and motion review (screenshots at 1440×900 and 390×844)
+## 3. Visual and motion review
 
-| Item | Desktop | Mobile |
-|---|---|---|
-| Hero with WebGL depth parallax and slat reveal | Pass | Pass |
-| Arrival: scroll-scrubbed footage, beats, bamboo progress line | Pass (framed with blurred backdrop) | Pass (full screen) |
-| Room entry: exterior push-in → walk-in film through the doorway → bed → stay page settles | Pass (~10 s, skippable) | Pass (full-screen portrait film) |
-| Explore: depth scenes, hotspots on real objects, fly-through, map strip, swipe | Pass | Pass |
-| Day-to-night scroll | Pass | Pass |
-| Reduced motion / data saver: static frames, all text visible, no films or WebGL | Pass | Pass |
-| Admin: overview, booking, calendar, channels | Pass | Pass (collapsible menu) |
+| Item | Result |
+|---|---|
+| Each render compared side by side with the owner's photograph of the same spot (18 pairs) | Same composition and contents: lawn, stones, umbrella tables, net, brush heap, villa patio and pool, bedroom, bathroom, courtyard cottages, night lighting. Differences: the arrangement of the grounds is illustrative, the forest is stylised, and close-up foliage is less detailed than a photograph |
+| Hero: live 3D lawn with wind in the bamboo and a slow camera drift, fading in over the rendered still | Pass |
+| Walk: camera from above the pond, over the lawn, along the stepping stones; the door slides open; settles at the bed | Pass |
+| Room entry: 3D flight, then the stay page; stills fallback when 3D is unavailable or not ready within 2.5 s | Pass |
+| Explore: 3D flights between 8 viewpoints, hotspots pinned to objects, door routing in and out of the bedroom | Pass |
+| Walk-throughs on stay pages and in the gallery (pause, next, close, Escape) | Pass |
+| Reduced motion or data saver: rendered stills, all text visible, no WebGL | Pass |
+| Software-only WebGL (no graphics card): stills, no 3D | Pass |
 
-## 4. Performance (local, unthrottled; real-world times will be longer)
+## 4. Performance
 
-| Page | Initial transfer | Requests | LCP | CLS |
-|---|---|---|---|---|
-| Home, desktop | 884 KB | 13 | 152 ms | 0 |
-| Home, mobile | 603 KB | 13 | 196 ms | 0 |
-| Garden Villa, mobile | 361 KB | 10 | 152 ms | 0 |
-| Explore, mobile | 639 KB | 16 | 132 ms | 0 |
-| Enquire | 297 KB | 8 | 108–124 ms | 0 |
-
-The arrival film frames (3.4 MB desktop, about 1.7 MB on phones, which load every second frame) download only after the visitor starts scrolling. Room-entry films (1.1–1.4 MB) preload when a stay card comes into view or is hovered. Media files are served with a 30-day immutable cache; CSS and JS carry content hashes.
+- The 3D bundle (`public/js/world.js`, 680 KB, about 175 KB compressed) is fetched only after the page has loaded, or on intent (hovering a stay, the walk-through button), never with reduced motion or data saver.
+- Building the estate takes about 1–2 s of main-thread work on a recent laptop and is split into steps that yield to the browser. Until then the rendered still is shown, so the largest paint is an ordinary image.
+- Quality is chosen per device (shadow map size, texture resolution, plant density, grass blades, floor reflections). The hero renders at most 40 frames a second, only while it is on screen and the tab is visible, and stops by itself if frames take more than about 110 ms.
+- Pictures are WebP renditions at 640/1024/1600 px (portrait 480/768/1200) with blurred placeholders, served with a 30-day immutable cache.
 
 ## 5. Defects found and fixed during QA
 
@@ -91,11 +96,16 @@ The arrival film frames (3.4 MB desktop, about 1.7 MB on phones, which load ever
 | Past dates in the availability calendar and today's header in the admin calendar failed contrast | Re-coloured to pass WCAG AA |
 | Explorer counter unreadable over bright grass; edge hotspots cut off on phones | Stronger scrim and text shadow; scene links pinned inside the screen and anchored on their dot |
 | No `/favicon.ico` (browsers request it) | Added |
-| Home page downloaded all 96 film frames before any scroll | Frames load on first scroll; phones load half |
+| Home page downloaded all 96 film frames before any scroll | Frames load on first scroll; phones load half (since replaced by the 3D walk) |
+| 3D: the lawn vanished on some GPUs (flat ground layers fighting in the depth buffer) | Ground layers are drawn first in a fixed order and simply cover each other |
+| 3D: a bamboo leaf card passed through the camera in the hero view | Plants are kept clear of every camera position and path; foliage is kept out of buildings |
+| 3D: the bedroom ceiling looked olive (it picked up the lawn's colour from the sky light) | Interior surfaces take little outdoor light; the ceiling gets a soft bounce |
+| 3D: in headless Chrome (software WebGL) the live hero made the page unresponsive | Software renderers get the stills; a frame-time guard stops the hero on slow devices |
 
 ## 6. Known limitations and open items
 
-- **Not tested on real devices** (iOS Safari, low-end Android). Headless Chrome only. Test on an iPhone and an Android phone after deployment, especially the room-entry film and the explorer.
+- **Not tested on real devices** (iOS Safari, low-end Android). Headless Chrome only, with software WebGL. Test on an iPhone and an Android phone after deployment, especially the 3D hero, the walk and the explorer, and check that phones get the low quality tier.
+- **The 3D layout is illustrative.** No site plan was supplied; see `docs/CONTENT-SOURCES.md`.
 - **Email delivery** is untested until SMTP credentials are added.
 - **Client confirmations** are listed in `docs/CONTENT-SOURCES.md`: check-in/out times, capacity, meals, rates, PIN code, map pin, licence number, WhatsApp availability, lawn area.
 - The rate limiter is in memory (fine for one server process).

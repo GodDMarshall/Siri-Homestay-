@@ -26,6 +26,8 @@ for (let i = 0; i < 50 && !log.includes('running at'); i++) await new Promise((r
 
 const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
+// The test browser renders WebGL in software; the site skips 3D there unless asked to.
+await ctx.addInitScript(() => { try { localStorage.setItem('sh-3d', 'force'); localStorage.setItem('sh-3d-quality', 'low'); } catch (e) {} });
 const page = await ctx.newPage();
 page.setDefaultTimeout(10000);
 const consoleErrors = [];
@@ -333,6 +335,75 @@ try {
     await page.goto(`${BASE}/admin/bookings/${id1}`);
     const items = await page.locator('.timeline li').allTextContents();
     assert(items.some((t) => t.includes('Enquiry received')) && items.some((t) => t.includes('Confirmed')), items.join(' | '));
+  });
+
+  // ---------------------------------------------------------------- the 3D estate
+  await check('No real photographs or films are published', async () => {
+    const m = await (await fetch(BASE + '/media/manifest.json')).json();
+    assert(m.renders && Object.keys(m.renders).length >= 24, 'renders missing');
+    assert(!m.photos && !m.video && !m.sequences, 'old photo/video entries still in the manifest');
+    for (const u of ['/media/photos/lawn-stepping-stones-1600.webp', '/media/video/walk-in.mp4', '/media/seq/arrival/000.webp']) {
+      const r = await fetch(BASE + u); assert(r.status === 404, `${u} is still served`);
+    }
+    for (const p of ['/', '/stay/garden-villa', '/gallery']) {
+      const html = await (await fetch(BASE + p)).text();
+      assert(!/<video/i.test(html), `${p} still has a video`);
+      assert(!/media\/photos\//.test(html), `${p} still links a photo`);
+    }
+    return `${Object.keys(m.renders).length} renders`;
+  });
+
+  await check('Pictures say they are 3D recreations', async () => {
+    await page.goto(BASE + '/');
+    const foot = await page.locator('.footer__legal').innerText();
+    assert(/3D recreation/.test(foot) && /illustrative/.test(foot), foot);
+  });
+
+  await check('Home hero brings the code-built estate to life (WebGL)', async () => {
+    await page.goto(BASE + '/');
+    await page.waitForSelector('.hero__media.is-live .world-canvas', { timeout: 90000 });
+    const size = await page.evaluate(() => { const c = document.querySelector('.hero__media .world-canvas'); return [c.width, c.height]; });
+    assert(size[0] > 300 && size[1] > 200, 'canvas ' + size);
+    return `canvas ${size.join('x')}`;
+  });
+
+  await check('Scrolling the walk takes the camera across the lawn and through the villa door', async () => {
+    await page.evaluate(() => { const w = document.querySelector('[data-walk3d]'); window.scrollTo(0, w.offsetTop + (w.offsetHeight - innerHeight) * 0.9); });
+    await page.waitForSelector('.walk.is-live', { timeout: 30000 });
+    await page.waitForFunction(() => window.SH.world.world.state.door > 0.5, null, { timeout: 30000 });
+    const inside = await page.evaluate(() => window.SH.world.world.state.interiorK);
+    assert(inside === 1, 'camera not inside the villa');
+  });
+
+  await check('Explorer flies between 3D viewpoints with hotspots pinned to them', async () => {
+    await page.goto(BASE + '/explore');
+    await page.waitForSelector('[data-explorer].is-3d', { timeout: 90000 });
+    await page.click('[data-next]');
+    await page.waitForFunction(() => document.querySelector('[data-title]').textContent === 'Umbrella tables', null, { timeout: 60000 });
+    await page.waitForFunction(() => !document.querySelector('[data-spots]').classList.contains('is-moving'), null, { timeout: 60000 });
+    const spots = await page.locator('.spot:not([hidden])').count();
+    assert(spots >= 1, 'no hotspots');
+    return `${spots} hotspots`;
+  });
+
+  await check('"Step inside" flies into the villa, then opens its page', async () => {
+    await page.goto(BASE + '/stay');
+    await page.click('.stay--lead .stay__actions [data-enter]');
+    await page.waitForSelector('.cinema', { timeout: 30000 });
+    await page.waitForURL(/\/stay\/garden-villa$/, { timeout: 120000 });
+  });
+
+  await check('Without WebGL motion the site shows the rendered stills, with hotspots', async () => {
+    const rctx = await browser.newContext({ viewport: { width: 1280, height: 860 }, reducedMotion: 'reduce' });
+    const p = await rctx.newPage();
+    await p.goto(BASE + '/');
+    await p.waitForTimeout(1500);
+    assert(await p.locator('.world-canvas').count() === 0, '3D started despite reduced motion');
+    assert(await p.locator('.hero__media img').isVisible(), 'hero still missing');
+    await p.goto(BASE + '/explore');
+    const n = await p.locator('.spot:not([hidden])').count();
+    assert(n >= 2, `only ${n} hotspots on the still`);
+    await rctx.close();
   });
 
   // ---------------------------------------------------------------- accessibility

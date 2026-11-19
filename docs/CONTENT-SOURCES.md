@@ -5,7 +5,7 @@ Every fact on the website comes from one of four sources. Nothing was invented.
 | Code | Source |
 |---|---|
 | **C** | Client brief from Dilip (WhatsApp, 12 and 17 Nov 2026) |
-| **P** | Client photos (18) and videos (2), Nov 2026 |
+| **P** | Client photos (18) and videos (2), Nov 2026. Used as the reference for the 3D estate; not published |
 | **W** | Existing sirihomestay.in (WordPress, last updated around 2020) |
 | **L** | The property's current online travel listing (Expedia/Hotels.com group) |
 
@@ -45,9 +45,15 @@ Every fact on the website comes from one of four sources. Nothing was invented.
 11. **Converted (alienated) land, 1.12 acres** is stored in the admin for the record and not shown to guests.
 12. **Bhadra distance.** The old site gives two different figures (10 km from Chikmagalur and 30 km from the homestay). The site uses "about 30 km from the homestay".
 13. **Old phone number +91 94830 29603** appears on the old site's booking section but not in the brief, so it isn't used.
-14. **Old photographs** on sirihomestay.in (2014) show an earlier layout ("main bungalow and cottage") and were not reused. All images are the November 2026 set.
+14. **Old photographs** on sirihomestay.in (2014) show an earlier layout ("main bungalow and cottage") and were not reused.
+15. **The 3D estate's site plan.** No plan of the grounds was supplied, so where the villas, lawn, courtyard, dining hall and pond sit relative to each other is illustrative. The buildings, rooms and furniture follow the photographs. If the owner can share a rough sketch of the grounds, `src/world/layout.js` is the one file to change, then re-render (`npm run render`).
+16. **Details the photographs don't show** were kept neutral rather than invented: the inside of the cottages (their windows show only curtains), the kitchen and staff quarters (plain blocks), and the bathroom beyond what the walk-through video shows.
+
+## Pictures
+
+Every picture on the site is a 3D render of the estate generated in code (`src/world/`), framed to match the owner's photograph of the same spot. The photographs and videos themselves are not published. The footer says so on every page: “Every picture on this site is a 3D recreation of Siri Homestay, built in code from the owners’ photographs. The buildings, rooms and furniture follow those photographs; the arrangement of the grounds is illustrative.”
 
 ## Privacy
 
-- The second walk-through film had a person reflected in the bathroom mirror (about 1:26–1:30). That segment is cut from the published film.
-- Sound is removed from all published footage.
+- No photographs or footage of the estate are published, so nothing from the source material (for example the person reflected in the bathroom mirror in the second video) can appear on the site.
+- No people are modelled in the 3D estate.

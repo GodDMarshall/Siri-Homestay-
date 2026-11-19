@@ -19,28 +19,37 @@ function asset(p) {
   return versions.get(p);
 }
 
+// Every picture on the site is a 3D render of the code-built estate (see src/world/).
+const DIR = '/media/renders/';
+
 function media(key) {
-  return manifest.photos[key] || manifest.stills[key] || null;
+  return manifest.renders[key] || null;
 }
 
 function srcset(m) {
-  return m.files.map((f) => `/media/photos/${f.src} ${f.w}w`).join(', ');
+  return m.files.map((f) => `${DIR}${f.src} ${f.w}w`).join(', ');
 }
 
 function largest(m) {
-  return `/media/photos/${m.files[m.files.length - 1].src}`;
+  return `${DIR}${m.files[m.files.length - 1].src}`;
 }
 
 function src(key, maxW = 1600) {
   const m = media(key);
   if (!m) return '';
   const f = [...m.files].reverse().find((x) => x.w <= maxW) || m.files[0];
-  return `/media/photos/${f.src}`;
+  return `${DIR}${f.src}`;
 }
 
 function ogImage(key) {
-  const m = manifest.photos[key];
-  return m ? `/media/photos/${m.jpg}` : null;
+  const m = media(key);
+  return m ? `${DIR}${m.jpg}` : null;
+}
+
+// Where a named 3D anchor falls in a render, as [x, y] fractions (for hotspots).
+function anchorAt(key, anchor) {
+  const m = media(key);
+  return (m && m.anchors && m.anchors[anchor]) || null;
 }
 
 /**
@@ -58,12 +67,7 @@ function img(key, { sizes = '100vw', cls = '', loading = 'lazy', alt = null, pos
 function clientMedia(key) {
   const m = media(key);
   if (!m) return null;
-  return { key, alt: m.alt, w: m.w, h: m.h, src: src(key, 1600), srcSmall: src(key, 800), depth: m.depth ? `/media/depth/${m.depth}` : null, lqip: m.lqip };
+  return { key, alt: m.alt, w: m.w, h: m.h, src: src(key, 1600), srcSmall: src(key, 800), lqip: m.lqip };
 }
 
-function video(key) {
-  const v = manifest.video[key];
-  return v ? { src: `/media/video/${v.src}`, poster: `/media/video/${v.poster}`, duration: v.duration, bytes: v.bytes } : null;
-}
-
-module.exports = { manifest, asset, media, img, src, srcset, largest, ogImage, clientMedia, video, PUBLIC };
+module.exports = { manifest, asset, media, img, src, srcset, largest, ogImage, anchorAt, clientMedia, PUBLIC };

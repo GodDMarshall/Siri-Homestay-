@@ -5,7 +5,8 @@
  * Sources:
  *  [C] Client brief via Dilip (WhatsApp, 12 & 17 Nov 2026): acreage, villas, facilities, power backup,
  *      licence, location, enquiry contacts and their order.
- *  [P] Client photos and videos (Nov 2026): what rooms and grounds contain.
+ *  [P] Client photos and videos (Nov 2026): what rooms and grounds contain. The site shows 3D renders
+ *      modelled on them (src/world/); the photos and videos themselves are not published.
  *  [W] Existing sirihomestay.in: meals, activities, TV/DTH, nearby places, Facebook page.
  *  [L] Current online listing for the property: check-in/out times, 4 guests per room.
  * Anything marked CONFIRM in docs/CONTENT-SOURCES.md should be checked with the owner.
@@ -36,16 +37,24 @@ const GARDEN_VILLA = {
   media: {
     hero: 'villa-bedroom',
     card: 'villa-patio',
-    gallery: ['doorway-bedroom', 'villa-bedroom', 'villa-window-pool', 'villa-patio', 'patio-chairs', 'villa-pool',
-      'room-beds', 'bath-basin', 'bath-wc', 'room-pool-view'],
-    tour: 'tour-room-and-bath',
+    gallery: ['doorway-bedroom', 'villa-bedroom', 'room-beds', 'villa-window-pool', 'villa-patio', 'patio-chairs', 'walk-door', 'villa-pool',
+      'bath-basin', 'bath-wc', 'room-pool-view'],
+    tour: 'garden-villa',
   },
-  // Room-entry shot list: exterior push-in, real walk-in footage, settle on the bed.
-  transition: [
-    { type: 'image', media: 'villa-patio', from: { x: 0.5, y: 0.5, s: 1.0 }, to: { x: 0.46, y: 0.56, s: 1.9 }, ms: 1100, caption: 'A villa in the bamboo' },
-    { type: 'video', src: 'walk-in', rate: 1.2, caption: 'Up the steps and inside' },
-    { type: 'image', media: 'villa-bedroom', from: { x: 0.34, y: 0.64, s: 1.35 }, to: { x: 0.42, y: 0.6, s: 1.06 }, ms: 1000, caption: 'Your room' },
-  ],
+  // Room entry: a camera flight through the 3D estate (see src/world/views.js), with
+  // rendered stills of the same walk for devices without 3D.
+  transition: {
+    world: [
+      { path: 'arrival', from: 0.38, to: 1, ms: 2600, caption: 'Across the lawn to a villa' },
+      { path: 'enter', from: 0, to: 1, ms: 3000, door: [0, 0.35], caption: 'The glass door slides open' },
+      { ms: 500, caption: 'Your room' },
+    ],
+    stills: [
+      { media: 'villa-patio', from: { x: 0.5, y: 0.5, s: 1.0 }, to: { x: 0.56, y: 0.55, s: 1.6 }, ms: 1100, caption: 'A villa in the bamboo' },
+      { media: 'walk-door', from: { x: 0.5, y: 0.6, s: 1.0 }, to: { x: 0.52, y: 0.5, s: 1.35 }, ms: 1000, caption: 'The glass door slides open' },
+      { media: 'walk-bed', from: { x: 0.5, y: 0.6, s: 1.2 }, to: { x: 0.5, y: 0.55, s: 1.04 }, ms: 1000, caption: 'Your room' },
+    ],
+  },
   sort_order: 1,
 };
 
@@ -71,15 +80,22 @@ const WHOLE_ESTATE = {
   media: {
     hero: 'estate-lawn-dining',
     card: 'lawn-umbrellas',
-    gallery: ['estate-lawn-dining', 'lawn-stepping-stones', 'lawn-umbrellas', 'courtyard-villas', 'lawn-table-villa',
-      'night-garden', 'night-lawn', 'courtyard-villa', 'courtyard-garden', 'bamboo-view-lawn'],
-    tour: 'tour-garden-to-bed',
+    gallery: ['aerial', 'estate-lawn-dining', 'lawn-stepping-stones', 'lawn-umbrellas', 'courtyard-villas', 'lawn-table-villa',
+      'night-garden', 'night-lawn', 'courtyard-villa', 'courtyard-garden', 'bamboo-view-lawn', 'pond'],
+    tour: 'whole-estate',
   },
-  transition: [
-    { type: 'image', media: 'courtyard-villas', from: { x: 0.5, y: 0.5, s: 1.0 }, to: { x: 0.62, y: 0.42, s: 1.5 }, ms: 1100, caption: 'Five villas' },
-    { type: 'video', src: 'estate-walk', rate: 1.15, caption: 'Along the stone path' },
-    { type: 'image', media: 'estate-lawn-dining', from: { x: 0.45, y: 0.55, s: 1.3 }, to: { x: 0.5, y: 0.5, s: 1.04 }, ms: 1000, caption: 'The lawn and dining hall' },
-  ],
+  transition: {
+    world: [
+      { view: 'aerial', ms: 700, caption: 'Five villas on 4.28 acres' },
+      { fly: 'lawn-stepping-stones', ms: 3200, caption: 'Down to the lawn' },
+      { fly: 'estate-lawn-dining', ms: 2400, caption: 'The lawn and the dining hall' },
+    ],
+    stills: [
+      { media: 'aerial', from: { x: 0.5, y: 0.5, s: 1.0 }, to: { x: 0.45, y: 0.55, s: 1.5 }, ms: 1100, caption: 'Five villas on 4.28 acres' },
+      { media: 'lawn-stepping-stones', from: { x: 0.5, y: 0.6, s: 1.25 }, to: { x: 0.5, y: 0.5, s: 1.0 }, ms: 1000, caption: 'Down to the lawn' },
+      { media: 'estate-lawn-dining', from: { x: 0.45, y: 0.55, s: 1.3 }, to: { x: 0.5, y: 0.5, s: 1.04 }, ms: 1000, caption: 'The lawn and the dining hall' },
+    ],
+  },
   sort_order: 2,
 };
 

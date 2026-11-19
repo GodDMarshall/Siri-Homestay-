@@ -9,8 +9,10 @@
     "setup": "node src/db/seed.js",
     "test": "node --test tests/*.test.js",
     "test:e2e": "node tests/e2e.mjs",
-    "media": "python3 scripts/build-media.py --src ./originals --out public/media --midas ./models/model-small.onnx",
-    "admin:reset-password": "node scripts/reset-admin-password.js"
+    "admin:reset-password": "node scripts/reset-admin-password.js",
+    "build:world": "esbuild src/world/index.js --bundle --format=esm --minify --legal-comments=none --target=es2020 --outfile=public/js/world.js",
+    "build:world:dev": "esbuild src/world/index.js --bundle --format=esm --sourcemap --target=es2020 --outfile=public/js/world.js",
+    "render": "node scripts/render-views.mjs --out renders --q ultra --w 1600 && python3 scripts/build-renders.py --src renders --out public/media"
   },
   "license": "UNLICENSED",
   "dependencies": {
@@ -22,10 +24,12 @@
     "nodemailer": "^10.6.0"
   },
   "devDependencies": {
-    "axe-core": "^4.14.1",
-    "playwright-core": "^1.65.1",
     "@fontsource-variable/anek-kannada": "^5.3.0",
-    "@fontsource-variable/newsreader": "^5.3.0"
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "axe-core": "^4.14.1",
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.65.1",
+    "three": "^0.187.0"
   },
   "private": true,
   "engines": {

@@ -6,71 +6,65 @@ const { fmtDate, today, addDays, diffDays } = require('../lib/dates');
 const { formatPhone } = require('../domain/catalog');
 
 // ---------------------------------------------------------------------------
-// Explore scenes: hotspots are placed on the actual photographs (x, y as 0..1).
+// Explore scenes: each is a viewpoint in the 3D estate (src/world/views.js). Hotspots are
+// pinned to named 3D anchors; on the rendered stills they sit where the render placed them.
 // ---------------------------------------------------------------------------
 const SCENES = [
-  { id: 'lawn', media: 'lawn-stepping-stones', title: 'The lawn',
+  { id: 'lawn', view: 'lawn-stepping-stones', title: 'The lawn',
     text: 'The main lawn, with stepping stones, umbrella tables and the volleyball net, ringed by bamboo and tall trees.',
-    focus: [0.55, 0.5],
     spots: [
-      { x: 0.85, y: 0.45, label: 'Umbrella tables', to: 'umbrellas' },
-      { x: 0.44, y: 0.43, label: 'Volleyball net', to: 'dining' },
-      { x: 0.6, y: 0.76, label: 'Stepping stones across the grass' },
+      { anchor: 'umbrellaP5', label: 'Umbrella tables', to: 'umbrellas' },
+      { anchor: 'net', label: 'Volleyball net', to: 'dining' },
+      { anchor: 'stones', label: 'Stepping stones across the grass' },
     ] },
-  { id: 'umbrellas', media: 'lawn-table-villa', title: 'Umbrella tables',
+  { id: 'umbrellas', view: 'lawn-table-villa', title: 'Umbrella tables',
     text: 'Round tables under big white umbrellas, each on its own concrete circle, with a villa behind the bamboo.',
-    focus: [0.55, 0.55],
     spots: [
-      { x: 0.16, y: 0.33, label: 'Walk to a villa', to: 'villa' },
-      { x: 0.6, y: 0.58, label: 'Seats for six under each umbrella' },
+      { anchor: 'villa', label: 'Walk to a villa', to: 'villa' },
+      { anchor: 'tableP3', label: 'Seats for six under each umbrella' },
     ] },
-  { id: 'dining', media: 'estate-lawn-dining', title: 'Dining hall and lawn',
+  { id: 'dining', view: 'estate-lawn-dining', title: 'Dining hall and lawn',
     text: 'The dining hall is the open building on the left. Firewood is stacked for the evening campfire.',
-    focus: [0.45, 0.45],
     spots: [
-      { x: 0.1, y: 0.37, label: 'The dining hall' },
-      { x: 0.47, y: 0.33, label: 'Across to the courtyard', to: 'courtyard' },
-      { x: 0.8, y: 0.34, label: 'Volleyball net' },
-      { x: 0.6, y: 0.74, label: 'Firewood for the campfire' },
+      { anchor: 'diningHall', label: 'The dining hall' },
+      { anchor: 'courtyard', label: 'Across to the courtyard', to: 'courtyard' },
+      { anchor: 'net', label: 'Volleyball net' },
+      { anchor: 'firewood', label: 'Firewood for the campfire' },
     ] },
-  { id: 'villa', media: 'villa-patio', title: 'A villa patio',
+  { id: 'villa', view: 'villa-patio', title: 'A villa patio',
     text: 'Sliding glass doors open onto a patio with root-wood chairs, behind tall golden bamboo.',
-    focus: [0.5, 0.52],
     spots: [
-      { x: 0.52, y: 0.48, label: 'Go inside', to: 'bedroom' },
-      { x: 0.3, y: 0.68, label: 'Root-wood chairs and table' },
-      { x: 0.07, y: 0.64, label: 'The pool by the villa', to: 'pool' },
+      { anchor: 'door', label: 'Go inside', to: 'bedroom' },
+      { anchor: 'patioChairs', label: 'Root-wood chairs and table' },
+      { anchor: 'pool', label: 'The pool by the villa', to: 'pool' },
     ] },
-  { id: 'bedroom', media: 'villa-bedroom', title: 'Inside a villa',
-    text: 'A king-size bed with single beds alongside, and glass that opens straight onto the garden.',
-    focus: [0.45, 0.58],
+  { id: 'bedroom', view: 'villa-bedroom', title: 'Inside a villa',
+    text: 'A king-size bed with a single bed alongside, and glass that opens straight onto the garden.',
     spots: [
-      { x: 0.31, y: 0.6, label: 'King-size bed' },
-      { x: 0.6, y: 0.4, label: 'Back out to the lawn', to: 'lawn' },
-      { x: 0.86, y: 0.84, label: 'Glass and root-wood side table' },
+      { anchor: 'bed', label: 'King-size bed' },
+      { anchor: 'glass', label: 'Back out to the lawn', to: 'lawn' },
+      { anchor: 'dayBed', label: 'Day bed by the glass' },
     ] },
-  { id: 'pool', media: 'villa-window-pool', title: 'The pool by the window',
+  { id: 'pool', view: 'villa-window-pool', title: 'The pool by the window',
     text: 'In some villas the bedroom glass looks onto a small blue-lined pool and a grove of bamboo.',
-    focus: [0.45, 0.55],
     spots: [
-      { x: 0.47, y: 0.6, label: 'Blue-lined pool' },
-      { x: 0.45, y: 0.18, label: 'Bamboo grove' },
+      { anchor: 'pool', label: 'Blue-lined pool' },
+      { anchor: 'sideTable', label: 'Glass and root-wood side table' },
+      { anchor: 'glass', label: 'Back to the bedroom', to: 'bedroom' },
     ] },
-  { id: 'courtyard', media: 'courtyard-villas', title: 'The courtyard',
-    text: 'A paved courtyard between villas, lined with potted plants under a spreading tree.',
-    focus: [0.55, 0.45],
+  { id: 'courtyard', view: 'courtyard-villas', title: 'The courtyard',
+    text: 'A paved courtyard between cottages, lined with potted plants under a spreading tree.',
     spots: [
-      { x: 0.25, y: 0.36, label: 'Villa' },
-      { x: 0.66, y: 0.56, label: 'Potted plants along the lawn' },
-      { x: 0.8, y: 0.38, label: 'Villa' },
+      { anchor: 'cottage', label: 'Cottage' },
+      { anchor: 'potRow', label: 'Potted plants along the grass' },
+      { anchor: 'cottageV5', label: 'Cottage' },
     ] },
-  { id: 'night', media: 'night-garden', title: 'After dark',
+  { id: 'night', view: 'night-garden', title: 'After dark',
     text: 'Floodlights come on over the lawn and low lamps glow along the beds.',
-    focus: [0.5, 0.5],
     spots: [
-      { x: 0.37, y: 0.4, label: 'Umbrella table under the lights' },
-      { x: 0.08, y: 0.62, label: 'Garden lamps' },
-      { x: 0.9, y: 0.46, label: 'Back to the lawn', to: 'lawn' },
+      { anchor: 'tableP5', label: 'Umbrella table under the lights' },
+      { anchor: 'gardenLamp', label: 'Garden lamps' },
+      { anchor: 'net', label: 'Back to the lawn', to: 'lawn' },
     ] },
 ];
 
@@ -92,11 +86,34 @@ const PLACES = [
 ];
 
 function stayCardData(rt) {
+  const t = Array.isArray(rt.transition) ? { world: [], stills: rt.transition.filter((s) => s.type === 'image') } : (rt.transition || {});
   return {
     slug: rt.slug, name: rt.name, href: `/stay/${rt.slug}`,
-    shots: rt.transition.map((s) => (s.type === 'image' ? { ...s, m: A.clientMedia(s.media) } : { ...s, v: A.video(s.src) })),
+    world: t.world || [],
+    stills: (t.stills || []).map((s) => ({ ...s, m: A.clientMedia(s.media) })).filter((s) => s.m),
   };
 }
+
+// Guided 3D walk-throughs, one per stay (played by cinema.js).
+const TOURS = {
+  'garden-villa': { title: 'Walk through a garden villa', steps: [
+    { view: 'villa-patio', caption: 'The patio, behind golden bamboo' },
+    { view: 'walk-door', caption: 'The sliding door, with the welcome mat' },
+    { view: 'villa-bedroom', caption: 'The bedroom' },
+    { view: 'room-beds', caption: 'A king-size bed and a single bed' },
+    { view: 'villa-window-pool', caption: 'The pool, just beyond the glass' },
+    { view: 'bath-basin', caption: 'The attached bathroom' },
+  ] },
+  'whole-estate': { title: 'Walk through the estate', steps: [
+    { view: 'aerial', caption: 'Five villas on 4.28 acres' },
+    { view: 'lawn-stepping-stones', caption: 'Stepping stones across the lawn', fly: 3.2 },
+    { view: 'estate-lawn-dining', caption: 'The dining hall across the lawn' },
+    { view: 'courtyard-villas', caption: 'Cottages around the courtyard', fly: 3 },
+    { view: 'pond', caption: 'The pond, about 15,000 sq ft', fly: 3 },
+    { view: 'night-garden', caption: 'The lawn after dark', fly: 3 },
+  ] },
+};
+const tourData = (slug) => html`<script type="application/json" id="tour-data">${jsonForScript({ [slug]: TOURS[slug] })}</script>`;
 
 function cinemaData(stays) {
   return html`<script type="application/json" id="cinema-data">${jsonForScript({ stays: Object.fromEntries(stays.map((rt) => [rt.slug, stayCardData(rt)])) })}</script>`;
@@ -111,13 +128,12 @@ function sleeps(rt) {
 // ---------------------------------------------------------------------------
 function home(ctx) {
   const { property: p, stays, contacts } = ctx;
-  const seq = A.manifest.sequences.arrival;
-  const garden = stays.find((s) => s.slug === 'garden-villa');
   const hero = A.clientMedia('lawn-stepping-stones');
+  const walkStills = [['arrival-start', 0, 0.3], ['villa-patio', 0.3, 0.56], ['walk-door', 0.56, 0.8], ['walk-bed', 0.8, 1.01]];
   const body = html`
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__media depth" data-depth="${JSON.stringify({ src: hero.src, small: hero.srcSmall, depth: hero.depth, focus: [0.58, 0.55], strength: 1 })}">
-    ${A.img('lawn-stepping-stones', { cls: 'depth__img', loading: 'eager', fetchpriority: 'high', sizes: '100vw', pos: '58% 50%' })}
+  <div class="hero__media" data-hero3d="lawn-stepping-stones">
+    ${A.img('lawn-stepping-stones', { cls: 'hero__still', loading: 'eager', fetchpriority: 'high', sizes: '100vw', pos: '58% 50%' })}
   </div>
   <div class="slats" aria-hidden="true">${raw('<i></i>'.repeat(9))}</div>
   <div class="hero__copy">
@@ -128,26 +144,24 @@ function home(ctx) {
       <a class="btn btn--ghost" href="#arrive">Walk in</a>
     </div>
   </div>
-  <p class="hero__caption">The lawn at dusk</p>
+  <p class="hero__caption">The lawn, rebuilt in 3D</p>
 </section>
 
-<section class="arrival" id="arrive" data-arrival="${JSON.stringify({ base: '/media/' + seq.dir + '/', count: seq.count, w: seq.w, h: seq.h })}" aria-labelledby="arrive-title">
+<section class="walk" id="arrive" data-walk3d aria-labelledby="arrive-title">
   <h2 id="arrive-title" class="visually-hidden">Walk to a villa</h2>
-  <div class="arrival__stage">
-    <div class="arrival__backdrop" aria-hidden="true"><canvas width="48" height="106"></canvas></div>
-    <div class="arrival__frame">
-      <img class="arrival__poster" src="/media/${seq.dir}/000.webp" width="${seq.w}" height="${seq.h}" alt="" loading="lazy">
-      <canvas class="arrival__canvas" width="${seq.w}" height="${seq.h}" role="img" aria-label="Film taken on the estate: walking across the lawn on a stone path, up the steps and in through a villa door"></canvas>
+  <div class="walk__stage">
+    <div class="walk__frame">
+      ${walkStills.map(([k, from, to], i) => html`<div class="walk__still${i === 0 ? ' is-on' : ''}" data-from="${from}" data-to="${to}">${A.img(k, { sizes: '100vw', alt: '' })}</div>`)}
     </div>
-    <ol class="arrival__beats">
-      <li class="beat" data-from="0" data-to="0.32"><p>A stone path crosses the lawn.</p></li>
+    <ol class="walk__beats">
+      <li class="beat is-on" data-from="0" data-to="0.3"><p>A stone path crosses the lawn.</p></li>
       <li class="beat" data-from="0.3" data-to="0.56"><p>The villas sit behind screens of golden bamboo.</p></li>
-      <li class="beat" data-from="0.54" data-to="0.8"><p>A few steps up to the door.</p></li>
+      <li class="beat" data-from="0.56" data-to="0.8"><p>The glass door slides open.</p></li>
       <li class="beat beat--last" data-from="0.78" data-to="1.01"><p>And you’re in.</p>
         <a class="btn" href="/stay/garden-villa" data-enter="garden-villa">Step inside a villa</a></li>
     </ol>
-    <div class="culm" aria-hidden="true"><span class="culm__fill"></span><i style="--at:.3"></i><i style="--at:.55"></i><i style="--at:.79"></i></div>
-    <p class="arrival__note">Filmed on the estate</p>
+    <div class="culm" aria-hidden="true"><span class="culm__fill"></span><i style="--at:.3"></i><i style="--at:.56"></i><i style="--at:.8"></i></div>
+    <p class="walk__note">The estate rebuilt in 3D from the owners’ photographs</p>
   </div>
 </section>
 
@@ -195,7 +209,7 @@ function home(ctx) {
   </a>
   <div class="peek__copy">
     <h2 id="peek-title" class="section-title">Walk the grounds</h2>
-    <p>Move from the lawn to a villa patio, inside to the bedroom, across to the courtyard and out into the garden after dark. Every scene is a photograph taken on the estate.</p>
+    <p>Move from the lawn to a villa patio, inside to the bedroom, across to the courtyard and out into the garden after dark, through the estate rebuilt in 3D.</p>
     <a class="btn" href="/explore">Explore the estate</a>
   </div>
 </section>
@@ -246,7 +260,7 @@ ${cinemaData(stays)}`;
     theme: 'over-image', bodyClass: 'page-home',
     description: 'Siri Homestay: five villas on a 4.28-acre estate at Joldal near Chikmagalur, with a lawn, golden bamboo, a separate dining hall and Malnad meals. Send an enquiry or call the hosts.',
     preload: html`<link rel="preload" as="image" href="${hero.src}" imagesrcset="${A.srcset(A.media('lawn-stepping-stones'))}" imagesizes="100vw">`,
-    scripts: ['/js/depth.js', '/js/cinema.js'], image: 'lawn-stepping-stones', body,
+    scripts: ['/js/cinema.js'], modules: ['/js/estate3d.js'], image: 'lawn-stepping-stones', body,
   });
 }
 
@@ -297,7 +311,7 @@ function stayIndex(ctx) {
 ${howBooking(ctx)}
 ${cinemaData(ctx.stays)}`;
   return layout(ctx, { title: 'Stay', description: 'Garden villas with attached bathrooms and patios, or the whole five-villa estate for groups, at Siri Homestay, Joldal, Chikmagalur.',
-    scripts: ['/js/cinema.js'], image: 'villa-patio', body });
+    scripts: ['/js/cinema.js'], modules: ['/js/estate3d.js'], image: 'villa-patio', body });
 }
 
 function howBooking(ctx) {
@@ -313,7 +327,7 @@ function howBooking(ctx) {
 
 function stayPage(ctx, rt, availability) {
   const p = ctx.property;
-  const tour = A.video(rt.media.tour);
+  const tour = TOURS[rt.media.tour || rt.slug];
   const other = ctx.stays.filter((s) => s.slug !== rt.slug);
   const heroM = A.clientMedia(rt.media.hero);
   const body = html`
@@ -355,18 +369,17 @@ function stayPage(ctx, rt, availability) {
 
 ${tour ? html`<section class="film" aria-labelledby="film-title">
   <div class="film__copy">
-    <h2 id="film-title" class="section-title">${rt.kind === 'whole_property' ? 'Walk from the garden to a bed' : 'Walk through a villa'}</h2>
-    <p>Unedited footage from the estate, ${Math.round(tour.duration)} seconds, without sound.</p>
+    <h2 id="film-title" class="section-title">${tour.title}</h2>
+    <p>A camera flight through the estate as rebuilt in 3D: ${tour.steps.map((st) => st.caption.charAt(0).toLowerCase() + st.caption.slice(1)).join(', ')}.</p>
+    <button class="btn" type="button" data-tour="${rt.media.tour || rt.slug}" hidden>Start the walk-through</button>
+    <p class="film__note">The walk-through needs a device with 3D graphics. The pictures below show the same views.</p>
   </div>
-  <div class="film__player">
-    <video controls preload="none" playsinline muted poster="${tour.poster}" width="540" height="1200">
-      <source src="${tour.src}" type="video/mp4">
-    </video>
-  </div>
-</section>` : ''}
+  <div class="film__player">${A.img(tour.steps[0].view, { sizes: '(min-width: 900px) 45vw, 100vw', alt: '' })}</div>
+</section>
+${tourData(rt.media.tour || rt.slug)}` : ''}
 
 <section class="gallery" aria-labelledby="gallery-title">
-  <h2 id="gallery-title" class="section-title">Photographs</h2>
+  <h2 id="gallery-title" class="section-title">Pictures</h2>
   <ul class="gallery__grid" data-lightbox>
     ${rt.media.gallery.map((k) => galleryItem(k))}
   </ul>
@@ -385,7 +398,7 @@ ${cinemaData(ctx.stays)}`;
     title: rt.name, theme: 'over-image', bodyClass: 'page-room',
     description: `${rt.name} at Siri Homestay, Joldal, Chikmagalur. ${rt.summary} ${sleeps(rt)}.`,
     preload: html`<link rel="preload" as="image" href="${heroM.src}" imagesrcset="${A.srcset(A.media(rt.media.hero))}" imagesizes="100vw">`,
-    scripts: ['/js/cinema.js'], image: rt.media.hero, body,
+    scripts: ['/js/cinema.js'], modules: ['/js/estate3d.js'], image: rt.media.hero, body,
     jsonLd: html`<script type="application/ld+json">${jsonForScript({
       '@context': 'https://schema.org', '@type': rt.kind === 'whole_property' ? 'Accommodation' : 'HotelRoom', name: `${rt.name}, ${p.name}`,
       description: rt.description, occupancy: { '@type': 'QuantitativeValue', maxValue: rt.max_guests }, bed: rt.bed_config,
@@ -406,9 +419,8 @@ function galleryItem(k, { sizes = '(min-width: 900px) 33vw, 50vw' } = {}) {
   if (!m) return '';
   return html`<li class="gallery__item gallery__item--${m.orientation}">
     <a href="${A.largest(m)}" data-full="${A.largest(m)}" data-w="${m.files[m.files.length - 1].w}" data-h="${m.files[m.files.length - 1].h}">
-      ${A.img(k, { sizes })}<span class="visually-hidden">Open larger photo</span>
+      ${A.img(k, { sizes })}<span class="visually-hidden">Open a larger picture</span>
     </a>
-    ${m.source === 'video-still' ? html`<span class="gallery__tag">From the walk-through film</span>` : ''}
   </li>`;
 }
 
@@ -434,7 +446,8 @@ function availabilityBlock(rt, av) {
 // Explore
 // ---------------------------------------------------------------------------
 function explore(ctx) {
-  const scenes = SCENES.map((s) => ({ ...s, m: A.clientMedia(s.media) }));
+  const scenes = SCENES.map((s) => ({ ...s, media: s.view, m: A.clientMedia(s.view),
+    spots: s.spots.map((sp) => { const at = A.anchorAt(s.view, sp.anchor); return { ...sp, x: at ? at[0] : null, y: at ? at[1] : null }; }) }));
   const first = scenes[0];
   const body = html`
 <section class="explorer" data-explorer aria-labelledby="explore-title" aria-roledescription="scene viewer">
@@ -458,12 +471,12 @@ function explore(ctx) {
     <ol>${scenes.map((s, i) => html`<li><button type="button" data-goto="${s.id}"${i === 0 ? raw(' aria-current="true"') : ''}>
       ${A.img(s.media, { sizes: '120px', alt: '' })}<span>${s.title}</span></button></li>`)}</ol>
   </nav>
-  <noscript><p class="explorer__noscript">The scene viewer needs JavaScript. All the photographs are in the <a href="/gallery">gallery</a>.</p></noscript>
+  <noscript><p class="explorer__noscript">The scene viewer needs JavaScript. All the pictures are in the <a href="/gallery">gallery</a>.</p></noscript>
 </section>
-<script type="application/json" id="explore-data">${jsonForScript({ scenes: scenes.map(({ id, title, text, spots, focus, m }) => ({ id, title, text, spots, focus, m })) })}</script>`;
+<script type="application/json" id="explore-data">${jsonForScript({ scenes: scenes.map(({ id, view, title, text, spots, m }) => ({ id, view, title, text, spots, m })) })}</script>`;
   return layout(ctx, { title: 'Explore the estate', theme: 'over-image', bodyClass: 'page-explore',
-    description: 'Walk through Siri Homestay scene by scene: the lawn, umbrella tables, dining hall, a villa patio and bedroom, the courtyard and the garden at night.',
-    scripts: ['/js/depth.js', '/js/explore.js'], image: 'villa-patio', body });
+    description: 'Walk through Siri Homestay in 3D, scene by scene: the lawn, umbrella tables, dining hall, a villa patio and bedroom, the courtyard and the garden at night.',
+    scripts: ['/js/explore.js'], modules: ['/js/estate3d.js'], image: 'villa-patio', body });
 }
 
 // ---------------------------------------------------------------------------
@@ -587,30 +600,32 @@ function around(ctx) {
 function gallery(ctx) {
   const groups = [
     ['The lawn', ['lawn-stepping-stones', 'estate-lawn-dining', 'lawn-umbrellas', 'lawn-table-villa', 'lawn-table-closeup', 'bamboo-view-lawn']],
-    ['The villas', ['villa-patio', 'patio-chairs', 'doorway-bedroom', 'villa-bedroom', 'villa-window-pool', 'villa-pool', 'room-beds', 'bath-basin', 'bath-wc']],
+    ['The villas', ['villa-patio', 'patio-chairs', 'walk-door', 'doorway-bedroom', 'villa-bedroom', 'room-beds', 'villa-window-pool', 'villa-pool', 'bath-basin', 'bath-wc']],
     ['The courtyard', ['courtyard-villas', 'courtyard-villa', 'courtyard-garden']],
     ['After dark', ['night-garden', 'night-lawn', 'night-path']],
+    ['From above', ['aerial', 'pond']],
   ];
-  const films = [['tour-garden-to-bed', 'From the lawn into a villa'], ['tour-room-and-bath', 'A villa bedroom, the pool view and the bathroom']];
   const body = html`
 <section class="page-head">
   <h1 class="display page-head__title">Gallery</h1>
-  <p class="page-head__lede">Photographs and films taken on the estate. Select a photograph to see it larger.</p>
+  <p class="page-head__lede">Views of the estate, rebuilt in 3D from the owners’ photographs. Select a picture to see it larger.</p>
 </section>
 ${groups.map(([title, keys]) => html`<section class="gallery" aria-label="${title}">
   <h2 class="section-title">${title}</h2>
   <ul class="gallery__grid" data-lightbox>${keys.map((k) => galleryItem(k))}</ul>
 </section>`)}
 <section class="films" aria-labelledby="films-title">
-  <h2 id="films-title" class="section-title">Films</h2>
+  <h2 id="films-title" class="section-title">Walk-throughs</h2>
+  <p class="films__note">Camera flights through the 3D estate. They need a device with 3D graphics.</p>
   <div class="films__grid">
-    ${films.map(([k, label]) => { const v = A.video(k); return html`<figure class="film-card">
-      <video controls preload="none" playsinline muted poster="${v.poster}" width="540" height="1200"><source src="${v.src}" type="video/mp4"></video>
-      <figcaption>${label}. ${Math.round(v.duration)} seconds, no sound.</figcaption></figure>`; })}
+    ${Object.entries(TOURS).map(([k, t]) => html`<figure class="film-card">
+      ${A.img(t.steps[0].view, { sizes: '(min-width: 900px) 40vw, 100vw', alt: '' })}
+      <figcaption>${t.title}. <button class="btn btn--small" type="button" data-tour="${k}" hidden>Play</button></figcaption></figure>`)}
   </div>
-</section>`;
-  return layout(ctx, { title: 'Gallery', description: 'Photographs and films of Siri Homestay: the lawn, villas, bedrooms, bathrooms, courtyard and the garden at night.',
-    image: 'night-garden', body });
+</section>
+<script type="application/json" id="tour-data">${jsonForScript(TOURS)}</script>`;
+  return layout(ctx, { title: 'Gallery', description: 'Siri Homestay rebuilt in 3D: the lawn, villas, bedrooms, bathrooms, courtyard and the garden at night, with walk-throughs.',
+    scripts: ['/js/cinema.js'], modules: ['/js/estate3d.js'], image: 'night-garden', body });
 }
 
 // ---------------------------------------------------------------------------

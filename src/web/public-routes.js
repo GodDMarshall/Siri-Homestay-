@@ -133,7 +133,7 @@ module.exports = function publicRoutes(db) {
   };
   for (const [from, to] of Object.entries(legacy)) r.get([from, from + '/'], (req, res) => res.redirect(301, to));
 
-  r.get('/robots.txt', (req, res) => res.type('text/plain').send(`User-agent: *\nDisallow: /admin\nDisallow: /enquire/sent/\nSitemap: ${config.siteUrl}/sitemap.xml\n`));
+  r.get('/robots.txt', (req, res) => res.type('text/plain').send(`User-agent: *\nDisallow: /admin\nDisallow: /enquire/sent/\nDisallow: /world/\nSitemap: ${config.siteUrl}/sitemap.xml\n`));
   r.get('/sitemap.xml', (req, res) => {
     const paths = ['/', '/stay', ...catalog.roomTypes(db).map((t) => `/stay/${t.slug}`), '/explore', '/estate', '/around', '/gallery', '/contact', '/enquire', '/privacy'];
     res.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map((p) => `  <url><loc>${config.siteUrl}${p}</loc></url>`).join('\n')}\n</urlset>\n`);

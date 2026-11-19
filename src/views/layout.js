@@ -68,7 +68,7 @@ function lodgingJsonLd(ctx) {
 
 /**
  * ctx: { property, contacts, path }
- * page: { title, description, body, theme: 'over-image'|'solid', image, scripts: [], bodyClass, jsonLd, noindex }
+ * page: { title, description, body, theme: 'over-image'|'solid', image, scripts: [], modules: [], bodyClass, jsonLd, noindex }
  */
 function layout(ctx, page) {
   const p = ctx.property;
@@ -105,6 +105,7 @@ ${lodgingJsonLd(ctx)}
 ${page.jsonLd || ''}
 <script src="${asset('/js/boot.js')}"></script>
 <script src="${asset('/js/site.js')}" defer></script>
+${(page.modules || []).map((s) => html`<script type="module" src="${asset(s)}" data-world="${asset('/js/world.js')}"></script>`)}
 ${(page.scripts || []).map((s) => html`<script src="${asset(s)}" defer></script>`)}
 </head>
 <body class="${page.bodyClass || ''}" data-header="${theme}">
@@ -145,7 +146,7 @@ ${page.body}
       ${p.facebook_url ? html`<li><a href="${p.facebook_url}" rel="noopener" target="_blank">Facebook</a></li>` : ''}
     </ul>
   </nav>
-  <p class="footer__legal">Every photograph and film on this site was taken at Siri Homestay. © ${new Date().getFullYear()} ${p.name}.</p>
+  <p class="footer__legal">Every picture on this site is a 3D recreation of Siri Homestay, built in code from the owners’ photographs. The buildings, rooms and furniture follow those photographs; the arrangement of the grounds is illustrative. © ${new Date().getFullYear()} ${p.name}.</p>
 </footer>
 </body>
 </html>`;

@@ -1,13 +1,13 @@
 # Architecture
 
-Siri Homestay is one small Node.js application with an embedded SQLite database. There is no build step, no front-end framework and no external service it depends on to run. That keeps hosting cheap and the system easy to hand over.
+Siri Homestay is one small Node.js application with an embedded SQLite database. There is no front-end framework and no external service it depends on to run, and the server needs no build step: the one bundle (the 3D estate, `public/js/world.js`) is built ahead of time and committed. That keeps hosting cheap and the system easy to hand over.
 
 ```
 Browser ──► Express (server.js)
              ├── Public pages      src/web/public-routes.js  → src/views/public.js
              ├── Enquiry API       POST /enquire, GET /api/availability
              ├── Owner admin       src/web/admin-routes.js   → src/views/admin.js
-             └── Static files      public/ (CSS, JS, fonts, media)
+             └── Static files      public/ (CSS, JS, fonts, rendered pictures, the 3D bundle)
                    │
              Domain layer          src/domain/   (reservations, inventory, notifications, catalog)
              Channel boundary      src/channels/ (adapter contract, registry, sync services)
@@ -23,7 +23,7 @@ Browser ──► Express (server.js)
 | Web | Express 5, Helmet, compression | Familiar, few moving parts |
 | Database | SQLite via better-sqlite3, WAL mode | One file, transactional, fast for a 5-villa property |
 | Templates | Tagged template literals with escaping by default (`src/lib/html.js`) | No template engine; XSS-safe by default |
-| Front end | Vanilla JS, CSS, WebGL | No framework or bundler to maintain |
+| Front end | Vanilla JS, CSS; the 3D estate in three.js, bundled once with esbuild | No framework to maintain; the bundle is prebuilt |
 | Email | Nodemailer over SMTP (optional) | Works with Gmail or any provider |
 | Fonts | Anek Kannada (Latin, variable width) and Newsreader, self-hosted | No third-party requests |
 
@@ -98,27 +98,37 @@ Phase 1 ships the boundary only. Nothing connects to a platform, and nothing can
 
 No schema change or front-end rebuild is needed for these steps.
 
-## Media pipeline
+## The 3D estate and the pictures
 
-`scripts/build-media.py` turns the client's originals into web assets and is re-runnable:
+The site publishes no photographs or films. The estate is rebuilt as a 3D world in code
+(`src/world/`, three.js), modelled on the owner's 18 photographs and 2 videos, and every
+picture is rendered from it.
 
-- WebP renditions at 640/1024/1600 px (480/800/1200 for portrait) plus a JPEG for social sharing, and a tiny blurred placeholder embedded in `public/media/manifest.json`.
-- Depth maps from MiDaS small (ONNX, run locally) for the WebGL parallax.
-- The room-entry montage (`walk-in.mp4`), the estate arrival clip, two full walk-through films (sound removed, a mirror reflection cut), and a 96-frame WebP sequence for the scroll-scrubbed homepage arrival.
+- **Generation.** Textures are painted on canvases at start-up (grass, soil and leaf litter, Mangalore roof tiles, interlocking pavers, plaster, wenge, root wood, bamboo culms and leaf atlases, bathroom tiles, the welcome mat, the no-smoking sign). Geometry is merged into one mesh per material; plants are instanced (a few draw calls for tens of thousands of leaves). Flat ground layers are drawn first in a fixed order (soil, lawn, paving, mud, water), so they never depth-fight on any GPU.
+- **Light.** A gradient sky with sun, image-based light from it, a sun with soft static shadows that are re-rendered only when the view moves to another part of the estate, and four looks: day, early golden light, overcast, dusk and night (floodlights, lamp glows, light pools and the bedroom ceiling light). The bedroom floor is a faint mirror (on high quality only).
+- **Quality tiers.** `auto` picks low, medium or high from the device (screen, memory, cores); low halves texture sizes, drops grass blades and reflections and uses smaller shadow maps.
+- **Cameras.** `views.js` holds a viewpoint for every picture, framed to match the owner's photograph of the same spot, and camera paths (the arrival, the entry through the sliding door, the hero drift). `flyTo` routes any move between the garden and the bedroom through the door, which slides open.
+- **Pictures.** `scripts/render-views.mjs` renders each viewpoint in headless Chrome and records where each named anchor lands; `scripts/build-renders.py` writes WebP renditions (640/1024/1600 px, 480/768/1200 portrait), a JPEG for link previews, a blurred placeholder and `public/media/manifest.json`. The keys are the same as the photo keys they replace, so templates did not change shape.
 
 ## Front-end motion
 
-| Moment | File | Technique | Fallback |
+| Moment | File | With 3D | Without 3D (no WebGL, reduced motion, data saver) |
 |---|---|---|---|
-| Hero | `depth.js` | WebGL: photo + depth map, pointer parallax, scroll dolly | Plain photo |
-| Arrival | `cinema.js` | Scroll-scrubbed frames of the real walk on a canvas | Poster frame and text |
-| Room entry | `cinema.js` | Shot list from `room_types.transition_json`: exterior push-in, walk-in film, bedroom settle; cross-document view transition | Normal link |
-| Explore | `explore.js` | Depth scenes, hotspots on real objects, fly-through on "go" hotspots, swipe | Crossfade; gallery link without JS |
-| Day to night | `site.js` | Scroll crossfade of real day and night photos | Night photo |
+| Hero | `estate3d.js` | The live estate, wind in the bamboo, a slow camera drift; fades in over the rendered still | Rendered still |
+| The walk | `estate3d.js` | Scroll drives the camera along the stepping stones, the door slides open, into the bedroom | Four rendered stills cross-fade with the text; static grid with reduced motion |
+| Room entry | `cinema.js` | Camera flight from `room_types.transition_json.world`, then the stay page | Ken Burns on the rendered stills in `transition_json.stills`; plain link with reduced motion |
+| Walk-throughs | `cinema.js` | Guided flights between viewpoints, with pause, next and close | Button stays hidden; the gallery shows the same views |
+| Explore | `explore.js` | Flies between viewpoints; hotspots follow their 3D anchors | Rendered stills with hotspots placed from the manifest |
+| Day to night | `site.js` | Scroll cross-fade of the day and night renders | Night render |
 
-`prefers-reduced-motion` and the browser's data-saver flag switch every moment to its fallback (`public/js/boot.js` sets `.reduce-motion`). The room-entry film is portrait, so on phones it fills the screen; on desktops it is framed against a blurred backdrop.
+One WebGL canvas is shared by every stage on a page and moved between them. The world
+module (`public/js/world.js`) is loaded only when a 3D moment is about to be seen, after the
+page has loaded, and rendering stops when its stage is off screen or the tab is hidden.
+Devices whose WebGL runs in software (no graphics card) get the stills. For testing,
+`localStorage.setItem('sh-3d', 'force')` turns 3D on anyway, and `sh-3d-quality`
+(`low`, `medium` or `high`) overrides the automatic quality tier.
 
-Each stay's shot list lives in the database (`transition_json`), so a new room type gets its own entry sequence by adding a row, not code.
+Each stay's flight lives in the database (`transition_json`), so a new room type gets its own entry by adding a row, not code.
 
 ## Security
 
