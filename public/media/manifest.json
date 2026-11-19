@@ -1,0 +1,667 @@
+{
+ "photos": {
+  "lawn-stepping-stones": {
+   "key": "lawn-stepping-stones",
+   "area": "lawn",
+   "alt": "Stepping stones curving across the lawn towards umbrella seating and the volleyball net, framed by bamboo leaves",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-stepping-stones-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-stepping-stones-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-stepping-stones-1600.webp"
+    }
+   ],
+   "jpg": "lawn-stepping-stones.jpg",
+   "lqip": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAACQBACdASoYABIAPu1gqE4ppSOiMBgMATAdiWUAwzQL22NEp2ou9z128ee5pEAA/sXfaTqLdA9fbw72ZOwN/lfJrvw3eUYyYMYNqkz8qauKhuJO30UocRU8hqtXYKOLDiepUNtkZaGYJIMSfBnkfTiHnPlEs7uxZtjZO81NcIiwXheAAAA=",
+   "depth": "lawn-stepping-stones.webp"
+  },
+  "estate-lawn-dining": {
+   "key": "estate-lawn-dining",
+   "area": "lawn",
+   "alt": "The estate lawn with umbrella seating in front, the open dining hall with yellow chairs on the left, a cottage behind and the volleyball net on the right",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "estate-lawn-dining-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "estate-lawn-dining-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "estate-lawn-dining-1600.webp"
+    }
+   ],
+   "jpg": "estate-lawn-dining.jpg",
+   "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADwBACdASoYABIAPu1qrlCppaQiqAqpMB2JYwCC5QSn+LxqVVRZ9xg+sa28pAOOpAAA/gPmzdnIJkWYDu9wIvoNbXnNTPe+7uKEdDz4Wlv6f4P5P7KH+eLOIbQMn7Oc5WzUGHr+np3D2znplAQ8bSqUeGgADlC5jmHKwQL8EzRByYAA",
+   "depth": "estate-lawn-dining.webp"
+  },
+  "lawn-umbrellas": {
+   "key": "lawn-umbrellas",
+   "area": "lawn",
+   "alt": "Umbrella seating on the lawn, two more umbrellas and the volleyball net in the distance, and firewood stacked for a campfire",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-umbrellas-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-umbrellas-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-umbrellas-1600.webp"
+    }
+   ],
+   "jpg": "lawn-umbrellas.jpg",
+   "lqip": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAADwBACdASoYABIAPu1qr1AppaQiqAqpMB2JZQC7ABGSZs7Uz1wFvM2U9H+ovDc4HMgA/sX7oSsGRnD7AKZlhRfCBT5sUlfJ6WBOwn12VBdSb4/Ndycm361TdjdFKJddz/frPGKrtUaK6mroJ0sBBE9w4qjv6ZoDOgM1tAQHyjAAAA==",
+   "depth": "lawn-umbrellas.webp"
+  },
+  "lawn-table-villa": {
+   "key": "lawn-table-villa",
+   "area": "lawn",
+   "alt": "Six blue chairs around a round table under a large white umbrella, in front of a villa screened by golden bamboo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-table-villa-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-table-villa-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-table-villa-1600.webp"
+    }
+   ],
+   "jpg": "lawn-table-villa.jpg",
+   "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABQBQCdASoYABIAPu1oq0+ppiOiMBgIATAdiWQAvOAQOiZoxCoGcdR6lIjCEEIakkBh/IAA9D0XdkueglFdkWJE+0ZlfILOGya2yQtvs6ov5nwPkWWrG6alpW+JP7K+vMQbnjxEsfuw/giDNvssljQ5BLLObJeAcjgOgvEXPOk1o7xO8T5ilLOicyvWLcMWRpETKFAiAkN3ZL4wAAA=",
+   "depth": "lawn-table-villa.webp"
+  },
+  "lawn-table-closeup": {
+   "key": "lawn-table-closeup",
+   "area": "lawn",
+   "alt": "Blue chairs around a dark round table beneath a white umbrella, with a villa and bamboo behind",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "lawn-table-closeup-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "lawn-table-closeup-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "lawn-table-closeup-1600.webp"
+    }
+   ],
+   "jpg": "lawn-table-closeup.jpg",
+   "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAwBACdASoYABIAPu1qrVCppaQiqAqpMB2JbAC1G0xBqN+QQb2hwYJjYAAAzfBgVoIgsGfb71rA+TRs7hGaukL4zJ19tPzXd75S7D42qpHYHDiw9HfIyZa0kTQOVGN13Dx4j58Tqx55mQHuQRb7Rb5Jkq4G4PlMlHZlLmPpe9JCY6IWlPcbkb0Byb0FZIqqottOg/ESURf1kYAICJwAAA=="
+  },
+  "bamboo-view-lawn": {
+   "key": "bamboo-view-lawn",
+   "area": "lawn",
+   "alt": "The lawn and umbrella seating seen between bamboo culms from a villa patio",
+   "w": 1200,
+   "h": 1600,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 480,
+     "h": 640,
+     "src": "bamboo-view-lawn-480.webp"
+    },
+    {
+     "w": 800,
+     "h": 1067,
+     "src": "bamboo-view-lawn-800.webp"
+    },
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "bamboo-view-lawn-1200.webp"
+    }
+   ],
+   "jpg": "bamboo-view-lawn.jpg",
+   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQBACdASoSABgAPu1sq1EppiOiqAqpMB2JYwCw7Ao8iMZadbkP4o7rTjCiPOwA/uNKgUvU/c4lQAdi6sjMt51l3tSRPupl8Nn0tjC5g8LqpRo3t7DrSz5o822rce9uMr2/TjqABcrGh0fVYiZrgTO2o9M7GaaGklvnVKJ/ghRk7I7LJSklNnuIOEAuDw/gAYEAAA==",
+   "depth": "bamboo-view-lawn.webp"
+  },
+  "villa-patio": {
+   "key": "villa-patio",
+   "area": "villa",
+   "alt": "A whitewashed villa with sliding glass doors, rustic root-wood chairs and a glass table on its patio, and tall golden bamboo in front",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "villa-patio-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "villa-patio-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "villa-patio-1600.webp"
+    }
+   ],
+   "jpg": "villa-patio.jpg",
+   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADQBACdASoYABIAPu1sq1EppiOiqAqpMB2JZQClsagAyDBcSAYg6UzuNUtoh/DOAAD+aUk4YbDfDoAuiMo6zmkuRQd35xu0xrSpEPwpaPDzyUXjQh6c8jBr+pCa6x5VS9/8AXlpJnOJ8Jv40BLo8rcHdS0QOIiAAAY5Sg1EzMzq1m7Hf0OFZQAA",
+   "depth": "villa-patio.webp"
+  },
+  "patio-chairs": {
+   "key": "patio-chairs",
+   "area": "villa",
+   "alt": "Three root-wood chairs and a glass table on a villa patio beside a bamboo grove",
+   "w": 1200,
+   "h": 1600,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 480,
+     "h": 640,
+     "src": "patio-chairs-480.webp"
+    },
+    {
+     "w": 800,
+     "h": 1067,
+     "src": "patio-chairs-800.webp"
+    },
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "patio-chairs-1200.webp"
+    }
+   ],
+   "jpg": "patio-chairs.jpg",
+   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAACQBACdASoSABgAPu1qq1EppaOiqAqpMB2JZwDIXAGMcOvroQ5G1ulD/QZ3dIAA+KbxXW750nEVc0Nb+leD2kUbeP2bhMKxculvwEGxU9ptHzLsUFDtG3/IrSpy143FAZrNplPe2dkM7JX5vjsJvTwr0RKMVdYOTjm7LdqCGVf48HTjR8JH8AAA"
+  },
+  "doorway-bedroom": {
+   "key": "doorway-bedroom",
+   "area": "villa",
+   "alt": "Looking through a villa's sliding door into the bedroom: a king-size bed with a red throw, a single bed, a wardrobe, a dressing mirror and the bathroom door",
+   "w": 1200,
+   "h": 1600,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 480,
+     "h": 640,
+     "src": "doorway-bedroom-480.webp"
+    },
+    {
+     "w": 800,
+     "h": 1067,
+     "src": "doorway-bedroom-800.webp"
+    },
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "doorway-bedroom-1200.webp"
+    }
+   ],
+   "jpg": "doorway-bedroom.jpg",
+   "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAAAwBQCdASoSABgAPu1ur1KppiQiqAgBMB2JZwDMWBECvB0xYcRO1Z+1Heq92PFO0VXzAAD+FAsfqsXTEpc+HOZo47igtJhcGNzFb4tWS4tnm4FSiXdqxzPRPz9FwbKu1EyvVR/VxiEMOrohro7AzDWHUyza1OuLkYnb9i0oAAA=",
+   "depth": "doorway-bedroom.webp"
+  },
+  "villa-bedroom": {
+   "key": "villa-bedroom",
+   "area": "villa",
+   "alt": "A villa bedroom with a king-size bed, two single beds, a glass-and-root side table and sliding glass doors open to the lawn",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "villa-bedroom-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "villa-bedroom-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "villa-bedroom-1600.webp"
+    }
+   ],
+   "jpg": "villa-bedroom.jpg",
+   "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYABIAPu1irVAppSQisBgIATAdiWUAvzgM+dcJAMqvH4Nh3IwqNg62bQbx8AD+cWnqh2hmplqyQ0HuFmsANYjB5cP+ztdsCkDhDi7OuPVBr9RP41zXEODctSPXMd8P/qqCsQ+AEBsWP7+kMa4tk3fVsRiZxk5+aOhg8KPNUuW4D2SUDzU3g3atBD036f0qxTsBofbuxm6GVb6GAAA=",
+   "depth": "villa-bedroom.webp"
+  },
+  "villa-window-pool": {
+   "key": "villa-window-pool",
+   "area": "villa",
+   "alt": "View from a villa bedroom through floor-to-ceiling glass to a blue-lined pool and a grove of bamboo",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "villa-window-pool-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "villa-window-pool-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "villa-window-pool-1600.webp"
+    }
+   ],
+   "jpg": "villa-window-pool.jpg",
+   "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAADwBACdASoYABIAPu1urlIppiQiqAgBMB2JZQC06AzpIjhkl+ajAMBWvhPX0XGU/MAA9rf90PBpC4oUIfCPk/AuifOe1IPzkZDr6/3fYZy5VH87BHvMJLd+v0wVi2CE7UqjbNDM3lhy2MLRJ5T4zQ4cXDJgU+1V6+Nn5iNvm3XXNRDiElh3LCqo27Ci7xG0yGgJYAAA",
+   "depth": "villa-window-pool.webp"
+  },
+  "villa-pool": {
+   "key": "villa-pool",
+   "area": "villa",
+   "alt": "A villa's blue-lined pool under a glass-roofed pergola, with bamboo in front of the bedroom window",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "villa-pool-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "villa-pool-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "villa-pool-1600.webp"
+    }
+   ],
+   "jpg": "villa-pool.jpg",
+   "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACwBQCdASoYABIAPu1oqU+ppiOiKA1RMB2JYgDE5iMwE0Z9FPfdSD2c0P0w2O9z+bb/Q7Uk66AA/rVL75+3z37PME3iOyP+NPZEaMYwmvzuYDvkDNk3/zmci0usRAXKwD+c3XtgLot8SYlNVF/Ez+zVWgE57dKbW9vuR5kCCLORiIApjON5T0TBTBt6m6rHgHmljMdDcXa/cxPWs7AAAA==",
+   "depth": "villa-pool.webp"
+  },
+  "courtyard-villas": {
+   "key": "courtyard-villas",
+   "area": "courtyard",
+   "alt": "Two tiled-roof villas around the paved courtyard, lined with potted plants",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "courtyard-villas-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "courtyard-villas-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "courtyard-villas-1600.webp"
+    }
+   ],
+   "jpg": "courtyard-villas.jpg",
+   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACwBACdASoYABIAPu1ipk4ppSMiMBgMATAdiWcAyNQJf8j4mlYhKSDR0x8azr4AAPucXGGmT/qMbeoR0RhT9klsJgGLckubb+hDwt9BUZLb9r3LmAYcctFYYTMcoQQONUCAp08xbFBmMk+bh1pN7s0mQVPnom1LeAk98e29ClpiMNbpkuFeesd1biOPhjMgscAAAA==",
+   "depth": "courtyard-villas.webp"
+  },
+  "courtyard-villa": {
+   "key": "courtyard-villa",
+   "area": "courtyard",
+   "alt": "The paved courtyard beside a villa with a tiled roof, backed by forested hills",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "courtyard-villa-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "courtyard-villa-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "courtyard-villa-1600.webp"
+    }
+   ],
+   "jpg": "courtyard-villa.jpg",
+   "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAABQBQCdASoYABIAPu1gqE4ppSOiMBgMATAdiWcAACIaQ9xL6MEGXT60vd/zZlSjWMrRKAAA/uxNWuPUlF5/sqDC8SR9d+VFylZosMrlTLkzX3kcY+f2ZYnNRZgcfC20+f3lySGk3CcLBOe1wdOus4Ab3TjiTWK1sdtvy4E2+GVYAAAA"
+  },
+  "courtyard-garden": {
+   "key": "courtyard-garden",
+   "area": "courtyard",
+   "alt": "An umbrella table under a tree beside a row of potted plants and the paved courtyard",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "courtyard-garden-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "courtyard-garden-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "courtyard-garden-1600.webp"
+    }
+   ],
+   "jpg": "courtyard-garden.jpg",
+   "lqip": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAADQBACdASoYABIAPu1eqU4ppKOiMBgMATAdiWUAuwALNctbE1laaxkFzyomeyGVAAD98CH2sBNCG6cfdUEEWaSjZeBByx9noLWcBs9O77H3JgeEjwHPa5oANUNx0GnLtRS9FZolOppB1EiZostZfScMqZlTDfaixLKfQtRty9XKqaEHAAA="
+  },
+  "night-garden": {
+   "key": "night-garden",
+   "area": "night",
+   "alt": "The garden at night: floodlit trees, glowing ground lights, umbrella tables and the volleyball net",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "night-garden-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "night-garden-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "night-garden-1600.webp"
+    }
+   ],
+   "jpg": "night-garden.jpg",
+   "lqip": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAABwBACdASoYABIAPu1kq0+ppSOmsBgIATAdiWUAtOgQKZhLsMl95FXJFQcqAAD+6cc0XKErqjUeSIqQboyx+VEkZfunqK8QEKlN4w60fY+VVTMq5dN+bdNeFAni0oOGBPtctxLzcJ6WyPdTQ2yu8d1vbLVhasDCYAA=",
+   "depth": "night-garden.webp"
+  },
+  "night-lawn": {
+   "key": "night-lawn",
+   "area": "night",
+   "alt": "The lawn under a floodlight at night, with the volleyball net and a lit umbrella table near the villas",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "night-lawn-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "night-lawn-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "night-lawn-1600.webp"
+    }
+   ],
+   "jpg": "night-lawn.jpg",
+   "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAACQBACdASoYABIAPu1kqk2ppaQsMAgBgB2JZwDKMoADStVk4R5nCyz8pOwDLYAA/vDW0n6kwC04wdoxTKdkdYwKEhjPz+eIoKMSSaq+FT8VRF1S7LXjemU6smB9T2gA"
+  },
+  "night-path": {
+   "key": "night-path",
+   "area": "night",
+   "alt": "A floodlit path at night between bamboo and garden plants",
+   "w": 1600,
+   "h": 1200,
+   "orientation": "landscape",
+   "files": [
+    {
+     "w": 640,
+     "h": 480,
+     "src": "night-path-640.webp"
+    },
+    {
+     "w": 1024,
+     "h": 768,
+     "src": "night-path-1024.webp"
+    },
+    {
+     "w": 1600,
+     "h": 1200,
+     "src": "night-path-1600.webp"
+    }
+   ],
+   "jpg": "night-path.jpg",
+   "lqip": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoYABIAPu1osFAppaSiqAqpMB2JZwDA3AowU/TNExRl0kgAAP7ZQyhSmLrswdkuLjowL5V+glfR03oqjm93x9kntQuvE2gbVd2eWHisChFcrTpl0aWoEnZcwRpSFTAA"
+  }
+ },
+ "stills": {
+  "bath-basin": {
+   "key": "bath-basin",
+   "alt": "Attached bathroom with a white vessel basin on a dark stone counter, tiled walls and a window",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 360,
+     "h": 800,
+     "src": "bath-basin-360.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "bath-basin-576.webp"
+    }
+   ],
+   "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAwCdASoLABgAPu1iqk4ppaQiMAgBMB2JZQAASiuMwek5jjq2yAD8cXglrlDqTggmdUZlgsMXu6okkZAeLKJcYliiJW9CLu+OkWitpdWf7TLCQAA=",
+   "source": "video-still"
+  },
+  "bath-wc": {
+   "key": "bath-wc",
+   "alt": "Attached bathroom with a wall-hung WC and textured wall tiles",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 360,
+     "h": 800,
+     "src": "bath-wc-360.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "bath-wc-576.webp"
+    }
+   ],
+   "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACQAwCdASoLABgAPu1Ct1apoqakGAEwHYlnAAEcnEx8ogLBu3gAAMmxc1tJD7NSEPxFYM/4LIplWbG9xdIdMYF9I45trev0i1d2YeVyeas0GY6942AAAA==",
+   "source": "video-still"
+  },
+  "room-pool-view": {
+   "key": "room-pool-view",
+   "alt": "Floor-to-ceiling glass looking out from the bedroom to the blue-lined pool and bamboo",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 360,
+     "h": 800,
+     "src": "room-pool-view-360.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "room-pool-view-576.webp"
+    }
+   ],
+   "lqip": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAACQAwCdASoLABgALrV2u12jqampiYC0SgCdAEfofwbtx2b/Wn8AAPliLtqlUTwhNtlUB+LrsLJMkL1ENz9FjNF487PFGXP+kgwMVTx3NGZKevz2XRZ/S/NsTnAhmIlk5Iaw1CyQ1nAAAA==",
+   "source": "video-still"
+  },
+  "room-beds": {
+   "key": "room-beds",
+   "alt": "A made-up king-size bed in a villa bedroom",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 360,
+     "h": 800,
+     "src": "room-beds-360.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "room-beds-576.webp"
+    }
+   ],
+   "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAwCdASoLABgAPu1iqk2ppaQiMAgBMB2JZwCo9CHaWjWBffUvSWkAAP3K+3Ssi5/eBfFXrHlU6WgSnnY3BczaT0OWgTRzy7VRfPPsncwi5eZP4B/tgAAA",
+   "source": "video-still"
+  },
+  "walk-bed": {
+   "key": "walk-bed",
+   "alt": "The king-size bed with a red throw, seen on walking into the villa",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 360,
+     "h": 800,
+     "src": "walk-bed-360.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "walk-bed-576.webp"
+    }
+   ],
+   "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAACwAwCdASoLABgALrV2u12jqampiYC0SzAFh2Idoh6nnUmSahWpwAD9+vm8K+I3ZQlbT2YgWMNqbeWdvyXfIKUQMnjLfM3T+iNvxIttQa2k1mncAt4J63qdlonwbrPRS4VZJX05wGghSsn6xYb47V8HIQnnggAA",
+   "source": "video-still",
+   "depth": "walk-bed.webp"
+  },
+  "walk-door": {
+   "key": "walk-door",
+   "alt": "Steps up to a villa door with a red welcome mat",
+   "w": 576,
+   "h": 1280,
+   "orientation": "portrait",
+   "files": [
+    {
+     "w": 360,
+     "h": 800,
+     "src": "walk-door-360.webp"
+    },
+    {
+     "w": 576,
+     "h": 1280,
+     "src": "walk-door-576.webp"
+    }
+   ],
+   "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAwCdASoLABgAPu1mq04ppaQiMAgBMB2JZwAAW+tBN8t4Zswwe3lQAP0AIdgyUAQZ5cllgxRyJmu947sih6FagKlGuxOjrlfTdT9iTKHAT8NwFEuiUjQBrKAAAA==",
+   "source": "video-still"
+  }
+ },
+ "video": {
+  "walk-in": {
+   "src": "walk-in.mp4",
+   "poster": "walk-in-poster.webp",
+   "duration": 6.57,
+   "bytes": 1106566
+  },
+  "estate-walk": {
+   "src": "estate-walk.mp4",
+   "poster": "estate-walk-poster.webp",
+   "duration": 4.67,
+   "bytes": 1375324
+  },
+  "tour-garden-to-bed": {
+   "src": "tour-garden-to-bed.mp4",
+   "poster": "tour-garden-to-bed-poster.webp",
+   "duration": 48.93,
+   "bytes": 4795192
+  },
+  "tour-room-and-bath": {
+   "src": "tour-room-and-bath.mp4",
+   "poster": "tour-room-and-bath-poster.webp",
+   "duration": 99.2,
+   "bytes": 6096663
+  }
+ },
+ "sequences": {
+  "arrival": {
+   "dir": "seq/arrival",
+   "count": 96,
+   "w": 480,
+   "h": 1066,
+   "bytes": 3394982,
+   "pattern": "{i3}.webp"
+  }
+ }
+}

@@ -1,0 +1,177 @@
+{
+  "at": "2026-11-19T08:41:45.678Z",
+  "passed": 34,
+  "failed": 0,
+  "results": [
+    {
+      "name": "All public pages return 200 with a title and one h1",
+      "ok": true,
+      "detail": "11 pages"
+    },
+    {
+      "name": "404 page for unknown address",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Old WordPress addresses redirect permanently",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Contacts appear in the client’s order (Swetha, Ganesh, Dilip last)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No OTA platform is shown as connected on the public site",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Structured data is valid JSON-LD LodgingBusiness",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Security headers are set",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Empty enquiry shows an error summary linked to fields",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Guest can send an enquiry and gets a reference",
+      "ok": true,
+      "detail": "SH-ETZCYF"
+    },
+    {
+      "name": "Confirmation page details are private to the sender",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Bots: honeypot and instant posts are silently dropped",
+      "ok": true,
+      "detail": "dropped without storing (verified in admin count below)"
+    },
+    {
+      "name": "Cross-site form posts are refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Availability API reports \"not published\" by default",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Admin requires sign-in",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Wrong password is refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "First sign-in forces a password change",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Overview lists the new enquiry and the setup checklist",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Owner confirms the enquiry into Villa 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Overlapping booking for the same villa is refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Same dates in a different villa are accepted",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Whole-estate booking is refused while any villa is taken",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Owner blocks dates; overlapping block is refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Calendar grid shows the confirmed booking",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Villa calendar exports as iCalendar",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Admin POST without CSRF token is refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Publishing the calendar exposes only real ledger data",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "With the calendar published, enquiries for full dates are refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Channel references are stored as \"Not connected\"",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Emails are queued and shown as \"not set up\" without SMTP",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Owner edits the rate shown on the website",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Booking history records every change",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Accessibility scan (axe-core, WCAG 2.1 A/AA) on key pages",
+      "ok": true,
+      "detail": "no violations"
+    },
+    {
+      "name": "Enquiry endpoint is rate limited per connection",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No JavaScript errors in the browser during the run",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

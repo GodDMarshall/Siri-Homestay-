@@ -1,0 +1,34 @@
+{
+  "name": "siri-homestay",
+  "version": "1.0.0",
+  "description": "Siri Homestay website, booking enquiries and owner admin (Phase 1)",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "node --watch server.js",
+    "setup": "node src/db/seed.js",
+    "test": "node --test tests/*.test.js",
+    "test:e2e": "node tests/e2e.mjs",
+    "media": "python3 scripts/build-media.py --src ./originals --out public/media --midas ./models/model-small.onnx",
+    "admin:reset-password": "node scripts/reset-admin-password.js"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "better-sqlite3": "^13.2.0",
+    "compression": "^1.8.2",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.3.0",
+    "helmet": "^8.3.0",
+    "nodemailer": "^10.6.0"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.1",
+    "playwright-core": "^1.65.1",
+    "@fontsource-variable/anek-kannada": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20.10"
+  }
+}
