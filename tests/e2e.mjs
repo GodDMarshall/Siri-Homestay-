@@ -24,7 +24,8 @@ const server = spawn(process.execPath, ['server.js'], { cwd: ROOT, env: { ...pro
 let log = ''; server.stdout.on('data', (d) => { log += d; }); server.stderr.on('data', (d) => { log += d; });
 for (let i = 0; i < 50 && !log.includes('running at'); i++) await new Promise((r) => setTimeout(r, 100));
 
-const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
+// WebGL in headless Chrome runs on SwiftShader; it has to be allowed explicitly.
+const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
 const page = await ctx.newPage();
 page.setDefaultTimeout(10000);
@@ -336,7 +337,7 @@ try {
   });
 
   // ---------------------------------------------------------------- photos, tour and room views
-  await check('Every picture is one of the owners’ photos; no 3D world is left', async () => {
+  await check('Every picture is one of the owners’ photos; the old code-built world is gone', async () => {
     const m = await (await fetch(BASE + '/media/manifest.json')).json();
     const keys = Object.keys(m.photos || {});
     assert(keys.length === 20, `${keys.length} photos in the manifest`);
@@ -379,9 +380,22 @@ try {
     return `${n} stops: ${seen.join(', ')}`;
   });
 
-  await check('A room shows its photos side by side, moving sideways as you scroll', async () => {
+  await check('Photos move in 3D: depth maps, the hero and the tour render with WebGL', async () => {
+    const m = await (await fetch(BASE + '/media/manifest.json')).json();
+    const withDepth = Object.values(m.photos).filter((p) => p.depth);
+    assert(withDepth.length === 18, `${withDepth.length} depth maps`);
+    const r = await fetch(BASE + '/media/depth/villa-patio.webp'); assert(r.status === 200, 'depth map not served');
+    await page.goto(BASE + '/');
+    await page.waitForSelector('.hero__media.is-live canvas.motion-canvas', { timeout: 30000 });
+    await page.evaluate(() => { const t = document.querySelector('.tour__track'); window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * 0.3 / 8); });
+    await page.waitForSelector('.tour.is-3d', { timeout: 30000 });
+    await page.waitForFunction(() => document.querySelector('.hero__title').classList.contains('is-in'));
+    return `${withDepth.length} depth maps`;
+  });
+
+  await check('A room shows its photos side by side on a 3D carousel turned by scrolling', async () => {
     await page.goto(BASE + '/stay/garden-villa');
-    await page.waitForSelector('.strip.is-live');
+    await page.waitForSelector('.strip.is-flow');
     const at = async (p) => {
       await page.evaluate((q) => { const t = document.querySelector('.strip__track'); window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * q); }, p);
       await page.waitForTimeout(250);
@@ -394,21 +408,27 @@ try {
     assert(a.visible >= 2, `only ${a.visible} photo(s) side by side`);
     assert(b.x < a.x - 200, 'the row did not move sideways');
     const n = await page.locator('.strip__item').count();
-    await at(0); // back to the start, where the first photos are in view
-    await page.click('.strip__item:nth-child(2) a');
+    await at(0); // back to the start
+    // A photo at the side turns to the front first; selecting the front photo opens it larger.
+    await page.evaluate(() => document.querySelectorAll('.strip__item a')[1].click());
+    await page.waitForSelector('.strip__item:nth-child(2).is-current');
+    await page.waitForTimeout(400);
+    // (a script click: Playwright's own click scrolls first, which would turn the carousel)
+    await page.evaluate(() => document.querySelector('.strip__item.is-current a').click());
     await page.waitForSelector('dialog.lightbox[open]');
     await page.keyboard.press('Escape');
     return `${n} photos, ${a.visible} side by side`;
   });
 
-  await check('With reduced motion the tour is a plain photo list and the room photos scroll sideways', async () => {
+  await check('With reduced motion: no 3D, the tour is a plain photo list and the room photos scroll sideways', async () => {
     const rctx = await browser.newContext({ viewport: { width: 1280, height: 860 }, reducedMotion: 'reduce' });
     const p = await rctx.newPage();
     await p.goto(BASE + '/');
     assert(await p.locator('.tour.is-live').count() === 0, 'tour animates despite reduced motion');
     assert(await p.locator('.tour__stop img').first().isVisible(), 'tour photos missing');
     await p.goto(BASE + '/stay/garden-villa');
-    assert(await p.locator('.strip.is-live').count() === 0, 'strip animates despite reduced motion');
+    assert(await p.locator('.strip.is-flow').count() === 0, 'carousel turns despite reduced motion');
+    assert(await p.locator('canvas').count() === 0, 'WebGL started despite reduced motion');
     const scrolls = await p.evaluate(() => { const r = document.querySelector('.strip__row'); return r.scrollWidth > r.clientWidth && getComputedStyle(r).overflowX === 'auto'; });
     assert(scrolls, 'room photos should scroll sideways on their own');
     await rctx.close();

@@ -27,19 +27,23 @@ function sleeps(rt) {
 }
 
 // ---------------------------------------------------------------------------
-// The home-page tour: one photo at a time, changing as you scroll (public/js/tour.js).
-// Landscape photos only, so little is cropped away on wide screens.
+// The home-page tour: one photo at a time, changing as you scroll. public/js/motion.js moves a
+// camera through each photo along its depth map (cam: start x,y,z then end x,y,z) and dissolves
+// to the next stop. Landscape photos only, so little is cropped away on wide screens.
 // ---------------------------------------------------------------------------
 const TOUR = [
-  { key: 'courtyard-villas', title: 'Arrive', text: 'Tiled-roof villas and a row of potted plants around the paved courtyard.', pos: '50% 62%' },
-  { key: 'lawn-stepping-stones', title: 'The lawn', text: 'Stepping stones cross the grass to the umbrella tables and the volleyball net.', pos: '50% 60%' },
-  { key: 'lawn-table-villa', title: 'Under the umbrellas', text: 'Blue chairs round a table in front of a villa, with golden bamboo behind.', pos: '55% 55%' },
-  { key: 'estate-lawn-dining', title: 'The dining hall', text: 'Meals from the estate kitchen are served in the separate dining hall, on the left across the lawn.', pos: '30% 45%' },
-  { key: 'villa-pool', title: 'A villa', text: 'A blue-lined pool under a glass-roofed pergola, with bamboo in front of the bedroom window.', pos: '45% 60%' },
-  { key: 'villa-bedroom', title: 'Inside', text: 'A king-size bed and two singles, with sliding glass doors open to the lawn.', pos: '50% 62%' },
-  { key: 'villa-window-pool', title: 'From the bed', text: 'Floor-to-ceiling glass, the pool and a grove of bamboo.', pos: '50% 55%' },
-  { key: 'night-garden', title: 'After dark', text: 'Floodlights and low lamps come on across the garden.', pos: '50% 50%' },
+  { key: 'courtyard-villas', title: 'Arrive', text: 'Tiled-roof villas and a row of potted plants around the paved courtyard.', pos: '50% 62%', cam: '-0.8,0.1,0, 0.7,-0.1,0.1' },
+  { key: 'lawn-stepping-stones', title: 'The lawn', text: 'Stepping stones cross the grass to the umbrella tables and the volleyball net.', pos: '50% 60%', cam: '0.1,0.4,0, -0.1,-0.2,0.16' },
+  { key: 'lawn-table-villa', title: 'Under the umbrellas', text: 'Blue chairs round a table in front of a villa, with golden bamboo behind.', pos: '55% 55%', cam: '0.8,0,0.02, -0.7,0.1,0.1' },
+  { key: 'estate-lawn-dining', title: 'The dining hall', text: 'Meals from the estate kitchen are served in the separate dining hall, on the left across the lawn.', pos: '30% 45%', cam: '-0.5,0.2,0, 0.7,0,0.08' },
+  { key: 'villa-pool', title: 'A villa', text: 'A blue-lined pool under a glass-roofed pergola, with bamboo in front of the bedroom window.', pos: '45% 60%', cam: '0.7,-0.2,0, -0.6,0.1,0.12' },
+  { key: 'villa-bedroom', title: 'Inside', text: 'A king-size bed and two singles, with sliding glass doors open to the lawn.', pos: '50% 62%', cam: '-0.6,0.1,0, 0.5,-0.1,0.12' },
+  { key: 'villa-window-pool', title: 'From the bed', text: 'Floor-to-ceiling glass, the pool and a grove of bamboo.', pos: '50% 55%', cam: '0,0.3,0, 0,-0.05,0.15' },
+  { key: 'night-garden', title: 'After dark', text: 'Floodlights and low lamps come on across the garden.', pos: '50% 50%', cam: '-0.7,0,0.02, 0.7,0,0.09' },
 ];
+
+// Words wrapped one by one so headings can rise into place (public/js/motion.js, CSS .kw).
+const words = (text) => raw(String(text).split(' ').map((w, i) => html`<span class="kw" style="--i:${i}"><span>${w}</span></span>`).map(String).join(' '));
 
 function tour() {
   return html`<section class="tour" id="tour" data-tour aria-labelledby="tour-title">
@@ -50,12 +54,12 @@ function tour() {
   <div class="tour__track" style="--n: ${TOUR.length}">
     <div class="tour__stage">
       <ol class="tour__stops">
-        ${TOUR.map((st, i) => html`<li class="tour__stop${i === 0 ? ' is-on' : ''}" data-stop="${i}">
+        ${TOUR.map((st, i) => html`<li class="tour__stop${i === 0 ? ' is-on' : ''}" data-stop="${i}"${A.motion(st.key)} data-cam="${st.cam}" data-pos="${st.pos}">
           <figure class="tour__frame">
             ${A.img(st.key, { sizes: '100vw', pos: st.pos, cls: 'tour__img', loading: i < 2 ? 'eager' : 'lazy' })}
             <figcaption class="tour__cap">
               <span class="tour__count">${i + 1} of ${TOUR.length}</span>
-              <span class="tour__title">${st.title}</span>
+              <span class="tour__title">${words(st.title)}</span>
               <span class="tour__text">${st.text}</span>
             </figcaption>
           </figure>
@@ -73,8 +77,8 @@ function tour() {
 </section>`;
 }
 
-// Photos side by side in a row that moves sideways as you scroll down (public/js/tour.js).
-// Without JavaScript, or with reduced motion, the row scrolls sideways on its own.
+// A room's photos side by side. public/js/motion.js turns them into a 3D carousel driven by the
+// scroll; without JavaScript, or with reduced motion, the row scrolls sideways on its own.
 function strip(keys, { title, lede, id = 'strip' } = {}) {
   const items = keys.map((k) => A.media(k)).filter(Boolean);
   if (!items.length) return '';
@@ -109,7 +113,7 @@ function home(ctx) {
   const hero = A.media('villa-patio');
   const body = html`
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__media">
+  <div class="hero__media" data-motion="hero"${A.motion('villa-patio')} data-pos="62% 58%">
     ${A.img('villa-patio', { cls: 'hero__still', loading: 'eager', fetchpriority: 'high', sizes: '100vw', pos: '62% 58%' })}
   </div>
   <div class="slats" aria-hidden="true">${raw('<i></i>'.repeat(9))}</div>
@@ -132,7 +136,7 @@ ${tour()}
     <a class="link" href="/estate">Read about the estate</a>
   </div>
   <figure class="ledger__figure">
-    ${A.img('bamboo-view-lawn', { sizes: '(min-width: 900px) 40vw, 100vw' })}
+    <span class="frame">${A.img('bamboo-view-lawn', { sizes: '(min-width: 900px) 40vw, 100vw' })}</span>
     <figcaption>The lawn through the bamboo, from a villa patio</figcaption>
   </figure>
 </section>
@@ -149,7 +153,7 @@ ${tour()}
 
 <section class="kitchen" aria-labelledby="kitchen-title">
   <figure class="kitchen__figure">
-    ${A.img('lawn-table-closeup', { sizes: '(min-width: 900px) 50vw, 100vw' })}
+    <span class="frame">${A.img('lawn-table-closeup', { sizes: '(min-width: 900px) 50vw, 100vw' })}</span>
     <figcaption>Tables on the lawn, in front of a villa</figcaption>
   </figure>
   <div class="kitchen__copy">
@@ -181,7 +185,7 @@ ${tour()}
     theme: 'over-image', bodyClass: 'page-home',
     description: 'Siri Homestay: five villas on a 4.28-acre estate at Joldal near Chikmagalur, with a lawn, golden bamboo, a separate dining hall and Malnad meals. Send an enquiry or call the hosts.',
     preload: html`<link rel="preload" as="image" href="${A.src('villa-patio', 1600)}" imagesrcset="${A.srcset(hero)}" imagesizes="100vw" fetchpriority="high">`,
-    scripts: ['/js/tour.js'], image: 'villa-patio', body,
+    image: 'villa-patio', body,
   });
 }
 
@@ -256,7 +260,7 @@ function stayPage(ctx, rt, availability) {
   const unit = rt.kind === 'unit';
   const body = html`
 <section class="room-hero">
-  <div class="room-hero__media">
+  <div class="room-hero__media" data-motion="photo"${A.motion(rt.media.hero)}>
     ${A.img(rt.media.hero, { loading: 'eager', fetchpriority: 'high', sizes: '100vw' })}
   </div>
   <div class="room-hero__copy">
@@ -267,8 +271,8 @@ function stayPage(ctx, rt, availability) {
 </section>
 
 ${strip(rt.media.strip || [], unit
-    ? { title: 'Inside the villa', lede: 'The bedroom, the pool beside it, the bathroom and the patio. Scroll to move along the photos; select one to see it larger.' }
-    : { title: 'Around the estate', lede: 'The courtyard, the lawn, the tables under the umbrellas and the garden after dark. Scroll to move along the photos; select one to see it larger.' })}
+    ? { title: 'Inside the villa', lede: 'The bedroom, the pool beside it, the bathroom and the patio. Scroll to turn through the photos; select one to see it larger.' }
+    : { title: 'Around the estate', lede: 'The courtyard, the lawn, the tables under the umbrellas and the garden after dark. Scroll to turn through the photos; select one to see it larger.' })}
 
 <section class="room-intro">
   <div class="room-intro__text">
@@ -307,7 +311,7 @@ ${other.length ? html`<section class="other" aria-labelledby="other-title">
     title: rt.name, theme: 'over-image', bodyClass: 'page-room',
     description: `${rt.name} at Siri Homestay, Joldal, Chikmagalur. ${rt.summary} ${sleeps(rt)}.`,
     preload: heroM ? html`<link rel="preload" as="image" href="${A.src(rt.media.hero, 1600)}" imagesrcset="${A.srcset(heroM)}" imagesizes="100vw" fetchpriority="high">` : '',
-    scripts: ['/js/tour.js'], image: rt.media.hero, body,
+    image: rt.media.hero, body,
     jsonLd: html`<script type="application/ld+json">${jsonForScript({
       '@context': 'https://schema.org', '@type': unit ? 'HotelRoom' : 'Accommodation', name: `${rt.name}, ${p.name}`,
       description: rt.description, occupancy: { '@type': 'QuantitativeValue', maxValue: rt.max_guests }, bed: rt.bed_config,
@@ -360,7 +364,7 @@ function estate(ctx) {
   const garden = ctx.stays.find((s) => s.kind === 'unit');
   const body = html`
 <section class="page-head page-head--image">
-  <div class="page-head__media">${A.img('estate-lawn-dining', { loading: 'eager', fetchpriority: 'high', sizes: '100vw' })}</div>
+  <div class="page-head__media" data-motion="photo"${A.motion('estate-lawn-dining')}>${A.img('estate-lawn-dining', { loading: 'eager', fetchpriority: 'high', sizes: '100vw' })}</div>
   <div class="page-head__copy">
     <h1 class="display page-head__title">The estate</h1>
     <p class="page-head__lede">${p.land_area_acres} acres at Joldal, outside Chikmagalur town, with five villas, a dining hall and a lawn among bamboo and tall trees.</p>

@@ -53,6 +53,8 @@ Every fact on the website comes from one of four sources. Nothing was invented.
 
 Every picture on the site is one of the owners' photographs, cleaned up for the web (levels, colour, light sharpening) but not redrawn or altered. The two bathroom pictures are stills from the owners' video, and the gallery and the room page say so. The footer says: “The photos on this site were taken at Siri Homestay by its owners.”
 
+The 3D motion uses a depth map for each photo, estimated from the photo itself by the MiDaS v2.1 small model (Intel ISL, MIT licence). A depth map only says how far away each part of the photo is; the motion moves the camera through the photo and never adds or changes what is in it.
+
 ## Privacy
 
 - No people appear in the published photos. The bathroom still was taken at a moment when the mirror shows only the wall, the window and a bucket (someone is reflected in it elsewhere in the second video); the videos themselves are not published.

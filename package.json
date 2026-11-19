@@ -10,7 +10,8 @@
     "test": "node --test tests/*.test.js",
     "test:e2e": "node tests/e2e.mjs",
     "admin:reset-password": "node scripts/reset-admin-password.js",
-    "photos": "python3 scripts/build-photos.py --src originals --out public/media"
+    "photos": "python3 scripts/build-photos.py --src originals --out public/media",
+    "depth": "python3 scripts/build-depth.py --model models/model-small.onnx --media public/media"
   },
   "license": "UNLICENSED",
   "dependencies": {

@@ -2,7 +2,7 @@
 
 The website, booking-enquiry system and owner admin for **Siri Homestay**, Joldal, Chikmagalur: five villas on a 4.28-acre estate.
 
-- **Public site, built on the owners' photos:** the home page opens on a villa among the golden bamboo, and scrolling takes a tour of the homestay one full-screen photo at a time: the courtyard, the lawn, the umbrella tables, the dining hall, a villa and its pool, the bedroom and the garden after dark. Each stay's page shows its photos side by side in a row that moves sideways as you scroll. Plus stay pages, estate information, location, a gallery of all the photos, contact and the enquiry form.
+- **Public site, built on the owners' photos, in 3D motion:** the home page opens on a villa among the golden bamboo, and the photo itself moves in depth (the bamboo in front shifts against the villa behind). Scrolling takes a tour of the homestay one full-screen photo at a time, with the camera drifting into each photo and the next one dissolving in from the nearest objects back: the courtyard, the lawn, the umbrella tables, the dining hall, a villa and its pool, the bedroom and the garden after dark. Each stay's page shows its photos side by side on a 3D carousel that turns as you scroll. Plus stay pages, estate information, location, a gallery of all the photos, contact and the enquiry form.
 - **Booking engine:** enquiries, holds, confirmations, villa allocation, owner date blocks and an availability calendar. Double-booking is prevented by the database itself.
 - **Owner admin** at `/admin`: bookings, calendar, blocks, stays and villas, property and contacts, email log, activity log, settings.
 - **Ready for Phase 2:** Airbnb and MakeMyTrip listing references, provider-independent channel adapters, sync records and idempotent import. **Nothing is connected in Phase 1, and nothing is shown as connected.**
@@ -25,7 +25,7 @@ On first start the app creates `data/siri-homestay.db`, seeds the property, five
 
 ```bash
 npm test               # 18 tests: booking engine, temporary-storage mode, the Vercel entry point
-npm run test:e2e       # 39 browser checks on a fresh server: guest and owner flows, security, accessibility, photo tour
+npm run test:e2e       # 40 browser checks on a fresh server: guest and owner flows, security, accessibility, 3D photo tour and carousel
 ```
 
 `test:e2e` uses Google Chrome. Set `CHROME_PATH` if it isn't at `/usr/bin/google-chrome`.
@@ -86,7 +86,14 @@ Every picture on the site is one of the owners' photographs of Siri Homestay. No
 - The photos arrived through WhatsApp at 1600 x 1200, so the largest size (2400 px wide) is an enlargement. For sharper pictures, ask the owners for the original camera files (sent as a WhatsApp "Document" or through Google Drive), put them in `originals/` under the same names and run `npm run photos` again.
 - To add a photo, add a line to `PHOTOS` in the script (key, file, area, look, caption, alt text describing only what is visible), run it, then use the key in `src/views/public.js` or a stay's `strip` list.
 
-On the home page `public/js/tour.js` changes the photo as you scroll; on stay pages it moves the row of photos sideways. With reduced motion, or without JavaScript, the tour is a plain list of photos and the room photos scroll sideways on their own.
+### 3D motion
+
+The depth comes from the photos themselves, not from a 3D model: nothing is drawn.
+
+- `npm run depth` runs `scripts/build-depth.py`, which estimates how far away each part of a photo is (MiDaS v2.1 small, run tiled and edge-aligned to the photo) and writes a greyscale depth map per photo to `public/media/depth/`, plus a `depth` entry in the manifest. It needs Python with onnxruntime, OpenCV and NumPy, and the model file `models/model-small.onnx` (not committed, 66 MB) from the [MiDaS v2.1 release](https://github.com/isl-org/MiDaS/releases/tag/v2_1). Run it after `npm run photos`.
+- `public/js/motion.js` draws each photo with WebGL and moves a camera through it using its depth map (parallax occlusion mapping), so nearer things move more than farther ones. It drives the home hero, the tour and the page headers, turns the room carousel, and reveals headings word by word.
+- It watches the frame rate and lowers the resolution on slow devices; on a device without a graphics chip it renders smaller and only while you scroll. For testing, `localStorage.setItem('sh-motion', 'full')` in the browser console treats any device as fast, `'still'` renders full size but only on scroll (used for the screen recordings), and removing the key restores the default.
+- Without WebGL the photos stay still but the tour and the carousel still work. With reduced motion, or without JavaScript, the tour is a plain list of photos and the room photos scroll sideways on their own.
 
 ## Project layout
 
@@ -98,8 +105,8 @@ src/domain/               reservations, inventory ledger, notifications, catalog
 src/channels/             Phase 2 boundary: adapter contract, registry, sync services
 src/web/                  Express app, public and admin routes, auth, assets
 src/views/                HTML templates (escaped by default)
-public/                   CSS, JS, fonts, photos (public/media/photos)
-scripts/                  photo pipeline, admin password reset
+public/                   CSS, JS, fonts, photos (public/media/photos), depth maps (public/media/depth)
+scripts/                  photo and depth-map pipelines, admin password reset
 tests/                    unit tests, end-to-end suite, screenshot helpers
 docs/                     architecture, admin guide, QA report, content sources
 ```

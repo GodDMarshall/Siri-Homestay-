@@ -41,6 +41,16 @@ function src(key, maxW = 1600) {
   return `${DIR}${f.src}`;
 }
 
+// Attributes public/js/motion.js needs to show a photo in 3D: the photo (native size and the
+// large enlargement) and its depth map (scripts/build-depth.py). Empty for photos without depth.
+function motion(key) {
+  const m = media(key);
+  if (!m || !m.depth) return '';
+  const native = m.files.find((f) => f.w === m.w) || m.files[m.files.length - 1];
+  const large = m.files[m.files.length - 1];
+  return html` data-photo="${DIR}${native.src}" data-photo-lg="${DIR}${large.src}" data-depth="/media/depth/${m.depth}"`;
+}
+
 function ogImage(key) {
   const m = media(key);
   return m ? `${DIR}${m.jpg}` : null;
@@ -57,4 +67,4 @@ function img(key, { sizes = '100vw', cls = '', loading = 'lazy', alt = null, pos
   return html`<img class="${cls}" src="${src(key, 1024)}" srcset="${srcset(m)}" sizes="${sizes}" width="${m.files[m.files.length - 1].w}" height="${m.files[m.files.length - 1].h}" alt="${alt ?? m.alt}" loading="${loading}" decoding="async" style="${style}"${fetchpriority ? raw(` fetchpriority="${fetchpriority}"`) : ''}${raw(attrs ? ' ' + attrs : '')}>`;
 }
 
-module.exports = { manifest, asset, media, img, src, srcset, largest, ogImage, PUBLIC };
+module.exports = { manifest, asset, media, img, src, srcset, largest, ogImage, motion, PUBLIC };

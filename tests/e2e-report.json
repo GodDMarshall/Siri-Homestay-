@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-19T12:34:17.406Z",
-  "passed": 39,
+  "at": "2026-11-19T13:11:28.980Z",
+  "passed": 40,
   "failed": 0,
   "results": [
     {
@@ -46,7 +46,7 @@
     {
       "name": "Guest can send an enquiry and gets a reference",
       "ok": true,
-      "detail": "SH-7ZFXTF"
+      "detail": "SH-GZW78F"
     },
     {
       "name": "Confirmation page details are private to the sender",
@@ -159,7 +159,7 @@
       "detail": ""
     },
     {
-      "name": "Every picture is one of the owners’ photos; no 3D world is left",
+      "name": "Every picture is one of the owners’ photos; the old code-built world is gone",
       "ok": true,
       "detail": "20 photos"
     },
@@ -169,12 +169,17 @@
       "detail": "8 stops: Arrive, The dining hall, After dark"
     },
     {
-      "name": "A room shows its photos side by side, moving sideways as you scroll",
+      "name": "Photos move in 3D: depth maps, the hero and the tour render with WebGL",
       "ok": true,
-      "detail": "8 photos, 2 side by side"
+      "detail": "18 depth maps"
     },
     {
-      "name": "With reduced motion the tour is a plain photo list and the room photos scroll sideways",
+      "name": "A room shows its photos side by side on a 3D carousel turned by scrolling",
+      "ok": true,
+      "detail": "8 photos, 3 side by side"
+    },
+    {
+      "name": "With reduced motion: no 3D, the tour is a plain photo list and the room photos scroll sideways",
       "ok": true,
       "detail": ""
     },

@@ -105,11 +105,22 @@ Every picture is one of the owners' photographs (two bathroom stills come from t
 sharpening; nothing is added or redrawn) and writes the WebP sizes, a JPEG for link previews,
 blurred placeholders and `public/media/manifest.json` with captions and alt text.
 
+Depth maps (`scripts/build-depth.py`, MiDaS v2.1 small run in overlapping tiles, aligned to a
+whole-photo pass and edge-snapped with a guided filter) let `motion.js` move a camera through
+each photo in WebGL (parallax occlusion mapping, 22 steps): nearer things shift more than
+farther ones, and nothing is redrawn. A frame-time governor lowers the resolution on slow
+devices; software renderers draw at 45% size and only while the page scrolls.
+
 | Moment | File | Motion | Reduced motion or no JavaScript |
 |---|---|---|---|
-| Home tour | `tour.js` | One full-screen photo per stop, cross-faded as you scroll; stop list on wide screens | Plain list of photos with captions |
-| Room photos | `tour.js` | Photos side by side in a row that moves sideways as you scroll | The row scrolls sideways on its own (swipe, trackpad or keyboard) |
+| Home hero, page headers | `motion.js` | The photo drifts in depth, follows the pointer, pushes in as you scroll away | The photo, still |
+| Home tour | `motion.js` | One full-screen photo per stop; the camera moves through it as you scroll and the next photo dissolves in from the nearest objects back; stop list on wide screens | Plain list of photos with captions |
+| Room photos | `motion.js` | 3D carousel (CSS perspective) turned by scrolling; the photo in front is lit, the rest turn away and dim | The row scrolls sideways on its own (swipe, trackpad or keyboard) |
+| Headings | `motion.js` | Words rise into place once, when the heading first scrolls into view | Plain heading |
 | Gallery | `site.js` | Lightbox with previous and next | Links open the full-size photo |
+
+Without WebGL (or if the governor gives up), the tour falls back to the same photos without
+depth, and the carousel still turns.
 
 Which photos a stay shows lives in the database (`room_types.media_json`: `hero`, `card` and
 the `strip` shown side by side), so a new room type gets its pictures by adding a row, not code.

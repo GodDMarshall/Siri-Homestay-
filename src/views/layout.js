@@ -105,6 +105,7 @@ ${lodgingJsonLd(ctx)}
 ${page.jsonLd || ''}
 <script src="${asset('/js/boot.js')}"></script>
 <script src="${asset('/js/site.js')}" defer></script>
+<script src="${asset('/js/motion.js')}" defer></script>
 ${(page.scripts || []).map((s) => html`<script src="${asset(s)}" defer></script>`)}
 </head>
 <body class="${page.bodyClass || ''}" data-header="${theme}">

@@ -34,7 +34,8 @@
     }
    ],
    "jpg": "villa-patio.jpg",
-   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQBACdASoYABIAPu1sq1EppaOiqAqpMB2JYwCo9BCHPCXAldeg5Rh8zxafloAA/mlJOGGxcTKsnWT7pXd0gXGgM1teu9i9hVxLCdFemaawQS+ef4FNzLbrEF9QBwQ+suhpJgwGCnLkx1pjsehp3yCRMYH2JCz80BBDUiUs6ZxZdjJL3SfVla5YKr9yp5+v0AAAAA=="
+   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQBACdASoYABIAPu1sq1EppaOiqAqpMB2JYwCo9BCHPCXAldeg5Rh8zxafloAA/mlJOGGxcTKsnWT7pXd0gXGgM1teu9i9hVxLCdFemaawQS+ef4FNzLbrEF9QBwQ+suhpJgwGCnLkx1pjsehp3yCRMYH2JCz80BBDUiUs6ZxZdjJL3SfVla5YKr9yp5+v0AAAAA==",
+   "depth": "villa-patio.webp"
   },
   "patio-chairs": {
    "key": "patio-chairs",
@@ -68,7 +69,8 @@
     }
    ],
    "jpg": "patio-chairs.jpg",
-   "lqip": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACwBACdASoSABgAPu1sqlEppaOiqAqpMB2JZQC/7Amk8lfVPPC/u4S03ZFCw10AAOEmJdvRlGm6rANLkImn3QAcAebbmvGCv/yQQcaI5HMafWk4o5l2OF3AhYrxYBb8qct03mdTeuY0hlVTvJPR52A1Shu0Z26DHc8reFgfX/zEZUiPH+Kk/8LJhcKbiUfsAAA="
+   "lqip": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACwBACdASoSABgAPu1sqlEppaOiqAqpMB2JZQC/7Amk8lfVPPC/u4S03ZFCw10AAOEmJdvRlGm6rANLkImn3QAcAebbmvGCv/yQQcaI5HMafWk4o5l2OF3AhYrxYBb8qct03mdTeuY0hlVTvJPR52A1Shu0Z26DHc8reFgfX/zEZUiPH+Kk/8LJhcKbiUfsAAA=",
+   "depth": "patio-chairs.webp"
   },
   "doorway-bedroom": {
    "key": "doorway-bedroom",
@@ -102,7 +104,8 @@
     }
    ],
    "jpg": "doorway-bedroom.jpg",
-   "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwBACdASoSABgAPu1sqlEppaOiqAqpMB2JZQDMHAirggKnkX5xRUcM7ZC4DYjdygAA7QUvlurF2oH5u1OolYwVcaGui3OyKt+g4ahxHBweD9/o+/EBHQ68wdOJnDGWZX6fYKH4xoImRRBq3in0N4TyK/PIlm5dXPX5m3Gp0D9BdmsDawIAAA=="
+   "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwBACdASoSABgAPu1sqlEppaOiqAqpMB2JZQDMHAirggKnkX5xRUcM7ZC4DYjdygAA7QUvlurF2oH5u1OolYwVcaGui3OyKt+g4ahxHBweD9/o+/EBHQ68wdOJnDGWZX6fYKH4xoImRRBq3in0N4TyK/PIlm5dXPX5m3Gp0D9BdmsDawIAAA==",
+   "depth": "doorway-bedroom.webp"
   },
   "villa-bedroom": {
    "key": "villa-bedroom",
@@ -136,7 +139,8 @@
     }
    ],
    "jpg": "villa-bedroom.jpg",
-   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACQBACdASoYABIAPu1qr1CppaSiqAqpMB2JYwCw7An9kPh6EVxL3vrvdAYs84AA+bSa6ZQUFBsfW+CKz9gBnArJoA4qbYtKq0DzXGjFNfdoCxoxJbhUrdkjgbLkDqjkYjWjp36xXbcS5y45nURCyElrt35koT9mfuJ0e39lzdsPuseGeJAlDIflR02dZrA0ZmjCDe29SWREYAAA"
+   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACQBACdASoYABIAPu1qr1CppaSiqAqpMB2JYwCw7An9kPh6EVxL3vrvdAYs84AA+bSa6ZQUFBsfW+CKz9gBnArJoA4qbYtKq0DzXGjFNfdoCxoxJbhUrdkjgbLkDqjkYjWjp36xXbcS5y45nURCyElrt35koT9mfuJ0e39lzdsPuseGeJAlDIflR02dZrA0ZmjCDe29SWREYAAA",
+   "depth": "villa-bedroom.webp"
   },
   "villa-window-pool": {
    "key": "villa-window-pool",
@@ -170,7 +174,8 @@
     }
    ],
    "jpg": "villa-window-pool.jpg",
-   "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADQBACdASoYABIAPu1urlIppiQiqAgBMB2JYwC06Ai4JEaW/86o2QNcgNm/iYfXQADOPVqxaSPbAeKqhvEYqVYDdBjj2Dgl2T1wceCScuq7TquL0faLEO84/JM9x+9pq+r+MgkNyRsRSqW07PwO/eBNDKDyL+ODWNA8ZoiYhrg239yNscQfjOOHTxNmOqMjCQ2oOezCCdlCMsRYRlBS5v3wCgSAAA=="
+   "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADQBACdASoYABIAPu1urlIppiQiqAgBMB2JYwC06Ai4JEaW/86o2QNcgNm/iYfXQADOPVqxaSPbAeKqhvEYqVYDdBjj2Dgl2T1wceCScuq7TquL0faLEO84/JM9x+9pq+r+MgkNyRsRSqW07PwO/eBNDKDyL+ODWNA8ZoiYhrg239yNscQfjOOHTxNmOqMjCQ2oOezCCdlCMsRYRlBS5v3wCgSAAA==",
+   "depth": "villa-window-pool.webp"
   },
   "villa-pool": {
    "key": "villa-pool",
@@ -204,7 +209,8 @@
     }
    ],
    "jpg": "villa-pool.jpg",
-   "lqip": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABwBQCdASoYABIAPu1oqU+ppaOiKA1RMB2JZAC1A1HAJ+6JCpIyxYw4MvFmUctM4z8zaD0AAP61S++fudsiM/+YE0hDCpQ6I/MCbkVYNSppz6d95A81yZUr5zOLNg2xG84Y1+K80ehJyU/+8uc5Qdqbc7WENQ4F4ILz0UZM8FYLawV4DsNyiV7Tpq0/E/FHVwQ4P+lEiBJ4ur1wSwfEyVUzSsPvm54ivQAAAA=="
+   "lqip": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABwBQCdASoYABIAPu1oqU+ppaOiKA1RMB2JZAC1A1HAJ+6JCpIyxYw4MvFmUctM4z8zaD0AAP61S++fudsiM/+YE0hDCpQ6I/MCbkVYNSppz6d95A81yZUr5zOLNg2xG84Y1+K80ehJyU/+8uc5Qdqbc7WENQ4F4ILz0UZM8FYLawV4DsNyiV7Tpq0/E/FHVwQ4P+lEiBJ4ur1wSwfEyVUzSsPvm54ivQAAAA==",
+   "depth": "villa-pool.webp"
   },
   "lawn-stepping-stones": {
    "key": "lawn-stepping-stones",
@@ -238,7 +244,8 @@
     }
    ],
    "jpg": "lawn-stepping-stones.jpg",
-   "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwBACdASoYABIAPu1gqE4ppSOiMBgMATAdiWMAvkgONjnBUsfs8e2Yd5u0AAD+xd9pOot0D19vDuYKllb40//zsnEhfIjmo52/S8YjUICAkEqPtKijmslNaxTUABSJN5qcIs0AH65oEdMqguhP7TtnhyTTZmrRKg9RRYHW6zxn9BgOgFAAAA=="
+   "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwBACdASoYABIAPu1gqE4ppSOiMBgMATAdiWMAvkgONjnBUsfs8e2Yd5u0AAD+xd9pOot0D19vDuYKllb40//zsnEhfIjmo52/S8YjUICAkEqPtKijmslNaxTUABSJN5qcIs0AH65oEdMqguhP7TtnhyTTZmrRKg9RRYHW6zxn9BgOgFAAAA==",
+   "depth": "lawn-stepping-stones.webp"
   },
   "estate-lawn-dining": {
    "key": "estate-lawn-dining",
@@ -272,7 +279,8 @@
     }
    ],
    "jpg": "estate-lawn-dining.jpg",
-   "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADwBACdASoYABIAPu1qrVCppiQiqAqpMB2JYwCxHxs/2Cd8d1z7tZ1TRq66yeAtPlgA/gh0xiXJGevh6raGWrEymooSK+DsQQUI+nKArdXWsL38wvSw+10k7kAAsR8kvGz4FDB3hyv/vC1TbCINBF4UnhuABDD+eudRtMk7FSEPNKG+5ofyBEBKVCAAAA=="
+   "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADwBACdASoYABIAPu1qrVCppiQiqAqpMB2JYwCxHxs/2Cd8d1z7tZ1TRq66yeAtPlgA/gh0xiXJGevh6raGWrEymooSK+DsQQUI+nKArdXWsL38wvSw+10k7kAAsR8kvGz4FDB3hyv/vC1TbCINBF4UnhuABDD+eudRtMk7FSEPNKG+5ofyBEBKVCAAAA==",
+   "depth": "estate-lawn-dining.webp"
   },
   "lawn-umbrellas": {
    "key": "lawn-umbrellas",
@@ -306,7 +314,8 @@
     }
    ],
    "jpg": "lawn-umbrellas.jpg",
-   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwBACdASoYABIAPu1qrlCppaQiqAqpMB2JYwC3uBGSZD8TPDPbr8URxGpkFE8afwAA/sX7oSsGRnD7AKbvQnDJdF1pHtrfKbinsLqKsOBjRjNhhewGfAFe4+qTAjbwmtEmoH9fhkglO0eIbMEVWElCS6SxI5A1DeJt/XCflbqYmt5OSsmoAAAA"
+   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwBACdASoYABIAPu1qrlCppaQiqAqpMB2JYwC3uBGSZD8TPDPbr8URxGpkFE8afwAA/sX7oSsGRnD7AKbvQnDJdF1pHtrfKbinsLqKsOBjRjNhhewGfAFe4+qTAjbwmtEmoH9fhkglO0eIbMEVWElCS6SxI5A1DeJt/XCflbqYmt5OSsmoAAAA",
+   "depth": "lawn-umbrellas.webp"
   },
   "lawn-table-villa": {
    "key": "lawn-table-villa",
@@ -340,7 +349,8 @@
     }
    ],
    "jpg": "lawn-table-villa.jpg",
-   "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBQCdASoYABIAPu1mrE+ppSQiMBgIATAdiWYAvZG/gG3TjUdp7aig3hq+QBvY/834APsTVr9/QY00bwARo7gjmwbn3gfrhjmTW2T6b0pT5pJJPAD65mpKkmMrSQWaAoT/Qpebpys19UNYcM/Odwsb5YB8bihAB6g/IZqLtS0LqJZTc86QaJqMIZHjd0m0V3bA2biQvU3+mb3S0eqAsxSz+1OABNWAAAA="
+   "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBQCdASoYABIAPu1mrE+ppSQiMBgIATAdiWYAvZG/gG3TjUdp7aig3hq+QBvY/834APsTVr9/QY00bwARo7gjmwbn3gfrhjmTW2T6b0pT5pJJPAD65mpKkmMrSQWaAoT/Qpebpys19UNYcM/Odwsb5YB8bihAB6g/IZqLtS0LqJZTc86QaJqMIZHjd0m0V3bA2biQvU3+mb3S0eqAsxSz+1OABNWAAAA=",
+   "depth": "lawn-table-villa.webp"
   },
   "lawn-table-closeup": {
    "key": "lawn-table-closeup",
@@ -374,7 +384,8 @@
     }
    ],
    "jpg": "lawn-table-closeup.jpg",
-   "lqip": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAABQBQCdASoYABIAPu1orlCppaQiqAqpMB2JbACdMxx/YGgAKbDnXQuVGSSuPGZlWARCCAAA4gXSRwFDkSaeckoIzXHaMbbTA5grpJMsBuiGGeb47afIKv7sTbsKSelRzkoaIz4uLuSDwWtne20h0f5t5RC2RjHxnvktbKK5aLeQsxjP724CEFAMvlhe0DQTsuCgpTrPhcEOhugOiQiuoT4vfhxbswmo6U+eJLgA"
+   "lqip": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAABQBQCdASoYABIAPu1orlCppaQiqAqpMB2JbACdMxx/YGgAKbDnXQuVGSSuPGZlWARCCAAA4gXSRwFDkSaeckoIzXHaMbbTA5grpJMsBuiGGeb47afIKv7sTbsKSelRzkoaIz4uLuSDwWtne20h0f5t5RC2RjHxnvktbKK5aLeQsxjP724CEFAMvlhe0DQTsuCgpTrPhcEOhugOiQiuoT4vfhxbswmo6U+eJLgA",
+   "depth": "lawn-table-closeup.webp"
   },
   "bamboo-view-lawn": {
    "key": "bamboo-view-lawn",
@@ -408,7 +419,8 @@
     }
    ],
    "jpg": "bamboo-view-lawn.jpg",
-   "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAAAQBQCdASoSABgAPu1sq1EppiOiqAqpMB2JQBdmargeGtf9SqEkgnQCrOltRfDVUCHAAP7o7+r7Wf3hjQ/JtC5CCBLL1zUN+qfwV13YwDTAZIV99Bp3pJfq+7O2H5nb+9pzAL7NaHeJtsqdag+2CdHBbeIvmL/qOa6BM9wNIOjGYEwyE2Tyh3IQWDWCa3eTURdosnnIePaCMQBRXHmE8AAA"
+   "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAAAQBQCdASoSABgAPu1sq1EppiOiqAqpMB2JQBdmargeGtf9SqEkgnQCrOltRfDVUCHAAP7o7+r7Wf3hjQ/JtC5CCBLL1zUN+qfwV13YwDTAZIV99Bp3pJfq+7O2H5nb+9pzAL7NaHeJtsqdag+2CdHBbeIvmL/qOa6BM9wNIOjGYEwyE2Tyh3IQWDWCa3eTURdosnnIePaCMQBRXHmE8AAA",
+   "depth": "bamboo-view-lawn.webp"
   },
   "courtyard-villas": {
    "key": "courtyard-villas",
@@ -442,7 +454,8 @@
     }
    ],
    "jpg": "courtyard-villas.jpg",
-   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAADQBACdASoYABIAPu1epk6ppKMiMBgMATAdiWUAuzLyAUyRSMprrap85vpyoT0FIAD7nFyWP46Je5LmUaa/qndirtb7XE7sxO2PgfgIPnTO/kiXG1CFGUn6f0m24RZw8cxmVgcaoEBiupoXmGeZpVEzo3j6xKAeTOsg5xROjkCkUbv1Y3pu5FS73qWJJNvzkb8e3xTH9YVApoAA"
+   "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAADQBACdASoYABIAPu1epk6ppKMiMBgMATAdiWUAuzLyAUyRSMprrap85vpyoT0FIAD7nFyWP46Je5LmUaa/qndirtb7XE7sxO2PgfgIPnTO/kiXG1CFGUn6f0m24RZw8cxmVgcaoEBiupoXmGeZpVEzo3j6xKAeTOsg5xROjkCkUbv1Y3pu5FS73qWJJNvzkb8e3xTH9YVApoAA",
+   "depth": "courtyard-villas.webp"
   },
   "courtyard-villa": {
    "key": "courtyard-villa",
@@ -476,7 +489,8 @@
     }
    ],
    "jpg": "courtyard-villa.jpg",
-   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADQBQCdASoYABIAPu1eqE6ppKOiMBgMATAdiWcAxnwPuOk836vVAM1lW3Ns8g1R8LADA8fRfHoAAP7u5smZtFa4PARW8Z4MgAwBAqPsMrNKdJEa4xjw302+umljNm9QMGaSOIWpK6epBnvbM8XY9Fq/wjGclDifuDPcm7gGREnRg0kkBKwRIAAA"
+   "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADQBQCdASoYABIAPu1eqE6ppKOiMBgMATAdiWcAxnwPuOk836vVAM1lW3Ns8g1R8LADA8fRfHoAAP7u5smZtFa4PARW8Z4MgAwBAqPsMrNKdJEa4xjw302+umljNm9QMGaSOIWpK6epBnvbM8XY9Fq/wjGclDifuDPcm7gGREnRg0kkBKwRIAAA",
+   "depth": "courtyard-villa.webp"
   },
   "courtyard-garden": {
    "key": "courtyard-garden",
@@ -510,7 +524,8 @@
     }
    ],
    "jpg": "courtyard-garden.jpg",
-   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBQCdASoYABIAPu1eqE4ppKOiMBgMATAdiWMAt+OVAEKztzqoa+fUKSdMraaL/qPAAAD98CH2sCb0k1ev/T7pPoDSeW3VMHazC7H8ugUjAms8ruym5NMPDeTdAAj4DgxazTMFcZZJH+4wDe3OP3XUVWTl7EMg5tGQoiTSYstYSdGt1RT+lMciL++6+4QJPAAAAA=="
+   "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBQCdASoYABIAPu1eqE4ppKOiMBgMATAdiWMAt+OVAEKztzqoa+fUKSdMraaL/qPAAAD98CH2sCb0k1ev/T7pPoDSeW3VMHazC7H8ugUjAms8ruym5NMPDeTdAAj4DgxazTMFcZZJH+4wDe3OP3XUVWTl7EMg5tGQoiTSYstYSdGt1RT+lMciL++6+4QJPAAAAA==",
+   "depth": "courtyard-garden.webp"
   },
   "night-garden": {
    "key": "night-garden",
@@ -544,7 +559,8 @@
     }
    ],
    "jpg": "night-garden.jpg",
-   "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABwBACdASoYABIAPu1mq0+ppSOmsBgIATAdiWUAv+wQKZhLsS3OARcXVFPWAAD+7LF1+BN8Grzejj4/Rk9kJ40r45U2VhD4X3Lz362+zTR0kbIhYWB1qck7C1oXle0YOc8/2KxJ7bmq5tj/NoDRpHxPk5fW6gAA"
+   "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABwBACdASoYABIAPu1mq0+ppSOmsBgIATAdiWUAv+wQKZhLsS3OARcXVFPWAAD+7LF1+BN8Grzejj4/Rk9kJ40r45U2VhD4X3Lz362+zTR0kbIhYWB1qck7C1oXle0YOc8/2KxJ7bmq5tj/NoDRpHxPk5fW6gAA",
+   "depth": "night-garden.webp"
   },
   "night-lawn": {
    "key": "night-lawn",
@@ -578,7 +594,8 @@
     }
    ],
    "jpg": "night-lawn.jpg",
-   "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAACQBACdASoYABIAPu1kqk2ppaQjMAgBMB2JZwDKMoADTo4BXz5JxtxdcMgsRoAA/vDWz6gKbxQTUN9O7ZQjJWBilGehuF6SdfyjFgk7RXSHuXd4g2byZ8PDtNPokttQAAA="
+   "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAACQBACdASoYABIAPu1kqk2ppaQjMAgBMB2JZwDKMoADTo4BXz5JxtxdcMgsRoAA/vDWz6gKbxQTUN9O7ZQjJWBilGehuF6SdfyjFgk7RXSHuXd4g2byZ8PDtNPokttQAAA=",
+   "depth": "night-lawn.webp"
   },
   "night-path": {
    "key": "night-path",
@@ -612,7 +629,8 @@
     }
    ],
    "jpg": "night-path.jpg",
-   "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAwCdASoYABIAPu1qr1AppaSiqAqpMB2JZwC90A9YrKIGc3vcSqWAAP7ZQyvRh8bNUXvRxuVdMVSBg4TVhuRpxYtWBlPR/SCdaeIU8EHjfFE6KpqfRrahoaUY2OAA"
+   "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAwCdASoYABIAPu1qr1AppaSiqAqpMB2JZwC90A9YrKIGc3vcSqWAAP7ZQyvRh8bNUXvRxuVdMVSBg4TVhuRpxYtWBlPR/SCdaeIU8EHjfFE6KpqfRrahoaUY2OAA",
+   "depth": "night-path.webp"
   },
   "bath-basin": {
    "key": "bath-basin",
