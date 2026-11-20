@@ -3,7 +3,7 @@
 **Date:** 19 November 2026  
 **Build:** Phase 1, version 1.0.0  
 **Environment:** Node.js 22, SQLite 3.54, Google Chrome 153 (headless), Linux  
-**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 41/41 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 14 pages and no browser errors.
+**Result:** 18/18 tests (booking engine, temporary-storage mode, Vercel entry point) and 40/40 end-to-end checks pass, with no accessibility violations (axe-core, WCAG 2.1 A/AA) on 14 pages and no browser errors.
 
 **Update (real photos):** the owner rejected the code-built 3D estate, so the site is back on the owners' own photographs. The 3D checks were replaced by checks for the photos, the scroll tour and the side-by-side room photos (section 2), and the review and performance notes below are for this version.
 

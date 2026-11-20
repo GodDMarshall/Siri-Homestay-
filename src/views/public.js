@@ -247,38 +247,44 @@ function strip(keys, { title, lede, id = 'strip' } = {}) {
 // ---------------------------------------------------------------------------
 // Home
 // ---------------------------------------------------------------------------
+// The home page is a journey through the estate: public/js/fly.js flies a camera through these
+// chapters' pictures in 3D as you scroll. Without it, each chapter is a picture with its words.
+const JOURNEY = [
+  { key: 'villa-patio', id: 'arrive', title: 'Siri Homestay', text: 'Five villas among golden bamboo, on a 4.28-acre estate at Joldal, 10 km from Chikmagalur.' },
+  { key: 'courtyard-villas', id: 'courtyard', title: 'The courtyard', text: 'Tiled-roof villas and rows of potted plants around a paved courtyard.' },
+  { key: 'lawn-stepping-stones', id: 'lawn', title: 'Across the lawn', text: 'Stepping stones over the grass to the umbrella tables and the volleyball net.' },
+  { key: 'estate-lawn-dining', id: 'dining', title: 'The dining hall', text: 'Malnad meals from the estate kitchen, served in the separate dining hall.' },
+  { key: 'lawn-table-villa', id: 'umbrella', title: 'Under the umbrella', text: 'Blue chairs round a table in front of the villas, screened by golden bamboo.' },
+  { key: 'villa-bedroom', id: 'villa', title: 'Inside a villa', text: 'A king-size bed and two singles, with sliding glass doors open to the lawn.' },
+  { key: 'villa-pool', id: 'pool', title: 'The pool', text: 'Blue-lined water under a glass-roofed pergola, with bamboo all around.' },
+  { key: 'night-garden', id: 'night', title: 'After dark', text: 'Floodlights and low lamps over the garden, and campfire evenings on the lawn.', night: true },
+  { key: 'night-lawn', id: 'stay', title: 'Stay with us', night: true },
+];
+
 function home(ctx) {
   const { stays, contacts } = ctx;
-  const hero = A.media('villa-patio');
+  const first = contacts[0];
+  const chapter = (c, i) => {
+    const m = A.media(c.key);
+    const Title = i === 0 ? 'h1' : 'h2';
+    return html`<section class="chapter${i === 0 ? ' chapter--first' : ''}${c.id === 'stay' ? ' chapter--last' : ''}" id="${c.id}" data-chapter${A.motion(c.key)} data-ar="${(m.w / m.h).toFixed(4)}"${c.night ? raw(' data-night') : ''} aria-labelledby="${c.id}-title">
+  <figure class="chapter__media">${A.img(c.key, { sizes: '100vw', loading: i === 0 ? 'eager' : 'lazy', fetchpriority: i === 0 ? 'high' : undefined })}</figure>
+  <div class="chapter__copy">
+    ${raw(`<${Title} id="${c.id}-title" class="chapter__title">`)}${c.title}${raw(`</${Title}>`)}
+    ${c.text ? html`<p class="chapter__text">${c.text}</p>` : ''}
+    ${i === 0 ? html`<a class="chapter__cue" href="#courtyard">Scroll to step inside</a>` : ''}
+    ${c.id === 'stay' ? html`<p class="chapter__text">Call or WhatsApp the hosts, or send your dates. Nothing is booked or charged until they confirm.</p>
+    <div class="chapter__actions"><a class="btn" href="/enquire">Send an enquiry</a><a class="btn btn--ghost" href="/explore">Explore in 3D</a>${first ? html`<a class="btn btn--ghost" href="tel:${first.phone}">Call ${first.name.split(' ')[0]}</a>` : ''}</div>` : ''}
+  </div>
+</section>`;
+  };
   const body = html`
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero__media" data-motion="hero"${A.motion('villa-patio')} data-pos="62% 58%">
-    ${A.img('villa-patio', { cls: 'hero__still', loading: 'eager', fetchpriority: 'high', sizes: '100vw', pos: '62% 58%' })}
-  </div>
-  <div class="slats" aria-hidden="true">${raw('<i></i>'.repeat(9))}</div>
-  <div class="hero__copy">
-    <h1 id="hero-title" class="display hero__title">Five villas among the golden bamboo</h1>
-    <p class="hero__lede">Siri Homestay is a 4.28-acre estate at Joldal, about 10 km from Chikmagalur town, with a wide lawn, a separate dining hall and Malnad meals from its own kitchen.</p>
-    <div class="hero__actions">
-      <a class="btn" href="/enquire">Send an enquiry</a>
-      <a class="btn btn--ghost" href="#tour">Take the tour</a>
-    </div>
-  </div>
-</section>
-
-${tour()}
-
-<section class="ledger" aria-labelledby="estate-title">
-  <div class="ledger__inner">
-    <h2 id="estate-title" class="ledger__title">The estate</h2>
-    <p class="ledger__text"><b>4.28 acres</b> of lawn, bamboo and trees. <b>Five villas.</b> A separate dining hall and kitchen, with staff quarters on the estate. A pond of about <b>15,000 sq ft</b>. A lawn for volleyball, cricket and campfires. A <b>7.5 kW</b> generator and a <b>4 kW</b> UPS, so a power cut doesn’t end the evening. And a homestay licence, so everything is above board.</p>
-    <a class="link" href="/estate">Read about the estate</a>
-  </div>
-  <figure class="ledger__figure">
-    <span class="frame">${A.img('bamboo-view-lawn', { sizes: '(min-width: 900px) 40vw, 100vw' })}</span>
-    <figcaption>The lawn through the bamboo, from a villa patio</figcaption>
-  </figure>
-</section>
+<div class="fly" data-fly style="--chapters: ${JOURNEY.length}">
+  ${JOURNEY.map(chapter)}
+  <nav class="fly__rail" data-rail aria-label="The journey">
+    <ol>${JOURNEY.map((c) => html`<li><a href="#${c.id}"><span>${c.title === 'Siri Homestay' ? 'Arrive' : c.title}</span></a></li>`)}</ol>
+  </nav>
+</div>
 
 <section class="stays" aria-labelledby="stays-title">
   <div class="stays__head">
@@ -290,28 +296,6 @@ ${tour()}
   </div>
 </section>
 
-<section class="kitchen" aria-labelledby="kitchen-title">
-  <figure class="kitchen__figure">
-    <span class="frame">${A.img('lawn-table-closeup', { sizes: '(min-width: 900px) 50vw, 100vw' })}</span>
-    <figcaption>Tables on the lawn, in front of a villa</figcaption>
-  </figure>
-  <div class="kitchen__copy">
-    <h2 id="kitchen-title" class="section-title">Meals from the estate kitchen</h2>
-    <p>Breakfast is South Indian or continental. Lunch and dinner are Malnad cooking, vegetarian and non-vegetarian, served in the separate dining hall. Ask the hosts what’s included in your stay when you enquire.</p>
-    <h3 class="kitchen__sub">Things to do here</h3>
-    <ul class="ticks">${ACTIVITIES.map((a) => html`<li>${a}</li>`)}</ul>
-  </div>
-</section>
-
-<section class="around" aria-labelledby="around-title">
-  <div class="around__head">
-    <h2 id="around-title" class="section-title">Around Joldal</h2>
-    <p>Joldal is about 10 km from Chikmagalur town, in the district where coffee was first grown in India.</p>
-    <a class="link" href="/around">Directions and nearby places</a>
-  </div>
-  <ul class="places">${PLACES.map((pl) => html`<li><h3>${pl.name}</h3><p>${pl.text}</p></li>`)}</ul>
-</section>
-
 <section class="plan" id="plan" aria-labelledby="plan-title">
   <div class="plan__copy">
     <h2 id="plan-title" class="section-title">Plan your stay</h2>
@@ -321,9 +305,8 @@ ${tour()}
   ${quickForm(ctx)}
 </section>`;
   return layout(ctx, {
-    theme: 'over-image', bodyClass: 'page-home',
+    theme: 'over-image', bodyClass: 'page-home', scripts: ['/js/fly.js'],
     description: 'Siri Homestay: five villas on a 4.28-acre estate at Joldal near Chikmagalur, with a lawn, golden bamboo, a separate dining hall and Malnad meals. Send an enquiry or call the hosts.',
-    preload: html`<link rel="preload" as="image" href="${A.src('villa-patio', 1600)}" imagesrcset="${A.srcset(hero)}" imagesizes="100vw" fetchpriority="high">`,
     image: 'villa-patio', body,
   });
 }

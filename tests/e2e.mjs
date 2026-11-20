@@ -358,37 +358,24 @@ try {
     return `${keys.length} photos`;
   });
 
-  await check('Scrolling the home page takes the tour, one photo at a time', async () => {
-    await page.goto(BASE + '/');
-    await page.waitForSelector('.tour.is-live');
-    const n = await page.locator('.tour__stop').count();
-    const seen = [];
-    for (const i of [0, 3, n - 1]) {
-      await page.evaluate((k) => {
-        const t = document.querySelector('.tour__track'), stops = document.querySelectorAll('.tour__stop').length;
-        window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * (k + 0.5) / stops);
-      }, i);
-      await page.waitForFunction((k) => document.querySelectorAll('.tour__stop')[k].classList.contains('is-on'), i);
-      const on = await page.locator('.tour__stop.is-on').count();
-      assert(on === 1, `${on} stops showing at once`);
-      seen.push(await page.locator('.tour__stop.is-on .tour__title').innerText());
-    }
-    await page.click('.tour__rail a[data-goto="1"]');
-    await page.waitForFunction(() => document.querySelectorAll('.tour__stop')[1].classList.contains('is-on'));
-    return `${n} stops: ${seen.join(', ')}`;
-  });
-
-  await check('Photos move in 3D: depth maps, the hero and the tour render with WebGL', async () => {
+  await check('The home page is a 3D journey: scrolling flies the camera from chapter to chapter', async () => {
+    const r = await fetch(BASE + '/js/vendor/three-0.187.0/three.module.js'); assert(r.status === 200, 'three.js not served');
     const m = await (await fetch(BASE + '/media/manifest.json')).json();
-    const withDepth = Object.values(m.photos).filter((p) => p.depth);
-    assert(withDepth.length === 18, `${withDepth.length} depth maps`);
-    const r = await fetch(BASE + '/media/depth/' + m.photos['villa-patio'].depth); assert(r.status === 200, 'depth map not served');
+    assert(Object.values(m.photos).filter((p) => p.depth).length === 18, 'depth maps missing');
+    assert((await fetch(BASE + '/media/depth/' + m.photos['villa-patio'].depth)).status === 200, 'depth map not served');
     await page.goto(BASE + '/');
-    await page.waitForSelector('.hero__media.is-live canvas.motion-canvas', { timeout: 30000 });
-    await page.evaluate(() => { const t = document.querySelector('.tour__track'); window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * 0.3 / 8); });
-    await page.waitForSelector('.tour.is-3d', { timeout: 30000 });
-    await page.waitForFunction(() => document.querySelector('.hero__title').classList.contains('is-in'));
-    return `${withDepth.length} depth maps`;
+    await page.waitForSelector('.fly.is-live canvas.fly__canvas', { timeout: 30000 });
+    const n = await page.locator('[data-chapter]').count();
+    assert(n === 9, `${n} chapters`);
+    await page.waitForSelector('#arrive.is-active');
+    const seen = [];
+    for (const id of ['lawn', 'night', 'stay']) {
+      await page.evaluate((x) => document.getElementById(x).scrollIntoView(), id);
+      await page.waitForFunction((x) => document.getElementById(x).classList.contains('is-active'), id, { timeout: 15000 });
+      seen.push(await page.locator(`#${id} .chapter__title`).innerText());
+    }
+    assert(await page.locator('#stay a[href="/enquire"]').isVisible(), 'enquiry button missing at the end of the journey');
+    return `${n} chapters: ${seen.join(', ')}`;
   });
 
   await check('A room shows its photos side by side on a 3D carousel turned by scrolling', async () => {
@@ -471,8 +458,8 @@ try {
     const rctx = await browser.newContext({ viewport: { width: 1280, height: 860 }, reducedMotion: 'reduce' });
     const p = await rctx.newPage();
     await p.goto(BASE + '/');
-    assert(await p.locator('.tour.is-live').count() === 0, 'tour animates despite reduced motion');
-    assert(await p.locator('.tour__stop img').first().isVisible(), 'tour photos missing');
+    assert(await p.locator('.fly.is-live').count() === 0, 'journey animates despite reduced motion');
+    assert(await p.locator('#lawn .chapter__media img').isVisible(), 'journey pictures missing');
     await p.goto(BASE + '/stay/garden-villa');
     assert(await p.locator('.strip.is-flow').count() === 0, 'carousel turns despite reduced motion');
     assert(await p.locator('canvas').count() === 0, 'WebGL started despite reduced motion');

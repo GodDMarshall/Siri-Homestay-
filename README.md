@@ -90,6 +90,10 @@ Every picture on the site is one of the owners' photographs of Siri Homestay. No
 
 `npm run enhance` (`scripts/enhance-ai.py`) rebuilds every photo with an AI super-resolution model (Real-ESRGAN `realesr-general-x4v3`, run with onnxruntime; download the `.pth` from the [Real-ESRGAN v0.2.5.0 release](https://github.com/xinntao/Real-ESRGAN/releases/tag/v0.2.5.0) into `models/`) and grades it for a clean, vivid "AI" finish. It keeps what is in each photo, writes `<key>-ai-<width>.webp` files and updates the manifest. Run `npm run depth` after it.
 
+### The 3D journey (home page)
+
+`public/js/fly.js` loads three.js (vendored unmodified in `public/js/vendor/three-0.187.0/`, MIT licence alongside) and flies a camera through the home page's chapters as you scroll: each chapter's picture is a mesh shaped by its depth map, floating in fog with drifting motes of light, turning to night for the last chapters. The chapters are `JOURNEY` in `src/views/public.js`; without WebGL, with reduced motion or without JavaScript they show as plain pictures with their words. The whole site uses a dark theme and one corner menu on every screen size.
+
 ### 3D motion
 
 The depth comes from the photos themselves, not from a 3D model: nothing is drawn.

@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-20T20:19:00.364Z",
-  "passed": 41,
+  "at": "2026-11-20T20:56:49.431Z",
+  "passed": 40,
   "failed": 0,
   "results": [
     {
@@ -46,7 +46,7 @@
     {
       "name": "Guest can send an enquiry and gets a reference",
       "ok": true,
-      "detail": "SH-SXE6TW"
+      "detail": "SH-VQ3YYN"
     },
     {
       "name": "Confirmation page details are private to the sender",
@@ -164,14 +164,9 @@
       "detail": "20 photos"
     },
     {
-      "name": "Scrolling the home page takes the tour, one photo at a time",
+      "name": "The home page is a 3D journey: scrolling flies the camera from chapter to chapter",
       "ok": true,
-      "detail": "8 stops: Arrive, The dining hall, After dark"
-    },
-    {
-      "name": "Photos move in 3D: depth maps, the hero and the tour render with WebGL",
-      "ok": true,
-      "detail": "18 depth maps"
+      "detail": "9 chapters: Across the lawn, After dark, Stay with us"
     },
     {
       "name": "A room shows its photos side by side on a 3D carousel turned by scrolling",
