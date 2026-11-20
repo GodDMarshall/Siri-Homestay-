@@ -146,7 +146,7 @@ ${page.body}
       ${p.facebook_url ? html`<li><a href="${p.facebook_url}" rel="noopener" target="_blank">Facebook</a></li>` : ''}
     </ul>
   </nav>
-  <p class="footer__legal">The photos on this site were taken at Siri Homestay by its owners. © ${new Date().getFullYear()} ${p.name}.</p>
+  <p class="footer__legal">The pictures on this site are AI-enhanced from photos taken at Siri Homestay by its owners. © ${new Date().getFullYear()} ${p.name}.</p>
 </footer>
 </body>
 </html>`;

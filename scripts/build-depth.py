@@ -14,7 +14,7 @@ Usage:
 Reads public/media/manifest.json and the 1600 px photos; writes public/media/depth/<key>.webp
 and adds "depth" to each manifest entry.
 """
-import argparse, json
+import re, argparse, json
 from pathlib import Path
 
 import cv2
@@ -91,8 +91,11 @@ def main():
         src = [f for f in m["files"] if f["w"] <= m["w"]][-1]["src"]  # the native-size file
         rgb = np.asarray(Image.open(media / "photos" / src).convert("RGB")).astype(np.float32) / 255.0
         d = depth_for(sess, rgb)
-        Image.fromarray((d * 255 + 0.5).astype(np.uint8), "L").save(media / "depth" / f"{key}.webp", "WEBP", quality=90)
-        m["depth"] = f"{key}.webp"
+        name = re.sub(r"-\d+\.webp$", ".webp", src)  # villa-patio-ai-1600.webp -> villa-patio-ai.webp
+        Image.fromarray((d * 255 + 0.5).astype(np.uint8), "L").save(media / "depth" / name, "WEBP", quality=90)
+        if m.get("depth") and m["depth"] != name and (media / "depth" / m["depth"]).exists():
+            (media / "depth" / m["depth"]).unlink()
+        m["depth"] = name
         print("depth", key)
     mf.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\n")
 

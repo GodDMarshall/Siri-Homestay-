@@ -52,7 +52,7 @@ Every fact on the website comes from one of four sources. Nothing was invented.
 
 ## Pictures
 
-Every picture on the site is one of the owners' photographs, cleaned up for the web (levels, colour, light sharpening) but not redrawn or altered. The two bathroom pictures are stills from the owners' video, and the gallery and the room page say so. The footer says: “The photos on this site were taken at Siri Homestay by its owners.”
+Every picture on the site is one of the owners' photographs, cleaned up for the web (levels, colour, light sharpening) but not redrawn or altered. The two bathroom pictures are stills from the owners' video, and the gallery and the room page say so. Every picture is AI-enhanced (`npm run enhance`: Real-ESRGAN super-resolution, then a colour grade with glow and smoothing), keeping what is in the photo; nothing is added or removed. The footer says: “The pictures on this site are AI-enhanced from photos taken at Siri Homestay by its owners.”
 
 The 3D motion uses a depth map for each photo, estimated from the photo itself by the MiDaS v2.1 small model (Intel ISL, MIT licence). A depth map only says how far away each part of the photo is; the motion moves the camera through the photo and never adds or changes what is in it.
 

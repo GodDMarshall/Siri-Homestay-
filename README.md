@@ -86,6 +86,10 @@ Every picture on the site is one of the owners' photographs of Siri Homestay. No
 - The photos arrived through WhatsApp at 1600 x 1200, so the largest size (2400 px wide) is an enlargement. For sharper pictures, ask the owners for the original camera files (sent as a WhatsApp "Document" or through Google Drive), put them in `originals/` under the same names and run `npm run photos` again.
 - To add a photo, add a line to `PHOTOS` in the script (key, file, area, look, caption, alt text describing only what is visible), run it, then use the key in `src/views/public.js` or a stay's `strip` list.
 
+### AI enhancement
+
+`npm run enhance` (`scripts/enhance-ai.py`) rebuilds every photo with an AI super-resolution model (Real-ESRGAN `realesr-general-x4v3`, run with onnxruntime; download the `.pth` from the [Real-ESRGAN v0.2.5.0 release](https://github.com/xinntao/Real-ESRGAN/releases/tag/v0.2.5.0) into `models/`) and grades it for a clean, vivid "AI" finish. It keeps what is in each photo, writes `<key>-ai-<width>.webp` files and updates the manifest. Run `npm run depth` after it.
+
 ### 3D motion
 
 The depth comes from the photos themselves, not from a 3D model: nothing is drawn.

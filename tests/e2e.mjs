@@ -382,7 +382,7 @@ try {
     const m = await (await fetch(BASE + '/media/manifest.json')).json();
     const withDepth = Object.values(m.photos).filter((p) => p.depth);
     assert(withDepth.length === 18, `${withDepth.length} depth maps`);
-    const r = await fetch(BASE + '/media/depth/villa-patio.webp'); assert(r.status === 200, 'depth map not served');
+    const r = await fetch(BASE + '/media/depth/' + m.photos['villa-patio'].depth); assert(r.status === 200, 'depth map not served');
     await page.goto(BASE + '/');
     await page.waitForSelector('.hero__media.is-live canvas.motion-canvas', { timeout: 30000 });
     await page.evaluate(() => { const t = document.querySelector('.tour__track'); window.scrollTo(0, t.getBoundingClientRect().top + scrollY + (t.offsetHeight - innerHeight) * 0.3 / 8); });
@@ -495,7 +495,7 @@ try {
     await page.click('.gallery__item:first-child a');
     await page.waitForSelector('dialog.lightbox[open]');
     const src = await page.getAttribute('dialog.lightbox img', 'src');
-    assert(/\/media\/photos\/villa-patio-2400\.webp$/.test(src), src);
+    assert(/\/media\/photos\/villa-patio-ai-2400\.webp$/.test(src), src);
     await page.keyboard.press('Escape');
     return `${n} photos`;
   });
