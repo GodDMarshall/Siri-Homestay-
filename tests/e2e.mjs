@@ -366,7 +366,7 @@ try {
     await page.goto(BASE + '/');
     await page.waitForSelector('.fly.is-live canvas.fly__canvas', { timeout: 30000 });
     const n = await page.locator('[data-chapter]').count();
-    assert(n === 9, `${n} chapters`);
+    assert(n === 10, `${n} chapters`);
     await page.waitForSelector('#arrive.is-active');
     const seen = [];
     for (const id of ['lawn', 'night', 'stay']) {

@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-20T20:56:49.431Z",
+  "at": "2026-11-21T06:21:23.568Z",
   "passed": 40,
   "failed": 0,
   "results": [
@@ -46,7 +46,7 @@
     {
       "name": "Guest can send an enquiry and gets a reference",
       "ok": true,
-      "detail": "SH-VQ3YYN"
+      "detail": "SH-MKBHF2"
     },
     {
       "name": "Confirmation page details are private to the sender",
@@ -166,7 +166,7 @@
     {
       "name": "The home page is a 3D journey: scrolling flies the camera from chapter to chapter",
       "ok": true,
-      "detail": "9 chapters: Across the lawn, After dark, Stay with us"
+      "detail": "10 chapters: Stepping stones across the lawn., The light goes gold at night., Stay with us."
     },
     {
       "name": "A room shows its photos side by side on a 3D carousel turned by scrolling",

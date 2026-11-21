@@ -24,16 +24,16 @@
   --leaf-deep: #08110E;
   --culm: #D9B44A;
   --culm-2: #E7CB72;
-  --culm-ink: #E2BC5A;      /* gold for text on the dark pages */
-  --lime: #0B1411;          /* page */
-  --paper: #121F1A;         /* raised surfaces */
-  --ink: #E8ECE4;           /* text */
-  --ink-2: #A8B3AB;
-  --line: #2A3A33;
+  --culm-ink: #7A5E12;      /* gold dark enough for text on light pages */
+  --lime: #F2F1EC;
+  --paper: #FFFFFF;
+  --ink: #18201C;
+  --ink-2: #4A544E;
+  --line: #D3D8D2;
   --mist: #E8ECE4;
   --on-gold: #1A1506;
   --pool: #2D6E9E;
-  --error: #F07A62;
+  --error: #A3321F;
   --sans: 'Anek', 'Segoe UI', system-ui, sans-serif;
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --pad: clamp(20px, 5vw, 72px);
@@ -96,7 +96,7 @@ main { display: block; outline: none; }
 /* ---------- Masthead ------------------------------------------------------ */
 .masthead {
   position: fixed; inset: 0 0 auto; z-index: 50; height: var(--head); display: flex; align-items: center; gap: 28px;
-  padding: 0 var(--pad); color: var(--ink); background: rgba(8, 17, 14, .82); backdrop-filter: blur(10px);
+  padding: 0 var(--pad); color: var(--mist); background: rgba(8, 17, 14, .82); backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(232, 236, 228, .08); transition: background-color .35s, color .35s, border-color .35s, transform .35s var(--ease);
 }
 [data-header="over-image"] .masthead:not(.is-solid) { background: transparent; color: #fff; border-color: transparent; backdrop-filter: none; }
@@ -420,7 +420,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .choice { position: relative; display: grid; gap: 2px; padding: 14px 16px 14px 46px; background: var(--paper); border: 1px solid var(--line); border-radius: 3px; cursor: pointer; }
 .choice input { position: absolute; left: 16px; top: 17px; width: 18px; height: 18px; accent-color: var(--culm); margin: 0; }
-.choice:has(input:checked) { border: 2px solid var(--culm); padding: 13px 15px 13px 45px; background: var(--leaf-2); }
+.choice:has(input:checked) { border: 2px solid var(--culm); padding: 13px 15px 13px 45px; background: #FFF6DB; }
 .choice:has(input:focus-visible) { outline: 3px solid var(--pool); outline-offset: 2px; }
 .choice__name { font: 620 1.15rem/1.15 var(--sans); }
 .choice__meta { font: 400 .95rem/1.3 var(--sans); color: var(--ink-2); }
@@ -612,8 +612,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 
 /* ---------- 2026-11 redesign: a dark, cinematic site around a 3D journey ----------------
    One menu for every screen size, opened from the corner; the home page is fly.js's journey. */
-.nav { display: none; }
-.menu-toggle { display: block; color: inherit; }
 body.menu-open { overflow: hidden; }
 body.menu-open .masthead { background: transparent !important; color: var(--mist) !important; border-color: transparent !important; }
 .menu { inset: 0; z-index: 49; display: grid; align-content: center; gap: 40px; padding: calc(var(--head) + 24px) var(--pad) 40px;
@@ -629,28 +627,32 @@ body.menu-open .masthead { background: transparent !important; color: var(--mist
 .fly__canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; opacity: 0; transition: opacity 1.2s ease; pointer-events: none; }
 .fly.is-live .fly__canvas { opacity: 1; }
 .fly.is-away .fly__canvas { visibility: hidden; }
-.chapter { position: relative; z-index: 1; min-height: 100svh; display: grid; align-items: end; padding: calc(var(--head) + 40px) var(--pad) clamp(48px, 9vh, 110px); }
+.chapter { position: relative; z-index: 1; min-height: 100svh; color: var(--mist); display: grid; align-items: end; padding: calc(var(--head) + 40px) var(--pad) clamp(48px, 9vh, 110px); }
 .chapter__media { position: absolute; inset: 0; z-index: -1; margin: 0; }
 .chapter__media img { width: 100%; height: 100%; object-fit: cover; background-size: cover; }
 .chapter__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6, 12, 10, .85), rgba(6, 12, 10, .1) 55%, rgba(6, 12, 10, .35)); }
 .chapter__copy { max-width: 46rem; text-shadow: 0 2px 30px rgba(0, 0, 0, .5); }
-.chapter__title { font: 680 clamp(3rem, 8.4vw, 8.6rem)/.88 var(--sans); font-stretch: 70%; letter-spacing: -.015em; margin: 0 0 18px; }
-.chapter--first .chapter__title { font-size: clamp(3.6rem, 12vw, 12.5rem); color: var(--culm); }
-.chapter__text { font: italic 400 clamp(1.15rem, 1.8vw, 1.6rem)/1.4 var(--serif); color: rgba(232, 236, 228, .92); max-width: 34em; margin: 0 0 14px; }
+.chapter__label { font: 500 .95rem/1 var(--sans); color: var(--culm); margin: 0 0 16px; }
+.chapter__title { font: 330 clamp(2.4rem, 4.4vw, 4.3rem)/1.03 var(--sans); letter-spacing: -.02em; max-width: 12em; margin: 0 0 16px; }
+.chapter--first .chapter__title { font-size: clamp(2.8rem, 5.6vw, 5.6rem); }
+.chapter__text { font: 400 clamp(1rem, 1.25vw, 1.15rem)/1.5 var(--sans); color: rgba(232, 236, 228, .86); max-width: 30em; margin: 0 0 6px; }
 .chapter__cue { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font: 600 1rem/1 var(--sans); color: var(--mist); text-decoration: none; }
 .chapter__cue::after { content: ''; width: 1px; height: 46px; background: linear-gradient(var(--culm), transparent); animation: cue 1.8s var(--ease) infinite; }
 @keyframes cue { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 .chapter__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-.btn--ghost { background: rgba(8, 17, 14, .35); color: var(--mist); border-color: rgba(232, 236, 228, .6); }
-.btn--ghost:hover { background: var(--mist); color: var(--on-gold); border-color: var(--mist); }
+.chapter .btn--ghost { background: rgba(8, 17, 14, .35); color: var(--mist); border-color: rgba(232, 236, 228, .6); }
+.chapter .btn--ghost:hover { background: var(--mist); color: var(--on-gold); border-color: var(--mist); }
 .fly__rail { display: none; }
 
 /* with the journey running: the words float over the 3D, one chapter at a time */
-.fly.is-live .chapter { min-height: 165svh; align-items: start; padding: 0; }
+.fly.is-live .chapter { min-height: 140svh; align-items: start; padding: 0; }
 .fly.is-live .chapter--last { min-height: 100svh; }
 .fly.is-live .chapter__media { display: none; }
 .fly.is-live .chapter__copy { position: sticky; top: 0; min-height: 100svh; max-width: none; display: flex; flex-direction: column; justify-content: flex-end;
-  padding: calc(var(--head) + 40px) var(--pad) clamp(48px, 10vh, 120px); background: linear-gradient(to top, rgba(5, 10, 8, .55), transparent 45%); }
+  padding: calc(var(--head) + 40px) var(--pad) clamp(48px, 10vh, 120px); }
+.fly.is-live::before { content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to right, rgba(5, 10, 8, .5), transparent 55%), linear-gradient(to top, rgba(5, 10, 8, .5), transparent 40%), linear-gradient(rgba(5, 10, 8, .45), transparent 18%); }
+.fly.is-away::before { display: none; }
 .fly.is-live .chapter__copy > * { max-width: 46rem; opacity: 0; transform: translate3d(0, 34px, 0); filter: blur(6px); transition: opacity .7s var(--ease), transform .9s var(--ease), filter .7s var(--ease); }
 .fly.is-live .chapter.is-active .chapter__copy > * { opacity: 1; transform: none; filter: none; }
 .fly.is-live .chapter.is-active .chapter__copy > :nth-child(2) { transition-delay: .12s; }
@@ -665,3 +667,17 @@ body.menu-open .masthead { background: transparent !important; color: var(--mist
 .fly__rail a:hover span, .fly__rail a:focus-visible span, .fly__rail a[aria-current] span { opacity: 1; transform: none; }
 @media (max-width: 700px) { .fly__rail span { display: none; } .fly.is-live .chapter__copy { padding-bottom: 72px; } }
 .page-home .stays, .page-home .plan { position: relative; z-index: 2; }
+
+/* light content below the journey, with rounded photo cards */
+.light { background: var(--lime); color: var(--ink); }
+.bento { padding: clamp(80px, 10vw, 140px) var(--pad); position: relative; z-index: 2; }
+.bento__head { max-width: var(--max); margin: 0 auto 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; }
+.bento__head p { color: var(--ink-2); margin: 0; }
+.bento__grid { max-width: var(--max); margin: 0 auto; display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(150px, 17vw, 250px); }
+.bento__item { margin: 0; border-radius: 18px; overflow: hidden; }
+.bento__item img { width: 100%; height: 100%; object-fit: cover; background-size: cover; transition: transform 1.2s var(--ease); }
+.bento__item:hover img { transform: scale(1.04); }
+.bento__item--1 { grid-column: span 2; grid-row: span 2; }
+.bento__item--4 { grid-row: span 2; }
+.bento__item--7 { grid-column: span 2; }
+@media (max-width: 700px) { .bento__grid { grid-template-columns: 1fr 1fr; } .bento__item--4 { grid-row: span 1; } }

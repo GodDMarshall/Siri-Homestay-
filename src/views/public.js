@@ -250,15 +250,16 @@ function strip(keys, { title, lede, id = 'strip' } = {}) {
 // The home page is a journey through the estate: public/js/fly.js flies a camera through these
 // chapters' pictures in 3D as you scroll. Without it, each chapter is a picture with its words.
 const JOURNEY = [
-  { key: 'villa-patio', id: 'arrive', title: 'Siri Homestay', text: 'Five villas among golden bamboo, on a 4.28-acre estate at Joldal, 10 km from Chikmagalur.' },
-  { key: 'courtyard-villas', id: 'courtyard', title: 'The courtyard', text: 'Tiled-roof villas and rows of potted plants around a paved courtyard.' },
-  { key: 'lawn-stepping-stones', id: 'lawn', title: 'Across the lawn', text: 'Stepping stones over the grass to the umbrella tables and the volleyball net.' },
-  { key: 'estate-lawn-dining', id: 'dining', title: 'The dining hall', text: 'Malnad meals from the estate kitchen, served in the separate dining hall.' },
-  { key: 'lawn-table-villa', id: 'umbrella', title: 'Under the umbrella', text: 'Blue chairs round a table in front of the villas, screened by golden bamboo.' },
-  { key: 'villa-bedroom', id: 'villa', title: 'Inside a villa', text: 'A king-size bed and two singles, with sliding glass doors open to the lawn.' },
-  { key: 'villa-pool', id: 'pool', title: 'The pool', text: 'Blue-lined water under a glass-roofed pergola, with bamboo all around.' },
-  { key: 'night-garden', id: 'night', title: 'After dark', text: 'Floodlights and low lamps over the garden, and campfire evenings on the lawn.', night: true },
-  { key: 'night-lawn', id: 'stay', title: 'Stay with us', night: true },
+  { key: 'villa-patio', id: 'arrive', focus: '0.40 0.47', title: 'Where the bamboo turns gold.', text: 'Five villas on a 4.28-acre estate at Joldal, 10 km from Chikmagalur.' },
+  { key: 'villa-bedroom', id: 'inside', focus: '0.57 0.40', title: 'Glass doors, open to the lawn.', text: 'A king-size bed and two singles in every villa, with an attached bathroom.' },
+  { key: 'lawn-table-villa', id: 'umbrella', focus: '0.50 0.60', title: 'A table under the umbrella.', text: 'Blue chairs in front of the villas, screened by golden bamboo.' },
+  { key: 'lawn-stepping-stones', id: 'lawn', focus: '0.84 0.40', title: 'Stepping stones across the lawn.', text: 'Volleyball, cricket and campfire evenings on the grass.' },
+  { key: 'estate-lawn-dining', id: 'dining', focus: '0.14 0.32', title: 'Malnad meals in the dining hall.', text: 'Cooked in the estate kitchen, vegetarian and non-vegetarian.' },
+  { key: 'courtyard-villas', id: 'courtyard', focus: '0.24 0.38', title: 'Tiled roofs round a quiet courtyard.', text: 'Potted plants line the paving between the villas.' },
+  { key: 'villa-window-pool', id: 'bed', focus: '0.45 0.50', title: 'The pool, seen from the bed.', text: 'Floor-to-ceiling glass, water and a grove of bamboo.' },
+  { key: 'villa-pool', id: 'pool', focus: '0.50 0.75', title: 'Water under a glass roof.', text: 'A blue-lined pool under the pergola, beside the bedroom window.' },
+  { key: 'night-garden', id: 'night', focus: '0.88 0.43', title: 'The light goes gold at night.', text: 'Floodlights and low lamps over the garden, and campfires on the lawn.', night: true },
+  { key: 'night-lawn', id: 'stay', title: 'Stay with us.', night: true },
 ];
 
 function home(ctx) {
@@ -267,12 +268,13 @@ function home(ctx) {
   const chapter = (c, i) => {
     const m = A.media(c.key);
     const Title = i === 0 ? 'h1' : 'h2';
-    return html`<section class="chapter${i === 0 ? ' chapter--first' : ''}${c.id === 'stay' ? ' chapter--last' : ''}" id="${c.id}" data-chapter${A.motion(c.key)} data-ar="${(m.w / m.h).toFixed(4)}"${c.night ? raw(' data-night') : ''} aria-labelledby="${c.id}-title">
+    return html`<section class="chapter${i === 0 ? ' chapter--first' : ''}${c.id === 'stay' ? ' chapter--last' : ''}" id="${c.id}" data-chapter${A.motion(c.key)} data-ar="${(m.w / m.h).toFixed(4)}" data-focus="${c.focus || '0.5 0.5'}"${c.night ? raw(' data-night') : ''} aria-labelledby="${c.id}-title">
   <figure class="chapter__media">${A.img(c.key, { sizes: '100vw', loading: i === 0 ? 'eager' : 'lazy', fetchpriority: i === 0 ? 'high' : undefined })}</figure>
   <div class="chapter__copy">
+    ${i === 0 ? html`<p class="chapter__label">Siri Homestay, Joldal</p>` : ''}
     ${raw(`<${Title} id="${c.id}-title" class="chapter__title">`)}${c.title}${raw(`</${Title}>`)}
     ${c.text ? html`<p class="chapter__text">${c.text}</p>` : ''}
-    ${i === 0 ? html`<a class="chapter__cue" href="#courtyard">Scroll to step inside</a>` : ''}
+    ${i === 0 ? html`<div class="chapter__actions"><a class="btn" href="/enquire">Check your dates</a><a class="btn btn--ghost" href="/explore">Explore in 3D</a></div><a class="chapter__cue" href="#inside">Scroll to step inside</a>` : ''}
     ${c.id === 'stay' ? html`<p class="chapter__text">Call or WhatsApp the hosts, or send your dates. Nothing is booked or charged until they confirm.</p>
     <div class="chapter__actions"><a class="btn" href="/enquire">Send an enquiry</a><a class="btn btn--ghost" href="/explore">Explore in 3D</a>${first ? html`<a class="btn btn--ghost" href="tel:${first.phone}">Call ${first.name.split(' ')[0]}</a>` : ''}</div>` : ''}
   </div>
@@ -282,9 +284,19 @@ function home(ctx) {
 <div class="fly" data-fly style="--chapters: ${JOURNEY.length}">
   ${JOURNEY.map(chapter)}
   <nav class="fly__rail" data-rail aria-label="The journey">
-    <ol>${JOURNEY.map((c) => html`<li><a href="#${c.id}"><span>${c.title === 'Siri Homestay' ? 'Arrive' : c.title}</span></a></li>`)}</ol>
+    <ol>${JOURNEY.map((c) => html`<li><a href="#${c.id}"><span>${c.title.replace(/\.$/, '')}</span></a></li>`)}</ol>
   </nav>
 </div>
+
+<section class="bento light" aria-labelledby="bento-title">
+  <div class="bento__head">
+    <h2 id="bento-title" class="section-title">Inside Siri Homestay</h2>
+    <p>The villas, the lawn and the garden after dark. <a class="link" href="/gallery">See every photo</a></p>
+  </div>
+  <div class="bento__grid">
+    ${['villa-patio', 'villa-bedroom', 'lawn-umbrellas', 'villa-pool', 'courtyard-garden', 'bath-basin', 'night-lawn'].map((k, i) => html`<figure class="bento__item bento__item--${i + 1}">${A.img(k, { sizes: '(min-width: 900px) 33vw, 50vw' })}</figure>`)}
+  </div>
+</section>
 
 <section class="stays" aria-labelledby="stays-title">
   <div class="stays__head">
